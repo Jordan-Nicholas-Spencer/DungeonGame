@@ -58,13 +58,13 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
         // Implement player movement based on key presses
-        if (key == KeyEvent.VK_LEFT) {
+        if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_S) {
             playerX -= 10;
-        } else if (key == KeyEvent.VK_RIGHT) {
+        } else if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
             playerX += 10;
-        } else if (key == KeyEvent.VK_UP) {
+        } else if (key == KeyEvent.VK_UP || key == KeyEvent.VK_W) {
             playerY -= 10;
-        } else if (key == KeyEvent.VK_DOWN) {
+        } else if (key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) {
             playerY += 10;
         }
     }
