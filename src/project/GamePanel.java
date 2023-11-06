@@ -44,7 +44,7 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener
         g.setColor(Color.WHITE);
         g.fillOval(playerX, playerY, 50, 50); // Example: Player is represented as a white circle
         
-        // Draw the zombie
+        // Draw the enemy
         g.setColor(Color.GREEN);
         g.fillRect(250, 250, 50, 50);
     }

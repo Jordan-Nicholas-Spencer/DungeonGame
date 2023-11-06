@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 
 public class GameRun {
     public static void main(String[] args) {
-        JFrame frame = new JFrame("ZOMBIE HELL!");
+        JFrame frame = new JFrame("HUNTER");
         GamePanel gamePanel = new GamePanel();
         frame.add(gamePanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
