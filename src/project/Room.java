@@ -8,7 +8,7 @@ public class Room {
 	
 	public Room(String[] levelDesign, int xStartPos, int yStartPos) {
 		room = new Tile[levelDesign.length][];
-		for(int row=0; row<levelDesign.length; row++) {
+		for(int row =0; row<levelDesign.length; row++) {
 			room[row] = new Tile[levelDesign[row].length()];
 			
 			for(int column=0; column<levelDesign[row].length(); column++) {
@@ -28,6 +28,7 @@ public class Room {
 				}
 			}
 		}
+		
 		
 		this.xStartPos = xStartPos;
 		this.yStartPos = yStartPos;

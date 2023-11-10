@@ -3,7 +3,7 @@ package project;
 public class Organism extends Tile{
 
 	protected  int health;
-	protected  int maxHP;
+	protected  int maxHP; 
 	protected int strength;
 	protected int defense;
 	
