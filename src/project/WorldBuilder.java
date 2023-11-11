@@ -4,9 +4,9 @@ import java.awt.Graphics;
 
 public class WorldBuilder {
 	
-	private static Player player;
-	private static LevelDesign level;
-	private static Room currentRoom;
+	private Player player;
+	private LevelDesign level;
+	private Room currentRoom;
 	
 	public WorldBuilder() {
 		level = new LevelDesign();
@@ -14,23 +14,23 @@ public class WorldBuilder {
 		player = new Player ("player", 9, 13);
 	}
 	
-	public void renderPlayer() {
-		
-	}
-	
-	public static Player getPlayer() {
+	public Player getPlayer() {
 		return player;
 	}
 	
-	public static Room getCurrentRoom() {
+	public void movePlayer(int dirX, int dirY) {
+		player.setPosition(dirX, dirY);
+	}
+	
+	public Room getCurrentRoom() {
 		return currentRoom;
 	}
 	
-	public static LevelDesign getLevel() {
+	public LevelDesign getLevel() {
 		return level;
 	}
 	
-	public static void setLevel(LevelDesign newlevel) {
+	public void setLevel(LevelDesign newlevel) {
 		level = newlevel;
 	}
 }

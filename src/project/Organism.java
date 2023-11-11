@@ -12,6 +12,11 @@ public class Organism extends Tile{
 		this.maxHP = health;
 		this.health = health;
 	}
+	
+	public void setPosition(int dirX, int dirY) {
+		this.positionX += dirX;
+		this.positionY += dirY;
+	}
 
 	public int getHealth() {
 		return health;

@@ -18,8 +18,8 @@ package project;
 
 public class Tile {
 	private String type;
-	private int positionX;
-	private int positionY;
+	protected int positionX;
+	protected int positionY;
 	private boolean collectible;
 	
 	/**
