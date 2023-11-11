@@ -40,10 +40,7 @@ public class Panel extends JPanel {
         } catch (Exception e) {
         	System.out.print("Error rendering ");
         }
-        
-        // render player
-        BufferedImage sprite = Images.getSprite("player");
-        g.drawImage(sprite, 9 * 50, 2 * 50, sprite.getWidth(), sprite.getHeight(), null);
+
         repaint();
     }
 }
