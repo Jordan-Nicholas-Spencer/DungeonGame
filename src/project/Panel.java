@@ -4,15 +4,18 @@ import javax.swing.JPanel;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
 
 public class Panel extends JPanel implements KeyListener, ActionListener 
 {
-    private int playerX = 50; // Initial player X position
+    
+    LevelDesign level = new LevelDesign();
+    private WorldBuilder world = new WorldBuilder();
+	private int playerX = 50; // Initial player X position
     private int playerY = 50; // Initial player Y position    
     
     public Panel() 
@@ -20,7 +23,33 @@ public class Panel extends JPanel implements KeyListener, ActionListener
     	super();
         setFocusable(true);
         addKeyListener(this);
-
+        setLayout(new GridLayout(level.LEVEL1.getSizeX(), level.LEVEL1.getSizeY()));
+        
+        for (int row = 0; row < level.LEVEL1.getSizeX(); row++) {
+        	for (int column = 0; column < level.LEVEL1.getSizeY(); column ++) {
+        		JPanel type = new JPanel();
+        		switch (world.renderRoom(level.LEVEL1, null)[row][column]) {
+        		case "wall":
+        			type.setBackground(Color.WHITE);
+        			add(type);
+        			break;
+        		case "floor":
+        			type.setBackground(new Color(123,63,0));
+        			add(type);
+        			break;
+        		case "door":
+        			type.setBackground(Color.BLACK);
+        			add(type);
+        			break;
+        		case "stairs":
+        			type.setBackground(Color.GRAY);
+        			add(type);
+        			break;
+        		}
+        		
+        	}
+        }
+        
         // Start a game timer to handle animation and updates
         javax.swing.Timer timer = new javax.swing.Timer(0, this); // 100ms interval
         timer.start();
@@ -34,7 +63,6 @@ public class Panel extends JPanel implements KeyListener, ActionListener
         try {
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, getWidth(), getHeight());
-
        
         // Draw the player
         g.setColor(Color.WHITE);

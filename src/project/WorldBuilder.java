@@ -4,7 +4,7 @@ import java.awt.Graphics;
 
 public class WorldBuilder {
 	
-	public void renderRoom(Room currentRoom) {
+	public String[][] renderRoom(Room currentRoom, Graphics g) {
 		// this makes an array to store the classifications of the characters in the room
 		String[][] classificationArray = new String[currentRoom.getSizeX()][currentRoom.getSizeY()];
 		
@@ -20,6 +20,8 @@ public class WorldBuilder {
 			}
 			System.out.println();
 		}
+		
+		return classificationArray;
 		
 	}
 }
