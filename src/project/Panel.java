@@ -42,8 +42,8 @@ public class Panel extends JPanel {
         }
         
         // render player
-        BufferedImage sprite = Images.getSprite("player");
-        g.drawImage(sprite, 9 * 50, 2 * 50, sprite.getWidth(), sprite.getHeight(), null);
+//        BufferedImage sprite = Images.getSprite("player");
+//        g.drawImage(sprite, 9 * 50, 2 * 50, sprite.getWidth(), sprite.getHeight(), null);
         repaint();
     }
 }

@@ -25,6 +25,8 @@ public class Room {
 				case '^':
 					room[column][row] = new Tile("stairs", row, column);
 					break;
+				case 'p':
+					room[column][row] = new Tile("player", row, column);
 				}
 			}
 		}
