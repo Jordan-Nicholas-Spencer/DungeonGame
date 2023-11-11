@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 
 
 public class Window extends JFrame {
-	public static final int WIDTH = 800;
+	public static final int WIDTH = 970;
 	public static final int HEIGHT = 800;
 	
 	/**
@@ -25,7 +25,7 @@ public class Window extends JFrame {
 		Panel mainPanel = new Panel();
         add(mainPanel);
         
-        // pack();	// preferably we are able to use pack here and gridLayout in GamePanel
+//        pack();	// preferably we are able to use pack here
         setBounds(20, 20, WIDTH, HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);

@@ -11,7 +11,9 @@ public class Images {
 	private static HashMap<String, BufferedImage> sprites;
 	
 	public static void initializeSprites() {
-		File folder = new File("Final Project/src/project/imagelibrary");
+		sprites = new HashMap<String, BufferedImage>();
+		
+		File folder = new File("src/imagelibrary");
 		
 		for (File file : folder.listFiles()) {
 			try {

@@ -21,10 +21,6 @@ public class WorldController implements KeyListener, ActionListener{
 			return world;
 		}
 		
-		public void initializeWorld() {
-			
-		}
-		
 	 	@Override
 	    public void keyTyped(KeyEvent e) {
 	        // Implement keyTyped if needed
