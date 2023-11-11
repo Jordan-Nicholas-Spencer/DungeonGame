@@ -8,20 +8,31 @@ import java.awt.GridLayout;
 
 
 public class Panel extends JPanel {
+
+    @Override
+    protected void paintComponent(Graphics g) 
+    {
+        super.paintComponent(g);
+        drawSquares(g);
+        repaint();
+    }
     
-	private int playerX = 50; // Initial player X position
-    private int playerY = 50; // Initial player Y position    
+    public void drawSquares(Graphics g) {
+    	g.setColor(Color.GREEN);
+    	g.fillRect(100, 100, 30, 20);
+    }
     
+	
     public Panel() 
     {
     	super();
-    	
-        
-        setLayout(new GridLayout(world.getCurrentRoom().getSizeY(), world.getCurrentRoom().getSizeX()));
-        for(int column=0; column < world.getCurrentRoom().getSizeY(); column++) {
-			for(int row=0; row < world.getCurrentRoom().getSizeX(); row++) {
+    	WorldController controller = new WorldController();
+        GridLayout theGrid = new GridLayout(controller.getWorld().getCurrentRoom().getSizeY(), controller.getWorld().getCurrentRoom().getSizeX());
+        setLayout(theGrid);
+        for(int column=0; column < controller.getWorld().getCurrentRoom().getSizeY(); column++) {
+			for(int row=0; row < controller.getWorld().getCurrentRoom().getSizeX(); row++) {
 				JPanel type = new JPanel();
-        		switch (world.getCurrentRoom().getTileAt(row, column).getName()) {
+        		switch (controller.getWorld().getCurrentRoom().getTileAt(row, column).getName()) {
         		case "wall":
         			type.setBackground(Color.GRAY);
         			add(type);
@@ -41,19 +52,7 @@ public class Panel extends JPanel {
         		}
 			}
 		}
-        JPanel player = new JPanel();
-        player.setBackground(Color.GREEN);
-        world.getPlayer();
-      
     }
-
-    @Override
-    protected void paintComponent(Graphics g) 
-    {
-        super.paintComponent(g);
-    }
-
-   
 }
 
     
