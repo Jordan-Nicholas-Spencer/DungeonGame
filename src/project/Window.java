@@ -9,7 +9,7 @@ public class Window extends JFrame {
 	 * Purpose: Constructor for GameWindow
 	 */
 	public Window() {
-		initComponents();		
+		initComponents();	
 	}
 	
 	/**
