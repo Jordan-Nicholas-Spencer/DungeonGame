@@ -8,22 +8,22 @@ public class Room {
 	
 	public Room(String[] levelDesign, int xStartPos, int yStartPos) {
 		room = new Tile[levelDesign.length][];
-		for(int row =0; row<levelDesign.length; row++) {
-			room[row] = new Tile[levelDesign[row].length()];
+		for(int column = 0; column<levelDesign.length; column++) {
+			room[column] = new Tile[levelDesign[column].length()];
 			
-			for(int column=0; column<levelDesign[row].length(); column++) {
-				switch(levelDesign[row].charAt(column)) {
+			for(int row = 0; row<levelDesign[column].length(); row++) {
+				switch(levelDesign[column].charAt(row)) {
 				case '#':
-					room[row][column] = new Tile("wall", row, column);
+					room[column][row] = new Tile("wall", row, column);
 					break;
 				case ' ':
-					room[row][column] = new Tile("floor", row, column);
+					room[column][row] = new Tile("floor", row, column);
 					break;
 				case '|':
-					room[row][column] = new Tile("door", row, column);
+					room[column][row] = new Tile("door", row, column);
 					break;
 				case '^':
-					room[row][column] = new Tile("stairs", row, column);
+					room[column][row] = new Tile("stairs", row, column);
 					break;
 				}
 			}

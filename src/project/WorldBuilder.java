@@ -4,24 +4,33 @@ import java.awt.Graphics;
 
 public class WorldBuilder {
 	
-	public String[][] renderRoom(Room currentRoom, Graphics g) {
-		// this makes an array to store the classifications of the characters in the room
-		String[][] classificationArray = new String[currentRoom.getSizeX()][currentRoom.getSizeY()];
+	private static Player player;
+	private static LevelDesign level;
+	private static Room currentRoom;
+	
+	public WorldBuilder() {
+		level = new LevelDesign();
+		currentRoom = level.LEVEL1;
+		player = new Player ("player", 9, 13);
+	}
+	
+	public void renderPlayer() {
 		
-		for(int column=0; column<currentRoom.getSizeY(); column++) {
-			for(int row=0; row<currentRoom.getSizeX(); row++) {
-				classificationArray[row][column] = currentRoom.getTileAt(row, column).getName();
-			}
-		}
-		
-		for(int column=0; column<currentRoom.getSizeY(); column++) {
-			for(int row=0; row<currentRoom.getSizeX(); row++) {
-				System.out.print(classificationArray[row][column]);
-			}
-			System.out.println();
-		}
-		
-		return classificationArray;
-		
+	}
+	
+	public static Player getPlayer() {
+		return player;
+	}
+	
+	public static Room getCurrentRoom() {
+		return currentRoom;
+	}
+	
+	public static LevelDesign getLevel() {
+		return level;
+	}
+	
+	public static void setLevel(LevelDesign newlevel) {
+		level = newlevel;
 	}
 }
