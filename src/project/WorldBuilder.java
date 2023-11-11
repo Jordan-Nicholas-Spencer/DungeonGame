@@ -14,6 +14,10 @@ public class WorldBuilder {
 		player = new Player ("player", 9, 13);
 	}
 	
+	private static void initialize() {
+		Images.initializeSprites();
+	}
+	
 	public Player getPlayer() {
 		return player;
 	}

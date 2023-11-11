@@ -17,7 +17,7 @@ public class Player extends Organism{
 		this.armorEquipped = Shop.SCRAP;
 		this.strength = 1;
 		this.defense = 0;
-		
+
 	}
 	
 	/**Adds an items to the first empty slot

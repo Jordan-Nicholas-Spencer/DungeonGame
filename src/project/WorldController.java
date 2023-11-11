@@ -11,8 +11,7 @@ public class WorldController implements KeyListener, ActionListener{
 		private WorldBuilder world = new WorldBuilder();
 	
 		public void WorldController() {
-//			setFocusable(true);
-//			addKeyListener(this);
+
 			// Start a game timer to handle animation and updates
 		    javax.swing.Timer timer = new javax.swing.Timer(0, this); // 100ms interval
 		    timer.start();
