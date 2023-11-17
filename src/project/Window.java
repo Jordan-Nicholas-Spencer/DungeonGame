@@ -24,8 +24,8 @@ import javax.swing.JFrame;
 public class Window extends JFrame {
 	
 	// constants for window size and placement on screen
-	public static final int WIDTH = 800;
-	public static final int HEIGHT = 800;
+	public static final int WIDTH = 900;
+	public static final int HEIGHT = 600;
 	private static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	
 	/**

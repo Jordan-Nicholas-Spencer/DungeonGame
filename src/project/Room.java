@@ -1,12 +1,16 @@
 package project;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Room {
 
 	private Tile[][] room;
 	private int xStartPos;
 	private int yStartPos;
+	private List<Enemy> enemies;
 	
-	public Room(String[] levelDesign, int xStartPos, int yStartPos) {
+	public Room(String[] levelDesign, int xStartPos, int yStartPos, Enemy... species) {
 		room = new Tile[levelDesign.length][];
 		for(int column = 0; column<levelDesign.length; column++) {
 			room[column] = new Tile[levelDesign[column].length()];
@@ -32,9 +36,28 @@ public class Room {
 			}
 		}
 		
+		this.enemies = new ArrayList<Enemy>();
+		for (Enemy enemy : species) {
+			this.enemies.add(enemy);
+		}
 		
 		this.xStartPos = xStartPos;
 		this.yStartPos = yStartPos;
+	}
+	
+	public Enemy[] getEnemies() {
+		Enemy[] roomEnemies = new Enemy[enemies.size()];
+		roomEnemies = enemies.toArray(roomEnemies);
+		return roomEnemies;
+	}
+	
+	public boolean enemyInRoom(int x, int y) {
+		for (int i = 0; i < enemies.size(); i++) {
+			if (enemies.get(i).getPosX() == x && enemies.get(i).getPosY() == y) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public int getxStartPos() {
@@ -52,6 +75,7 @@ public class Room {
 	public int getSizeY() {
 		return room.length;
 	}
+	
 	public Tile getTileAt(int x, int y) {
 		return room[y][x];
 	}
