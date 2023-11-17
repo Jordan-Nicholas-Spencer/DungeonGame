@@ -1,11 +1,9 @@
 package project;
 
-import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
 
 import javax.swing.Timer;
 
@@ -30,11 +28,8 @@ public class WorldController implements ActionListener{
 		}
 
 		public WorldModel getWorld() {
-			return model;
-			
-		}
-		
-		
+			return model;			
+		}		
 		
 		class KeyboardListener implements KeyListener {
 			@Override
@@ -56,9 +51,9 @@ public class WorldController implements ActionListener{
 		        } else if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
 		        	model.movePlayer(1, 0);
 		        } else if (key == KeyEvent.VK_UP || key == KeyEvent.VK_W) {
-		        	model.movePlayer(0, 1);
-		        } else if (key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) {
 		        	model.movePlayer(0, -1);
+		        } else if (key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) {
+		        	model.movePlayer(0, 1);
 		        }
 		    }
 		}

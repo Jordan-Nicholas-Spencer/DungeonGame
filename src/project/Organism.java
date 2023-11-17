@@ -14,8 +14,8 @@ public class Organism extends Tile{
 	}
 	
 	public void setPosition(int dirX, int dirY) {
-		this.positionX += dirX;
-		this.positionY += dirY;
+		this.positionX = dirX;
+		this.positionY = dirY;
 	}
 
 	public int getHealth() {

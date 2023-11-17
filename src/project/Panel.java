@@ -33,6 +33,7 @@ public class Panel extends JPanel {
 	 */
     public Panel() {
     	super();
+    	this.setFocusable(true);
     }
     
     // invoked during any change of any component
@@ -45,8 +46,8 @@ public class Panel extends JPanel {
         	g.setColor(Color.BLACK);
         	g.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);        	
         	
-        	worldBuilder.renderLevel(WorldModel.getCurrentRoom(), g);
-        	
+        	worldBuilder.renderLevel(WorldModel.getCurrentRoom(), WorldModel.getPlayer(), g);
+        	worldBuilder.renderPlayer(WorldModel.getPlayer(), g);
         } catch (Exception e) {
         	System.out.print("Error rendering ");
         }
