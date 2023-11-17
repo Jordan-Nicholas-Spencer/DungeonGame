@@ -1,40 +1,24 @@
 package project;
 
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+
 
 public class WorldBuilder {
-	
-	private Player player;
-	private LevelDesign level;
-	private Room currentRoom;
-	
-	public WorldBuilder() {
-		level = new LevelDesign();
-		currentRoom = level.LEVEL1;
-		player = new Player ("player", 9, 13);
+
+	public void renderLevel(Room room, Graphics g) {
+		for(int column=0; column < room.getSizeY(); column++) {
+			for(int row=0; row < room.getSizeX(); row++) {
+				BufferedImage sprite = Images.getSprite(room.getTileAt(row, column).getName());
+				int drawPosX = room.getTileAt(row, column).getPosX() * sprite.getWidth();
+				int drawPosY = room.getTileAt(row, column).getPosY() * sprite.getWidth();
+				g.drawImage(sprite, drawPosX, drawPosY, sprite.getWidth(), sprite.getHeight(), null);
+			}
+		}
 	}
 	
-	public static void initializeWorld() {
-		Images.initializeSprites();
+	public void renderPlayer(Graphics g) {
+		
 	}
 	
-	public Player getPlayer() {
-		return player;
-	}
-	
-	public void movePlayer(int dirX, int dirY) {
-		player.setPosition(dirX, dirY);
-	}
-	
-	public Room getCurrentRoom() {
-		return currentRoom;
-	}
-	
-	public LevelDesign getLevel() {
-		return level;
-	}
-	
-	public void setLevel(LevelDesign newlevel) {
-		level = newlevel;
-	}
 }
