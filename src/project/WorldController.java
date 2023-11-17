@@ -7,6 +7,10 @@ import java.awt.event.KeyListener;
 
 import javax.swing.Timer;
 
+import project.model.WorldModel;
+import project.view.Panel;
+import project.view.Window;
+
 // controller never handles data logic (reserved for model - WorldBuilder)
 // controller never handles data presentation (reserved for view - Window/Panel)
 public class WorldController implements ActionListener{

@@ -1,6 +1,8 @@
-package project;
+package project.view;
 
 import javax.swing.JPanel;
+
+import project.model.WorldModel;
 
 import java.awt.Color;
 import java.awt.Graphics;

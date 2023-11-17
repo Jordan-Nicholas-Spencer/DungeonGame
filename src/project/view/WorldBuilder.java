@@ -1,7 +1,11 @@
-package project;
+package project.view;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+
+import project.model.Enemy;
+import project.model.Player;
+import project.model.Room;
 
 
 public class WorldBuilder {
@@ -11,11 +15,15 @@ public class WorldBuilder {
 	public void renderLevel(Room room, Player player, Graphics g) {
 		for(int column=0; column < room.getSizeY(); column++) {
 			for(int row=0; row < room.getSizeX(); row++) {
-				BufferedImage sprite = Images.getSprite(room.getTileAt(row, column).getName());
+				String name = room.getTileAt(row, column).getName();
+				BufferedImage sprite = Images.getSprite(name);
 				int drawPosX = room.getTileAt(row, column).getPosX() * (sprite.getWidth() * MULT) + ((Window.WIDTH/2) - player.getPosX() * (sprite.getWidth() * MULT) - sprite.getWidth());
 				int drawPosY = room.getTileAt(row, column).getPosY() * (sprite.getHeight() * MULT) + ((Window.HEIGHT/2) - player.getPosY() * (sprite.getHeight() * MULT) - sprite.getHeight());
-				if (room.getTileAt(row, column).getName() == "stairs" || room.getTileAt(row, column).getName() == "door") {
+				if (name == "stairs" || name == "chest" || name == "door" || name == "gate" || name == "open") {
 					g.drawImage(Images.getSprite("floor"), drawPosX, drawPosY, sprite.getWidth() * MULT, sprite.getHeight() * MULT, null);
+				}
+				else if (name == "skeleton") {
+					g.drawImage(Images.getSprite("wall"), drawPosX, drawPosY, sprite.getWidth() * MULT, sprite.getHeight() * MULT, null);
 				}
 				g.drawImage(sprite, drawPosX, drawPosY, sprite.getWidth() * MULT, sprite.getHeight() * MULT, null);
 			}

@@ -1,4 +1,4 @@
-package project;
+package project.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +31,18 @@ public class Room {
 					break;
 				case 'p':
 					room[column][row] = new Tile("player", row, column);
+					break;
+				case 's':
+					room[column][row] = new Tile("skeleton", row, column);
+					break;
+				case 'c':
+					room[column][row] = new Tile("chest", row, column);
+					break;
+				case 'o':
+					room[column][row] = new Tile("open", row, column);
+					break;
+				case 'g':
+					room[column][row] = new Tile("gate", row, column);
 					break;
 				}
 			}

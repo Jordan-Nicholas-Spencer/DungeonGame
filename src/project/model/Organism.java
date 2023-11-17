@@ -1,4 +1,4 @@
-package project;
+package project.model;
 
 public class Organism extends Tile{
 

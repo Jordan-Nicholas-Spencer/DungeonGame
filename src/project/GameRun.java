@@ -1,5 +1,8 @@
 package project;
 
+import project.model.WorldModel;
+import project.view.Window;
+
 /**
  * Lead Author(s):
  * @author Jordan Spencer

@@ -1,6 +1,8 @@
-package project;
+package project.model;
 
 import java.util.Random;
+
+import project.view.Images;
 
 //this is the model which handles data logic
 public class WorldModel {
@@ -45,11 +47,22 @@ public class WorldModel {
 		case "floor":
 			player.setPosition(player.getPosX() + dirX, player.getPosY() + dirY);
 			break;
+		case "open":
+			player.setPosition(player.getPosX() + dirX, player.getPosY() + dirY);
+			break;
+		case "skeleton":
+			break;
+		case "gate":
+			break;
+		case "chest":
+			break;
 		case "wall":
 			break;
 		case "stairs":
 			break;
 		case "door":
+			break;
+		default:
 			break;
 		}
 		moveEnemies();
