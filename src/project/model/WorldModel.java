@@ -65,6 +65,8 @@ public class WorldModel {
 		case "open":
 			player.setPosition(player.getPosX() + dirX, player.getPosY() + dirY);
 			break;
+		case "gargoyle":
+			break;
 		case "skeleton":
 			break;
 		case "gate":

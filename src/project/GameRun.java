@@ -22,6 +22,27 @@ import project.view.Window;
 public class GameRun {
 	
 	
+	/* 
+	 *  TODO:
+	 *  1) Game Logic
+	 *  	-Implement battle logic between enemy and player
+	 *  
+	 *  2) Display
+	 *  	-Player HUD Display
+	 * 		-Inventory Display
+	 *  	-Start Screen Display
+	 *  	-Game Over Display
+	 *  	-Game Complete/Credits Display
+	 *  	-Dialogue Display
+	 *  
+	 *  3) Level Design
+	 *  	-Create levels
+	 *  
+	 *  4) Inventory System
+	 *  	-Design Inventory System
+	 *  
+	 */
+	
     public static void main(String[] args) {
     	
     	//loop begin
