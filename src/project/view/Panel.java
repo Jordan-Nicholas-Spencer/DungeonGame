@@ -49,8 +49,9 @@ public class Panel extends JPanel {
         	g.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);        	
         	
         	worldBuilder.renderLevel(WorldModel.getCurrentRoom(), WorldModel.getPlayer(), g);
-        	worldBuilder.renderPlayer(WorldModel.getPlayer(), g);
         	worldBuilder.renderEnemy(WorldModel.getCurrentEnemies(), WorldModel.getPlayer(), g);
+        	worldBuilder.renderPlayer(WorldModel.getPlayer(), g);
+        	
         } catch (Exception e) {
         	System.out.print("Error rendering ");
         }

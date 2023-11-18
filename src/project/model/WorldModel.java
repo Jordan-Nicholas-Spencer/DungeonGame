@@ -58,7 +58,17 @@ public class WorldModel {
 	}
 	
 	public void movePlayer(int dirX, int dirY) {
+		if (currentRoom.enemyInRoom(getTileInFront(player, dirX, dirY).getPosX(), getTileInFront(player, dirX, dirY).getPosY()))
+		{
+			Enemy enemy = currentRoom.getEnemyAt(getTileInFront(player, dirX, dirY).getPosX(), getTileInFront(player, dirX, dirY).getPosY());
+			int defense = enemy.getDefense();
+			int damage = player.getStrength();
+			int amount = damage - defense;
+			enemy.damage(amount);
+			System.out.print("fightEnemy");
+		}
 		switch(getTileInFront(player, dirX, dirY).getName()) {
+		
 		case "floor":
 			player.setPosition(player.getPosX() + dirX, player.getPosY() + dirY);
 			break;
@@ -95,7 +105,11 @@ public class WorldModel {
 					return;
 				}
 				else if(enemy.getPosX() + 1 == player.getPosX() && enemy.getPosY() == player.getPosY()) {
-					// fight player
+					int defense = player.getDefense();
+					int damage = enemy.getStrength();
+					int amount = damage - defense;
+					player.damage(amount);
+					System.out.print("fightPlayer");
 					break;
 				}	
 				if(name == "floor" || name == "open") {
@@ -109,7 +123,11 @@ public class WorldModel {
 					return;
 				}
 				else if(enemy.getPosX() - 1 == player.getPosX() && enemy.getPosY() == player.getPosY()) {
-					// fight player
+					int defense = player.getDefense();
+					int damage = enemy.getStrength();
+					int amount = damage - defense;
+					player.damage(amount);
+					System.out.print("fightPlayer");
 					break;
 				}	
 				if(name == "floor" || name == "open") {
@@ -123,7 +141,11 @@ public class WorldModel {
 					return;
 				}
 				else if(enemy.getPosX() == player.getPosX() && enemy.getPosY() + 1 == player.getPosY()) {
-					// fight player
+					int defense = player.getDefense();
+					int damage = enemy.getStrength();
+					int amount = damage - defense;
+					player.damage(amount);
+					System.out.print("fightPlayer");
 					break;
 				}	
 				if(name == "floor" || name == "open") {
@@ -137,7 +159,11 @@ public class WorldModel {
 					return;
 				}
 				else if(enemy.getPosX() == player.getPosX() && enemy.getPosY() - 1 == player.getPosY()) {
-					// fight player
+					int defense = player.getDefense();
+					int damage = enemy.getStrength();
+					int amount = damage - defense;
+					player.damage(amount);
+					System.out.print("fightPlayer");
 					break;
 				}	
 				if(name == "floor" || name == "open") {
@@ -149,6 +175,8 @@ public class WorldModel {
 		}
 		
 	}
+	
+	
 		
 	public LevelDesign getLevel() {
 		return level;
