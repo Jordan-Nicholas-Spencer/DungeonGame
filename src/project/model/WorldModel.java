@@ -61,7 +61,7 @@ public class WorldModel {
 		if (currentRoom.enemyInRoom(getTileInFront(player, dirX, dirY).getPosX(), getTileInFront(player, dirX, dirY).getPosY()))
 		{
 			Enemy enemy = currentRoom.getEnemyAt(getTileInFront(player, dirX, dirY).getPosX(), getTileInFront(player, dirX, dirY).getPosY());
-			int defense = enemy.getDefense()
+			int defense = enemy.getDefense();
 			int damage = player.getStrength();
 			int amount = damage - defense;
 			enemy.damage(amount);
