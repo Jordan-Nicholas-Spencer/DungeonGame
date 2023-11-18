@@ -26,6 +26,7 @@ public class GameRun {
 	 *  TODO:
 	 *  1) Game Logic
 	 *  	-Implement battle logic between enemy and player
+	 *  // kind of there
 	 *  
 	 *  2) Display
 	 *  	-Player HUD Display

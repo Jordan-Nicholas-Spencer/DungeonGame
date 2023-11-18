@@ -13,6 +13,7 @@ public class Player extends Organism{
 	private boolean inventoryOpen;
 	private Weapon weaponEquipped;
 	private Armor armorEquipped;
+	private int levelsCompleted;
 	
 	public Player(String type, int posX, int posY) {
 		super(type, posX, posY, startingHP);
@@ -22,7 +23,7 @@ public class Player extends Organism{
 		this.armorEquipped = Shop.SCRAP;
 		this.strength = 1;
 		this.defense = 0;
-
+		this.levelsCompleted = 0;
 	}
 	
 	/**Adds an items to the first empty slot
@@ -101,4 +102,13 @@ public class Player extends Organism{
 		return this.armorEquipped;
 	}
 	
+	public int getLevelsCompleted()
+	{
+		return this.levelsCompleted;
+	}
+	
+	public void levelCompleted()
+	{
+		this.levelsCompleted += 1;
+	}
 }
