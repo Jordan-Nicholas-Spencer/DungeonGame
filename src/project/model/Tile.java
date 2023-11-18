@@ -1,4 +1,4 @@
-package project;
+package project.model;
 
 /**
  * Lead Author(s):

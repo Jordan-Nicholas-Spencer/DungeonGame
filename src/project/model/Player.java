@@ -1,4 +1,9 @@
-package project;
+package project.model;
+
+import project.model.items.Armor;
+import project.model.items.Consumable;
+import project.model.items.Shop;
+import project.model.items.Weapon;
 
 public class Player extends Organism{
 
