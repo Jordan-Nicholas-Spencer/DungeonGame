@@ -2,7 +2,7 @@ package project.model;
 
 import java.util.Random;
 
-import project.view.Images;
+import project.view.ImageLoader;
 
 //this is the model which handles data logic
 public class WorldModel {
@@ -23,7 +23,7 @@ public class WorldModel {
 	}
 	
 	public static void initializeWorld() {
-		Images.initializeSprites();
+		ImageLoader.initializeSprites();
 	}
 	
 	public static Player getPlayer() {
@@ -70,8 +70,10 @@ public class WorldModel {
 	
 	public void moveEnemies() {
 		for (Enemy enemy : currentEnemies) {
+			String name;
 			switch(random.nextInt(4)) {
 			case 0:
+				name = getTileInFront(enemy, 1, 0).getName();
 				if(currentRoom.enemyInRoom(enemy.getPosX() + 1, enemy.getPosY())) {
 					return;
 				}
@@ -79,11 +81,12 @@ public class WorldModel {
 					// fight player
 					break;
 				}	
-				if(getTileInFront(enemy, 1, 0).getName() == "floor") {
+				if(name == "floor" || name == "open") {
 					enemy.setPosition(enemy.getPosX() + 1, enemy.getPosY());
 					break;
 				}
 			case 1:
+				name = getTileInFront(enemy, -1, 0).getName();
 				if(currentRoom.enemyInRoom(enemy.getPosX() - 1, enemy.getPosY())) {
 					return;
 				}
@@ -91,11 +94,12 @@ public class WorldModel {
 					// fight player
 					break;
 				}	
-				if(getTileInFront(enemy, -1, 0).getName() == "floor") {
+				if(name == "floor" || name == "open") {
 					enemy.setPosition(enemy.getPosX() - 1, enemy.getPosY());
 					break;
 				}
 			case 2:
+				name = getTileInFront(enemy, 0, 1).getName();
 				if(currentRoom.enemyInRoom(enemy.getPosX(), enemy.getPosY() + 1)) {
 					return;
 				}
@@ -103,11 +107,12 @@ public class WorldModel {
 					// fight player
 					break;
 				}	
-				if(getTileInFront(enemy, 0, 1).getName() == "floor") {
+				if(name == "floor" || name == "open") {
 					enemy.setPosition(enemy.getPosX(), enemy.getPosY() + 1);
 					break;
 				}
 			case 3:
+				name = getTileInFront(enemy, 0, -1).getName();
 				if(currentRoom.enemyInRoom(enemy.getPosX(), enemy.getPosY() - 1)) {
 					return;
 				}
@@ -115,7 +120,7 @@ public class WorldModel {
 					// fight player
 					break;
 				}	
-				if(getTileInFront(enemy, 0, -1).getName() == "floor") {
+				if(name == "floor" || name == "open") {
 					enemy.setPosition(enemy.getPosX(), enemy.getPosY() - 1);
 					break;
 				}

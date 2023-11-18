@@ -23,7 +23,7 @@ public class Room {
 				case ' ':
 					room[column][row] = new Tile("floor", row, column);
 					break;
-				case '|':
+				case 'd':
 					room[column][row] = new Tile("door", row, column);
 					break;
 				case '^':

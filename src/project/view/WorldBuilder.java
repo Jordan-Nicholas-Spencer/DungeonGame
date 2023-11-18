@@ -10,20 +10,23 @@ import project.model.Room;
 
 public class WorldBuilder {
 	
-	private static final int MULT = 1;
+	private final int MULT = 1;
+	private final int SCALE = 50;
+	
+	SpriteSheetReader ssr = new SpriteSheetReader();
 
 	public void renderLevel(Room room, Player player, Graphics g) {
 		for(int column=0; column < room.getSizeY(); column++) {
 			for(int row=0; row < room.getSizeX(); row++) {
 				String name = room.getTileAt(row, column).getName();
-				BufferedImage sprite = Images.getSprite(name);
+				BufferedImage sprite = ImageLoader.getSprite(name);
 				int drawPosX = room.getTileAt(row, column).getPosX() * (sprite.getWidth() * MULT) + ((Window.WIDTH/2) - player.getPosX() * (sprite.getWidth() * MULT) - sprite.getWidth());
 				int drawPosY = room.getTileAt(row, column).getPosY() * (sprite.getHeight() * MULT) + ((Window.HEIGHT/2) - player.getPosY() * (sprite.getHeight() * MULT) - sprite.getHeight());
 				if (name == "stairs" || name == "chest" || name == "door" || name == "gate" || name == "open") {
-					g.drawImage(Images.getSprite("floor"), drawPosX, drawPosY, sprite.getWidth() * MULT, sprite.getHeight() * MULT, null);
+					g.drawImage(ImageLoader.getSprite("floor"), drawPosX, drawPosY, sprite.getWidth() * MULT, sprite.getHeight() * MULT, null);
 				}
 				else if (name == "skeleton") {
-					g.drawImage(Images.getSprite("wall"), drawPosX, drawPosY, sprite.getWidth() * MULT, sprite.getHeight() * MULT, null);
+					g.drawImage(ImageLoader.getSprite("wall"), drawPosX, drawPosY, sprite.getWidth() * MULT, sprite.getHeight() * MULT, null);
 				}
 				g.drawImage(sprite, drawPosX, drawPosY, sprite.getWidth() * MULT, sprite.getHeight() * MULT, null);
 			}
@@ -31,23 +34,24 @@ public class WorldBuilder {
 	}
 	
 	public void renderPlayer(Player player, Graphics g) {
-		BufferedImage sprite = Images.getSprite("player");
-		int drawPosX = (Window.WIDTH / 2) - sprite.getWidth();
-		int drawPosY = (Window.HEIGHT / 2) - sprite.getHeight();
-		g.drawImage(sprite, drawPosX, drawPosY, sprite.getWidth() * MULT, sprite.getHeight() * MULT, null);
+		BufferedImage sprite = ImageLoader.getSprite("player");
+		ssr.setImage(sprite);
+		sprite = ssr.grabImage(1, 0, 32, 32);
+		int drawPosX = (Window.WIDTH / 2) - SCALE;
+		int drawPosY = (Window.HEIGHT / 2) - SCALE;
+		g.drawImage(sprite, drawPosX, drawPosY, SCALE * MULT, SCALE * MULT, null);
 	}
 	
 	public void renderEnemy(Enemy[] enemies, Player player, Graphics g) {
-		int count = 0;
 		for (Enemy enemy : enemies) {
-			BufferedImage sprite = Images.getSprite(enemy.getName());
-			int drawPosX = enemy.getPosX() * (sprite.getWidth() * MULT) + ((Window.WIDTH/2) - player.getPosX() * (sprite.getWidth() * MULT) - sprite.getWidth());
-			int drawPosY = enemy.getPosY() * (sprite.getHeight() * MULT) + ((Window.HEIGHT/2) - player.getPosY() * (sprite.getHeight() * MULT) - sprite.getHeight());
-			if (count % 2 != 0) {
-				sprite = mirrorImage(Images.getSprite(enemy.getName()));	
+			BufferedImage sprite = ImageLoader.getSprite(enemy.getName());
+			if (sprite.getWidth() > SCALE) {
+				ssr.setImage(sprite);
+				sprite = ssr.grabImage(1, 1, 32, 32);
 			}
-			g.drawImage(sprite, drawPosX, drawPosY, sprite.getWidth() * MULT, sprite.getHeight() * MULT, null);
-			count += 1;
+			int drawPosX = enemy.getPosX() * (SCALE * MULT) + ((Window.WIDTH/2) - player.getPosX() * (SCALE * MULT) - SCALE);
+			int drawPosY = enemy.getPosY() * (SCALE * MULT) + ((Window.HEIGHT/2) - player.getPosY() * (SCALE * MULT) - SCALE);
+			g.drawImage(sprite, drawPosX, drawPosY, SCALE * MULT, SCALE * MULT, null);
 		}
 	}
 	

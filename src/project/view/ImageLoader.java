@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 
-public class Images {
+public class ImageLoader {
 	private static HashMap<String, BufferedImage> sprites;
 	
 	public static void initializeSprites() {
