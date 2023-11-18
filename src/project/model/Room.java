@@ -74,6 +74,7 @@ public class Room {
 		}
 		return null;
 	}
+	
 	public boolean enemyInRoom(int x, int y) {
 		for (int i = 0; i < enemies.size(); i++) {
 			if (enemies.get(i).getPosX() == x && enemies.get(i).getPosY() == y) {
