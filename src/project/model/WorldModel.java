@@ -4,7 +4,22 @@ import java.util.Random;
 
 import project.view.ImageLoader;
 
-//this is the model which handles data logic
+/**
+ * Lead Author(s):
+ * @author Jordan Spencer
+ * @author Nicholas Moffat
+ * 
+ * References:
+ * Morelli, R., & Walde, R. (2016). Java, Java, Java: Object-Oriented Problem Solving.
+ * Retrieved from https://open.umn.edu/opentextbooks/textbooks/java-java-java-object-oriented-problem-solving
+ * 
+ *  
+ * Version/date: 11/18/2023
+ * 
+ * Responsibilities of class: Handles the data logic of the program
+ * 
+ */
+
 public class WorldModel {
 	
 	private static Player player;
@@ -17,7 +32,7 @@ public class WorldModel {
 	public WorldModel() {
 		random = new Random();
 		level = new LevelDesign();
-		currentRoom = level.LEVEL1;
+		currentRoom = LevelDesign.LEVEL1;
 		player = new Player ("player", 9, 2);
 		currentEnemies = currentRoom.getEnemies();
 	}
@@ -83,6 +98,7 @@ public class WorldModel {
 				}	
 				if(name == "floor" || name == "open") {
 					enemy.setPosition(enemy.getPosX() + 1, enemy.getPosY());
+					enemy.setFacing("right");
 					break;
 				}
 			case 1:
@@ -96,6 +112,7 @@ public class WorldModel {
 				}	
 				if(name == "floor" || name == "open") {
 					enemy.setPosition(enemy.getPosX() - 1, enemy.getPosY());
+					enemy.setFacing("left");
 					break;
 				}
 			case 2:
@@ -109,6 +126,7 @@ public class WorldModel {
 				}	
 				if(name == "floor" || name == "open") {
 					enemy.setPosition(enemy.getPosX(), enemy.getPosY() + 1);
+					enemy.setFacing("down");
 					break;
 				}
 			case 3:
@@ -122,6 +140,7 @@ public class WorldModel {
 				}	
 				if(name == "floor" || name == "open") {
 					enemy.setPosition(enemy.getPosX(), enemy.getPosY() - 1);
+					enemy.setFacing("up");
 					break;
 				}
 			}

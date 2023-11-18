@@ -38,12 +38,12 @@ public class Panel extends JPanel {
     	this.setFocusable(true);
     }
     
-    // invoked during any change of any component
-    // repaint() used to transition between screens
+    // invoked by keyListener added to Panel in WorldController
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         
+        // try to render current objects
         try {
         	g.setColor(Color.BLACK);
         	g.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);        	
@@ -55,6 +55,7 @@ public class Panel extends JPanel {
         	System.out.print("Error rendering ");
         }
 
+        // update rendered objects on screen
         repaint();
     }
 }

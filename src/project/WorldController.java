@@ -11,8 +11,24 @@ import project.model.WorldModel;
 import project.view.Panel;
 import project.view.Window;
 
-// controller never handles data logic (reserved for model - WorldBuilder)
-// controller never handles data presentation (reserved for view - Window/Panel)
+/**
+ * Lead Author(s):
+ * @author Jordan Spencer
+ * @author Nicholas Moffat
+ * 
+ * References:
+ * Morelli, R., & Walde, R. (2016). Java, Java, Java: Object-Oriented Problem Solving.
+ * Retrieved from https://open.umn.edu/opentextbooks/textbooks/java-java-java-object-oriented-problem-solving
+ * 
+ *  
+ * Version/date: 11/18/2023
+ * 
+ * Responsibilities of class: Controls data flow between user, model, and view
+ * 		controller never handles data logic (reserved for model - WorldBuilder)
+ *		controller never handles data presentation (reserved for view - Window/Panel)
+ * 
+ */
+
 public class WorldController implements ActionListener{
 	
 		private WorldModel model;
@@ -42,8 +58,8 @@ public class WorldController implements ActionListener{
 		    }
 			
 			@Override
-			public void keyReleased(KeyEvent e) {
-				// TODO Auto-generated method stub
+			public void keyReleased(KeyEvent e) {				
+				// Implement keyReleased if needed
 			}
 
 		    @Override
@@ -52,19 +68,25 @@ public class WorldController implements ActionListener{
 		        // Implement player movement based on key presses
 		        if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) {
 		        	model.movePlayer(-1, 0);
-		        } else if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
+		        	WorldModel.getPlayer().setFacing("left");
+		        } 
+		        else if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
 		        	model.movePlayer(1, 0);
-		        } else if (key == KeyEvent.VK_UP || key == KeyEvent.VK_W) {
+		        	WorldModel.getPlayer().setFacing("right");
+		        } 
+		        else if (key == KeyEvent.VK_UP || key == KeyEvent.VK_W) {
 		        	model.movePlayer(0, -1);
-		        } else if (key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) {
+		        	WorldModel.getPlayer().setFacing("up");
+		        } 
+		        else if (key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) {
 		        	model.movePlayer(0, 1);
+		        	WorldModel.getPlayer().setFacing("down");
 		        }
 		    }
 		}
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-//			Implement game logic and updates here
-//	        repaint();
+			// can we use this to slow down movement?
 		}
 }
