@@ -31,26 +31,47 @@ public class WorldBuilder {
 	private final int STEP = 16; // 48 / 3 - for 3 frames of movement between tiles
 	private final int MULT = 1; // optional scalar for zooming in
 	
-	SpriteSheetReader ssr = new SpriteSheetReader();
-	private String name;
+	private SpriteSheetReader ssr = new SpriteSheetReader();
+	private BufferedImage sprite;
+	private BufferedImage floor;
+	private BufferedImage wall;
 
 	public void renderLevel(Room room, Player player, Graphics g) {
+		// floor tiles 512 x 384 / 32 = 16 x 12
+		floor = ImageLoader.getSprite("floor");
+		ssr.setImage(floor);
+		floor = ssr.grabImage(0, 6, SIZE, SIZE);
+		// wall tiles 512 x 480 / 32 = 16 x 15
+		wall = ImageLoader.getSprite("wall");
+		ssr.setImage(wall);
+		wall = ssr.grabImage(8, 3, SIZE, SIZE);
+		
+		String name;
 		for(int column=0; column < room.getSizeY(); column++) {
 			for(int row=0; row < room.getSizeX(); row++) {
 				name = room.getTileAt(row, column).getName();
-				BufferedImage sprite = ImageLoader.getSprite(name);
+				sprite = ImageLoader.getSprite(name);
 				
-				int drawPosX = room.getTileAt(row, column).getPosX() * (SCALE * MULT) + ((Window.WIDTH/2) - player.getPosX() * (SCALE * MULT) - sprite.getWidth());
-				int drawPosY = room.getTileAt(row, column).getPosY() * (SCALE * MULT) + ((Window.HEIGHT/2) - player.getPosY() * (SCALE * MULT) - sprite.getHeight());
+				int drawPosX = room.getTileAt(row, column).getPosX() * (SCALE * MULT) + ((Window.WIDTH/2) - player.getPosX() * (SCALE * MULT) - SCALE);
+				int drawPosY = room.getTileAt(row, column).getPosY() * (SCALE * MULT) + ((Window.HEIGHT/2) - player.getPosY() * (SCALE * MULT) - SCALE);
 				
 				if (name == "stairs" || name == "chest" || name == "door" || name == "gate" || name == "open") {
-					g.drawImage(ImageLoader.getSprite("floor"), drawPosX, drawPosY, sprite.getWidth() * MULT, sprite.getHeight() * MULT, null);
+					g.drawImage(floor, drawPosX, drawPosY, SCALE * MULT, SCALE * MULT, null);
 				}
 				else if (name == "skeleton") {
-					g.drawImage(ImageLoader.getSprite("wall"), drawPosX, drawPosY, sprite.getWidth() * MULT, sprite.getHeight() * MULT, null);
+					g.drawImage(wall, drawPosX, drawPosY, SCALE * MULT, SCALE * MULT, null);
 				}
 				
-				g.drawImage(sprite, drawPosX, drawPosY, sprite.getWidth() * MULT, sprite.getHeight() * MULT, null);
+				if (name == "floor") {
+					g.drawImage(floor, drawPosX, drawPosY, SCALE * MULT, SCALE * MULT, null);
+				}
+				else if (name == "wall") {
+					g.drawImage(wall, drawPosX, drawPosY, SCALE * MULT, SCALE * MULT, null);
+				}
+				else {
+					g.drawImage(sprite, drawPosX, drawPosY, SCALE * MULT, SCALE * MULT, null);
+				}
+				
 			}
 		}
 	}
@@ -58,7 +79,7 @@ public class WorldBuilder {
 	public void renderPlayer(Player player, Graphics g) {
 		int c, r;
 		
-		BufferedImage sprite = ImageLoader.getSprite("player");
+		sprite = ImageLoader.getSprite("player");
 		ssr.setImage(sprite);
 		
 		switch(player.getFacing()) {
@@ -90,7 +111,7 @@ public class WorldBuilder {
 		int c, r;
 		
 		for (Enemy enemy : enemies) {
-			BufferedImage sprite = ImageLoader.getSprite(enemy.getName());
+			sprite = ImageLoader.getSprite(enemy.getName());
 			ssr.setImage(sprite);
 			
 			switch(enemy.getFacing()) {
