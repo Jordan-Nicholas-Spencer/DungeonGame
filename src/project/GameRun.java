@@ -25,8 +25,14 @@ public class GameRun {
 	/* 
 	 *  TODO:
 	 *  1) Game Logic
-	 *  	-Implement battle logic between enemy and player
-	 *  // kind of there
+	 *  	-Enemy chasing player logic in moveEnemies()
+	 *  	-Remove enemy when killed
+	 *  	-Stop game when player dies
+	 *  	-Interactions with environment (picking up items, opening doors, opening chests, etc.)
+	 * 
+	 * 		-newGame+
+	 * 		-Items carry over to newGame+
+	 *  	-Movement between tiles to be more fluid (no teleporting)
 	 *  
 	 *  2) Display
 	 *  	-Player HUD Display
@@ -38,6 +44,7 @@ public class GameRun {
 	 *  
 	 *  3) Level Design
 	 *  	-Create levels
+	 *  	-Create story
 	 *  
 	 *  4) Inventory System
 	 *  	-Design Inventory System

@@ -28,7 +28,6 @@ public class WorldModel {
 	private Random random;
 	private LevelDesign level;
 	
-	
 	public WorldModel() {
 		random = new Random();
 		level = new LevelDesign();
@@ -61,28 +60,11 @@ public class WorldModel {
 	
 	public void movePlayer(int dirX, int dirY) {
 		boolean playerMoved = false;
-		if (currentRoom.enemyInRoom(getTileInFront(player, dirX, dirY).getPosX(), getTileInFront(player, dirX, dirY).getPosY()))
-		{
+		if (currentRoom.enemyInRoom(getTileInFront(player, dirX, dirY).getPosX(), getTileInFront(player, dirX, dirY).getPosY())) {
 			Enemy enemy = currentRoom.getEnemyAt(getTileInFront(player, dirX, dirY).getPosX(), getTileInFront(player, dirX, dirY).getPosY());
-			int defense = enemy.getDefense();
-			int damage = player.getStrength();
-			int amount = damage - defense;
-			enemy.damage(amount);
-			switch(player.getFacing()) {
-			case "up":
-				enemy.setFacing("down");
-				break;
-			case "down":
-				enemy.setFacing("up");
-				break;
-			case "left":
-				enemy.setFacing("right");
-				break;
-			case "right":
-				enemy.setFacing("left");
-				break;
-			}
+			enemy.damage(player.getStrength() - enemy.getDefense());
 			System.out.println("fightEnemy");
+			moveEnemies();
 		}
 		else {
 			switch(getTileInFront(player, dirX, dirY).getName()) {
@@ -124,18 +106,22 @@ public class WorldModel {
 			switch(random.nextInt(4)) {
 			case 0:
 				name = getTileInFront(enemy, 1, 0).getName();
+				
+				// if there is an enemy in front, try to move in a different direction
 				if(currentRoom.enemyInRoom(enemy.getPosX() + 1, enemy.getPosY())) {
-					return;
+					return; // consider using break in case enemy is surrounded on all sided by enemies
 				}
-				else if(enemy.getPosX() + 1 == player.getPosX() && enemy.getPosY() == player.getPosY()) {
-					int defense = player.getDefense();
-					int damage = enemy.getStrength();
-					int amount = damage - defense;
-					player.damage(amount);
+				// if the player is next to the enemy, face player and fight
+				else if(playerNextToEnemy(enemy)) {
+					player.damage(enemy.getStrength() - player.getDefense());
 					System.out.println("fightPlayer");
 					break;
 				}	
-				if(name == "floor" || name == "open") {
+				// if the player is near the enemy, move towards the player
+//				else if() {
+//					
+//				}
+				else if(name == "floor" || name == "open") {
 					enemy.setPosition(enemy.getPosX() + 1, enemy.getPosY());
 					enemy.setFacing("right");
 					break;
@@ -145,14 +131,15 @@ public class WorldModel {
 				if(currentRoom.enemyInRoom(enemy.getPosX() - 1, enemy.getPosY())) {
 					return;
 				}
-				else if(enemy.getPosX() - 1 == player.getPosX() && enemy.getPosY() == player.getPosY()) {
-					int defense = player.getDefense();
-					int damage = enemy.getStrength();
-					int amount = damage - defense;
-					player.damage(amount);
+				else if(playerNextToEnemy(enemy)) {
+					player.damage(enemy.getStrength() - player.getDefense());
 					System.out.println("fightPlayer");
 					break;
 				}	
+				// if the player is near the enemy, move towards the player
+//				else if() {
+//					
+//				}
 				if(name == "floor" || name == "open") {
 					enemy.setPosition(enemy.getPosX() - 1, enemy.getPosY());
 					enemy.setFacing("left");
@@ -163,14 +150,15 @@ public class WorldModel {
 				if(currentRoom.enemyInRoom(enemy.getPosX(), enemy.getPosY() + 1)) {
 					return;
 				}
-				else if(enemy.getPosX() == player.getPosX() && enemy.getPosY() + 1 == player.getPosY()) {
-					int defense = player.getDefense();
-					int damage = enemy.getStrength();
-					int amount = damage - defense;
-					player.damage(amount);
+				else if(playerNextToEnemy(enemy)) {
+					player.damage(enemy.getStrength() - player.getDefense());
 					System.out.println("fightPlayer");
 					break;
 				}	
+				// if the player is near the enemy, move towards the player
+//				else if() {
+//					
+//				}
 				if(name == "floor" || name == "open") {
 					enemy.setPosition(enemy.getPosX(), enemy.getPosY() + 1);
 					enemy.setFacing("down");
@@ -181,14 +169,15 @@ public class WorldModel {
 				if(currentRoom.enemyInRoom(enemy.getPosX(), enemy.getPosY() - 1)) {
 					return;
 				}
-				else if(enemy.getPosX() == player.getPosX() && enemy.getPosY() - 1 == player.getPosY()) {
-					int defense = player.getDefense();
-					int damage = enemy.getStrength();
-					int amount = damage - defense;
-					player.damage(amount);
+				else if(playerNextToEnemy(enemy)) {
+					player.damage(enemy.getStrength() - player.getDefense());
 					System.out.println("fightPlayer");
 					break;
 				}	
+				// if the player is near the enemy, move towards the player
+//				else if() {
+//					
+//				}
 				if(name == "floor" || name == "open") {
 					enemy.setPosition(enemy.getPosX(), enemy.getPosY() - 1);
 					enemy.setFacing("up");
@@ -196,9 +185,39 @@ public class WorldModel {
 				}
 			}
 		}
-		
 	}
-			
+	
+	public boolean playerNextToEnemy(Enemy enemy) {
+		boolean attackingRange = false;
+		// player right
+		if (enemy.getPosX() + 1 == player.getPosX() && enemy.getPosY() == player.getPosY()) {
+			enemy.setFacing("right");
+			attackingRange = true;
+			return attackingRange;
+		}
+		// player left
+		else if (enemy.getPosX() - 1 == player.getPosX() && enemy.getPosY() == player.getPosY()) {
+			attackingRange = true;
+			enemy.setFacing("left");
+			return attackingRange;
+		}
+		// player down
+		else if (enemy.getPosX() == player.getPosX() && enemy.getPosY() + 1 == player.getPosY()) {
+			enemy.setFacing("down");
+			attackingRange = true;
+			return attackingRange;
+		}
+		// player up
+		else if (enemy.getPosX() == player.getPosX() && enemy.getPosY() - 1 == player.getPosY()) {
+			enemy.setFacing("up");
+			attackingRange = true;
+			return attackingRange;
+		}
+		
+		// player not next to enemy
+		return attackingRange;
+	}
+	
 	public LevelDesign getLevel() {
 		return level;
 	}
@@ -208,7 +227,7 @@ public class WorldModel {
 		currentRoom = level.LEVELARRAY[levelsCompleted + 1];
 		currentEnemies = currentRoom.getEnemies();
 		player.setPosition(currentRoom.getXStartPos(), currentRoom.getYStartPos());
-		// player.levelCompleted();
+		player.levelCompleted();
 
 	}
 }
