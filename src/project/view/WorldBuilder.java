@@ -28,18 +28,20 @@ public class WorldBuilder {
 	
 	private final int SIZE = 32; // 32 x 32 - this program's standard sprite size
 	private final int SCALE = 48; // 32 * 1.5
-	private final int MULT = 1; // optional scalar
+	private final int STEP = 16; // 48 / 3 - for 3 frames of movement between tiles
+	private final int MULT = 1; // optional scalar for zooming in
 	
 	SpriteSheetReader ssr = new SpriteSheetReader();
+	private String name;
 
 	public void renderLevel(Room room, Player player, Graphics g) {
 		for(int column=0; column < room.getSizeY(); column++) {
 			for(int row=0; row < room.getSizeX(); row++) {
-				String name = room.getTileAt(row, column).getName();
+				name = room.getTileAt(row, column).getName();
 				BufferedImage sprite = ImageLoader.getSprite(name);
 				
-				int drawPosX = room.getTileAt(row, column).getPosX() * (sprite.getWidth() * MULT) + ((Window.WIDTH/2) - player.getPosX() * (sprite.getWidth() * MULT) - sprite.getWidth());
-				int drawPosY = room.getTileAt(row, column).getPosY() * (sprite.getHeight() * MULT) + ((Window.HEIGHT/2) - player.getPosY() * (sprite.getHeight() * MULT) - sprite.getHeight());
+				int drawPosX = room.getTileAt(row, column).getPosX() * (SCALE * MULT) + ((Window.WIDTH/2) - player.getPosX() * (SCALE * MULT) - sprite.getWidth());
+				int drawPosY = room.getTileAt(row, column).getPosY() * (SCALE * MULT) + ((Window.HEIGHT/2) - player.getPosY() * (SCALE * MULT) - sprite.getHeight());
 				
 				if (name == "stairs" || name == "chest" || name == "door" || name == "gate" || name == "open") {
 					g.drawImage(ImageLoader.getSprite("floor"), drawPosX, drawPosY, sprite.getWidth() * MULT, sprite.getHeight() * MULT, null);

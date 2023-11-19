@@ -13,10 +13,11 @@ public class LevelDesign {
 	*  s = skeleton (decoration)
 	*/
 
-	public static final Room[] LEVELARRAY = {new Room(new String[] {
+	public final Room[] LEVELARRAY = {new Room(new String[] 
+		{
 			"##########################",
 			"##########################",
-			"####ss## ^ #s#s##s########",
+			"####ss##   #s#s##s########",
 			"#      #   #      ########",
 			"##     #   #     #########",
 			"#####o##   #g#############",
@@ -29,19 +30,17 @@ public class LevelDesign {
 			"####cccc   cccc###########",
 			"#######ccccc##############",
 			"##########################"
-		}, 9, 2, new Enemy(Enemy.Species.GARGOYLE, 7 , 6), new Enemy(Enemy.Species.GARGOYLE, 11 , 6)),
+		}, 0, 3, new Enemy(Enemy.Species.GARGOYLE, 7 , 6), new Enemy(Enemy.Species.GARGOYLE, 11 , 6)),
 			new Room(new String[] {
 				"##########################",
 				"##########################",
-				"####ss## ^ #s#s##s########",
-				"#      #   #      ########",
+				"####ss######s#s#####s#####",
+				"g                      ###",
 				"###                    ###",
 				"###                    ###",
-				"###                    ###",
+				"###                      g",
 				"##########################"
-				
-				
-			}, 9, 2, new Enemy(Enemy.Species.GARGOYLE, 7 , 6), new Enemy(Enemy.Species.GARGOYLE, 11 , 6)) };
+			}, 1, 3) };
 	
 	
 }

@@ -23,8 +23,7 @@ public class Organism extends Tile{
 	protected int maxHP; 
 	protected int strength;
 	protected int defense;
-	
-	
+
 	public Organism(String type, int posX, int posY, int health) {
 		super(type, posX, posY);
 		this.facing = "down";

@@ -32,8 +32,8 @@ public class WorldModel {
 	public WorldModel() {
 		random = new Random();
 		level = new LevelDesign();
-		currentRoom = LevelDesign.LEVELARRAY[0];
-		player = new Player ("player", 9, 2);
+		currentRoom = level.LEVELARRAY[0];
+		player = new Player ("player", 2, 3);
 		currentEnemies = currentRoom.getEnemies();
 	}
 	
@@ -60,7 +60,6 @@ public class WorldModel {
 	}
 	
 	public void movePlayer(int dirX, int dirY) {
-		nextLevel();
 		if (currentRoom.enemyInRoom(getTileInFront(player, dirX, dirY).getPosX(), getTileInFront(player, dirX, dirY).getPosY()))
 		{
 			Enemy enemy = currentRoom.getEnemyAt(getTileInFront(player, dirX, dirY).getPosX(), getTileInFront(player, dirX, dirY).getPosY());
@@ -89,8 +88,10 @@ public class WorldModel {
 		case "wall":
 			break;
 		case "stairs":
+			nextLevel();
 			break;
-		case "door":
+		case "door":			
+			nextLevel();
 			break;
 		default:
 			break;
@@ -178,15 +179,17 @@ public class WorldModel {
 		}
 		
 	}
-	
-	
-		
+			
 	public LevelDesign getLevel() {
 		return level;
 	}
 	
 	public void nextLevel() {
 		int levelsCompleted = player.getLevelsCompleted();
-		currentRoom = LevelDesign.LEVELARRAY[levelsCompleted + 1];
+		currentRoom = level.LEVELARRAY[levelsCompleted + 1];
+		currentEnemies = currentRoom.getEnemies();
+		player.setPosition(currentRoom.getXStartPos(), currentRoom.getYStartPos());
+		// player.levelCompleted();
+
 	}
 }

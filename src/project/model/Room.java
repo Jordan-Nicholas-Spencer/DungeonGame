@@ -84,11 +84,11 @@ public class Room {
 		return false;
 	}
 	
-	public int getxStartPos() {
+	public int getXStartPos() {
 		return xStartPos;
 	}
 	
-	public int getyStartPos() {
+	public int getYStartPos() {
 		return yStartPos;
 	}
 	
