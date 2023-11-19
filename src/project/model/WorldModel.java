@@ -60,6 +60,7 @@ public class WorldModel {
 	}
 	
 	public void movePlayer(int dirX, int dirY) {
+		boolean playerMoved = false;
 		if (currentRoom.enemyInRoom(getTileInFront(player, dirX, dirY).getPosX(), getTileInFront(player, dirX, dirY).getPosY()))
 		{
 			Enemy enemy = currentRoom.getEnemyAt(getTileInFront(player, dirX, dirY).getPosX(), getTileInFront(player, dirX, dirY).getPosY());
@@ -67,36 +68,54 @@ public class WorldModel {
 			int damage = player.getStrength();
 			int amount = damage - defense;
 			enemy.damage(amount);
-			System.out.print("fightEnemy");
+			switch(player.getFacing()) {
+			case "up":
+				enemy.setFacing("down");
+				break;
+			case "down":
+				enemy.setFacing("up");
+				break;
+			case "left":
+				enemy.setFacing("right");
+				break;
+			case "right":
+				enemy.setFacing("left");
+				break;
+			}
+			System.out.println("fightEnemy");
 		}
-		switch(getTileInFront(player, dirX, dirY).getName()) {
-		
-		case "floor":
-			player.setPosition(player.getPosX() + dirX, player.getPosY() + dirY);
-			break;
-		case "open":
-			player.setPosition(player.getPosX() + dirX, player.getPosY() + dirY);
-			break;
-		case "gargoyle":
-			break;
-		case "skeleton":
-			break;
-		case "gate":
-			break;
-		case "chest":
-			break;
-		case "wall":
-			break;
-		case "stairs":
-			nextLevel();
-			break;
-		case "door":			
-			nextLevel();
-			break;
-		default:
-			break;
+		else {
+			switch(getTileInFront(player, dirX, dirY).getName()) {
+			
+			case "floor":
+				player.setPosition(player.getPosX() + dirX, player.getPosY() + dirY);
+				playerMoved = true;
+				break;
+			case "open":
+				player.setPosition(player.getPosX() + dirX, player.getPosY() + dirY);
+				playerMoved = true;
+				break;
+			case "skeleton":
+				break;
+			case "gate":
+				break;
+			case "chest":
+				break;
+			case "wall":
+				break;
+			case "stairs":
+				nextLevel();
+				break;
+			case "door":			
+				nextLevel();
+				break;
+			default:
+				break;
+			}
+			if (playerMoved == true) {
+				moveEnemies();
+			}
 		}
-		moveEnemies();
 	}
 	
 	public void moveEnemies() {
@@ -113,7 +132,7 @@ public class WorldModel {
 					int damage = enemy.getStrength();
 					int amount = damage - defense;
 					player.damage(amount);
-					System.out.print("fightPlayer");
+					System.out.println("fightPlayer");
 					break;
 				}	
 				if(name == "floor" || name == "open") {
@@ -131,7 +150,7 @@ public class WorldModel {
 					int damage = enemy.getStrength();
 					int amount = damage - defense;
 					player.damage(amount);
-					System.out.print("fightPlayer");
+					System.out.println("fightPlayer");
 					break;
 				}	
 				if(name == "floor" || name == "open") {
@@ -149,7 +168,7 @@ public class WorldModel {
 					int damage = enemy.getStrength();
 					int amount = damage - defense;
 					player.damage(amount);
-					System.out.print("fightPlayer");
+					System.out.println("fightPlayer");
 					break;
 				}	
 				if(name == "floor" || name == "open") {
@@ -167,7 +186,7 @@ public class WorldModel {
 					int damage = enemy.getStrength();
 					int amount = damage - defense;
 					player.damage(amount);
-					System.out.print("fightPlayer");
+					System.out.println("fightPlayer");
 					break;
 				}	
 				if(name == "floor" || name == "open") {

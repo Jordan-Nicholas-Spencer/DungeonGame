@@ -67,20 +67,20 @@ public class WorldController implements ActionListener{
 		        int key = e.getKeyCode();
 		        // Implement player movement based on key presses
 		        if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) {
-		        	model.movePlayer(-1, 0);
 		        	WorldModel.getPlayer().setFacing("left");
+		        	model.movePlayer(-1, 0);
 		        } 
 		        else if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
-		        	model.movePlayer(1, 0);
 		        	WorldModel.getPlayer().setFacing("right");
+		        	model.movePlayer(1, 0);
 		        } 
 		        else if (key == KeyEvent.VK_UP || key == KeyEvent.VK_W) {
-		        	model.movePlayer(0, -1);
 		        	WorldModel.getPlayer().setFacing("up");
+		        	model.movePlayer(0, -1);
 		        } 
 		        else if (key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) {
-		        	model.movePlayer(0, 1);
 		        	WorldModel.getPlayer().setFacing("down");
+		        	model.movePlayer(0, 1);
 		        }
 		    }
 		}
