@@ -16,10 +16,12 @@ public class Enemy extends Organism {
 	}
 
 	public enum Species {
-		BAT("bat", 11, 3, 2),
-		RAT("rat", 7, 1, 0),
-		GARGOYLE("gargoyle", 13, 3, 5),
-		VAMPIRE("vampire", 26, 6, 10);
+		BAT("bat", 10, 3, 2),
+		RAT("rat", 5, 1, 0),		
+		GARGOYLE("gargoyle", 15, 5, 5),
+		SLIME("slime", 8, 2, 5),
+		SUCCUBUS("succubus", 21, 7, 7),
+		VAMPIRE("vampire", 28, 9, 9);
 		
 		private String name;
 		private int maxHP;

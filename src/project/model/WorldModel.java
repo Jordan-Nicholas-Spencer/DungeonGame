@@ -33,7 +33,7 @@ public class WorldModel {
 		random = new Random();
 		level = new LevelDesign();
 		currentRoom = level.LEVELARRAY[0];
-		player = new Player ("player", 2, 3);
+		player = new Player ("player", currentRoom.getXStartPos(), currentRoom.getYStartPos());
 		currentEnemies = currentRoom.getEnemies();
 	}
 	

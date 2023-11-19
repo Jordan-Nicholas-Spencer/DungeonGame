@@ -56,21 +56,27 @@ public class WorldBuilder {
 	}
 	
 	public void renderPlayer(Player player, Graphics g) {
+		int c, r;
+		
 		BufferedImage sprite = ImageLoader.getSprite("player");
 		ssr.setImage(sprite);
 		
 		switch(player.getFacing()) {
 		case "down":
-			sprite = ssr.grabImage(1, 0, SIZE, SIZE);
+			c = 1; r = 0;
+			sprite = ssr.grabImage(c, r, SIZE, SIZE);
 			break;
 		case "left":
-			sprite = ssr.grabImage(1, 1, SIZE, SIZE);
+			c = 1; r = 1;
+			sprite = ssr.grabImage(c, r, SIZE, SIZE);
 			break;
 		case "right":
-			sprite = ssr.grabImage(1, 2, SIZE, SIZE);
+			c = 1; r = 2;
+			sprite = ssr.grabImage(c, r, SIZE, SIZE);
 			break;
 		case "up":
-			sprite = ssr.grabImage(1, 3, SIZE, SIZE);
+			c = 1; r = 3;
+			sprite = ssr.grabImage(c, r, SIZE, SIZE);
 			break;
 		}
 		
@@ -81,22 +87,28 @@ public class WorldBuilder {
 	}
 	
 	public void renderEnemy(Enemy[] enemies, Player player, Graphics g) {
+		int c, r;
+		
 		for (Enemy enemy : enemies) {
 			BufferedImage sprite = ImageLoader.getSprite(enemy.getName());
 			ssr.setImage(sprite);
 			
 			switch(enemy.getFacing()) {
 			case "down":
-				sprite = ssr.grabImage(1, 1, SIZE, SIZE);
+				c = 1; r = 0;
+				sprite = ssr.grabImage(c, r, SIZE, SIZE);
 				break;
 			case "left":
-				sprite = ssr.grabImage(1, 0, SIZE, SIZE);
+				c = 1; r = 1;
+				sprite = ssr.grabImage(c, r, SIZE, SIZE);
 				break;
 			case "right":
-				sprite = ssr.grabImage(1, 2, SIZE, SIZE);
+				c = 1; r = 2;
+				sprite = ssr.grabImage(c, r, SIZE, SIZE);
 				break;
 			case "up":
-				sprite = ssr.grabImage(1, 3, SIZE, SIZE);
+				c = 1; r = 3;
+				sprite = ssr.grabImage(c, r, SIZE, SIZE);
 				break;
 			}
 			
@@ -105,26 +117,5 @@ public class WorldBuilder {
 			
 			g.drawImage(sprite, drawPosX, drawPosY, SCALE * MULT, SCALE * MULT, null);
 		}
-	}
-	
-	/**
-	 * Alters the picture so that it displays the a mirror image
-	 * source: GeeksForGeeks
-	 * @param the image to be altered
-	 */
-	private BufferedImage mirrorImage(BufferedImage image) {		
-		int height = image.getHeight();
-		int width = image.getWidth();
-		BufferedImage mirrored = new BufferedImage(width, height, image.getType());
-		
-		for (int y = 0; y < height; y++) {
-			for (int lx = 0, rx = width - 1; lx < width; lx++, rx--) {
-				 int p = image.getRGB(lx, y); 
-				  
-	                // set mirror image pixel value 
-	                mirrored.setRGB(rx, y, p); 
-			}
-		}
-		return mirrored;
 	}
 }
