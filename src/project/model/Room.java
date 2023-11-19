@@ -1,14 +1,13 @@
 package project.model;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Room {
 
 	private Tile[][] room;
 	private int xStartPos;
 	private int yStartPos;
-	private List<Enemy> enemies;
+	private ArrayList<Enemy> enemies;
 	
 	public Room(String[] levelDesign, int xStartPos, int yStartPos, Enemy... species) {
 		room = new Tile[levelDesign.length][];
@@ -82,6 +81,14 @@ public class Room {
 			}
 		}
 		return false;
+	}
+	
+	public void killEnemy(int x, int y) {
+		for (int i = 0; i < enemies.size(); i++) {
+			if(enemies.get(i).getPosX() == x && enemies.get(i).getPosY() == y) {
+				enemies.remove(i);
+			}
+		}
 	}
 	
 	public int getXStartPos() {

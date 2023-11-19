@@ -19,10 +19,10 @@ public class Player extends Organism{
 		super(type, posX, posY, startingHP);
 		this.inventory = new Consumable[INVENTORY_SIZE];
 		this.inventoryOpen = false;
-		this.weaponEquipped = Shop.SWORD;
-		this.armorEquipped = Shop.SCRAP;
+		this.weaponEquipped = null;
+		this.armorEquipped = null;
 		this.strength = 1;
-		this.defense = 0;
+		this.defense = 1;
 		this.levelsCompleted = 0;
 	}
 	

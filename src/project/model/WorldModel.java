@@ -24,7 +24,6 @@ public class WorldModel {
 	
 	private static Player player;
 	private static Room currentRoom;
-	private static Enemy[] currentEnemies;
 	private Random random;
 	private LevelDesign level;
 	
@@ -33,7 +32,6 @@ public class WorldModel {
 		level = new LevelDesign();
 		currentRoom = level.LEVELARRAY[0];
 		player = new Player ("player", currentRoom.getXStartPos(), currentRoom.getYStartPos());
-		currentEnemies = currentRoom.getEnemies();
 	}
 	
 	
@@ -54,16 +52,17 @@ public class WorldModel {
 		return currentRoom;
 	}
 	
-	public static Enemy[] getCurrentEnemies() {
-		return currentEnemies;
-	}
-	
 	public void movePlayer(int dirX, int dirY) {
 		boolean playerMoved = false;
 		if (currentRoom.enemyInRoom(getTileInFront(player, dirX, dirY).getPosX(), getTileInFront(player, dirX, dirY).getPosY())) {
 			Enemy enemy = currentRoom.getEnemyAt(getTileInFront(player, dirX, dirY).getPosX(), getTileInFront(player, dirX, dirY).getPosY());
 			enemy.damage(player.getStrength() - enemy.getDefense());
 			System.out.println("fightEnemy");
+			System.out.println("Enemy Health: " + enemy.getHealth());
+			System.out.println("Player Health: " + player.getHealth());
+			if (enemy.getHealth() <= 0) {
+				currentRoom.killEnemy(enemy.getPosX(), enemy.getPosY());
+			}
 			moveEnemies();
 		}
 		else {
@@ -101,7 +100,7 @@ public class WorldModel {
 	}
 	
 	public void moveEnemies() {
-		for (Enemy enemy : currentEnemies) {
+		for (Enemy enemy : currentRoom.getEnemies()) {
 			String name;
 			switch(random.nextInt(4)) {
 			case 0:
@@ -115,6 +114,7 @@ public class WorldModel {
 				else if(playerNextToEnemy(enemy)) {
 					player.damage(enemy.getStrength() - player.getDefense());
 					System.out.println("fightPlayer");
+					System.out.println("Player Health: " + player.getHealth());
 					break;
 				}	
 				// if the player is near the enemy, move towards the player
@@ -134,6 +134,7 @@ public class WorldModel {
 				else if(playerNextToEnemy(enemy)) {
 					player.damage(enemy.getStrength() - player.getDefense());
 					System.out.println("fightPlayer");
+					System.out.println("Player Health: " + player.getHealth());
 					break;
 				}	
 				// if the player is near the enemy, move towards the player
@@ -153,6 +154,7 @@ public class WorldModel {
 				else if(playerNextToEnemy(enemy)) {
 					player.damage(enemy.getStrength() - player.getDefense());
 					System.out.println("fightPlayer");
+					System.out.println("Player Health: " + player.getHealth());
 					break;
 				}	
 				// if the player is near the enemy, move towards the player
@@ -172,6 +174,7 @@ public class WorldModel {
 				else if(playerNextToEnemy(enemy)) {
 					player.damage(enemy.getStrength() - player.getDefense());
 					System.out.println("fightPlayer");
+					System.out.println("Player Health: " + player.getHealth());
 					break;
 				}	
 				// if the player is near the enemy, move towards the player
@@ -225,7 +228,6 @@ public class WorldModel {
 	public void nextLevel() {
 		int levelsCompleted = player.getLevelsCompleted();
 		currentRoom = level.LEVELARRAY[levelsCompleted + 1];
-		currentEnemies = currentRoom.getEnemies();
 		player.setPosition(currentRoom.getXStartPos(), currentRoom.getYStartPos());
 		player.levelCompleted();
 

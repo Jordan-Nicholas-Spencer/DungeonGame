@@ -50,7 +50,7 @@ public class Panel extends JPanel {
         	
         	worldBuilder.renderLevel(WorldModel.getCurrentRoom(), WorldModel.getPlayer(), g);
         	worldBuilder.renderPlayer(WorldModel.getPlayer(), g);
-        	worldBuilder.renderEnemy(WorldModel.getCurrentEnemies(), WorldModel.getPlayer(), g);
+        	worldBuilder.renderEnemy(WorldModel.getCurrentRoom().getEnemies(), WorldModel.getPlayer(), g);
 
         	
         } catch (Exception e) {
