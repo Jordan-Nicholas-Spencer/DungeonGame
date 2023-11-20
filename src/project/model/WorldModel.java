@@ -24,19 +24,21 @@ public class WorldModel {
 	
 	private static Player player;
 	private static Room currentRoom;
-	private Random random;
-	private LevelDesign level;
+	private static Random random;
+	private static LevelDesign level;
 	
 	public WorldModel() {
+		initializeGame();
+	}
+	
+	public static void initializeGame() {
 		random = new Random();
 		level = new LevelDesign();
 		currentRoom = level.LEVELARRAY[0];
 		player = new Player ("player", currentRoom.getXStartPos(), currentRoom.getYStartPos());
 	}
 	
-	
-	
-	public static void initializeWorld() {
+	public static void initializeImages() {
 		ImageLoader.initializeSprites();
 	}
 	
@@ -115,6 +117,9 @@ public class WorldModel {
 					player.damage(enemy.getStrength() - player.getDefense());
 					System.out.println("fightPlayer");
 					System.out.println("Player Health: " + player.getHealth());
+					if (player.getHealth() <= 0) {
+						
+					}
 					break;
 				}	
 				// if the player is near the enemy, move towards the player

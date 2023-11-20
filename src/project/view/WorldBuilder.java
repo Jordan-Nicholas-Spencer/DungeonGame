@@ -1,5 +1,7 @@
 package project.view;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 
 import java.awt.image.BufferedImage;
@@ -138,5 +140,58 @@ public class WorldBuilder {
 			
 			g.drawImage(sprite, drawPosX, drawPosY, SCALE * MULT, SCALE * MULT, null);
 		}
+	}
+	
+	public void renderGameOver(Player player, Graphics g) {
+		
+		if (player.getHealth() <= 0) {
+			int x = (Window.WIDTH / 2) - SCALE * 5;
+			int y = (Window.HEIGHT/ 2) - SCALE * 4;
+			int width = SCALE * 10;
+			int height = SCALE * 5;
+			
+			g.setColor(Color.BLACK);
+			g.fillRoundRect(x, y, width, height, SCALE, SCALE);
+			g.setColor(Color.WHITE);
+			g.drawRoundRect(x, y, width, height, SCALE, SCALE);
+			
+			g.setFont(new Font("Dialog", Font.PLAIN, 20));
+			g.drawString("Floors cleard: " + player.getLevelsCompleted(), x + SCALE / 2, y + SCALE * 2);
+			g.drawString("Press any key to restart the game.", x + SCALE / 2, y + SCALE * 2 + SCALE / 2);
+			
+			g.setColor(Color.RED);
+			g.setFont(new Font("Dialog", Font.PLAIN, 40));
+			g.drawString("GAME OVER", x + SCALE * 2 + SCALE / 2, y + SCALE);
+		}
+
+	}
+	
+	public void renderHUD(Player player, Graphics g) {
+		int x = SCALE / 2;
+		int y = SCALE / 2;
+		int width = SCALE * 2;
+		int height = SCALE * 2;
+		
+		Color c = new Color(0, 0, 0, 150);	// 150 setsOpacity
+		g.setColor(c);
+		g.fillRoundRect(x, y, width, height, SCALE / 2, SCALE / 2);
+		g.setColor(Color.WHITE);
+		g.drawRoundRect(x, y, width, height, SCALE / 2, SCALE / 2);
+		
+		g.setFont(new Font("Dialog", Font.PLAIN, 20));
+		g.drawString("- HUD -", x + 14, y + 20);
+		g.setFont(new Font("Dialog", Font.PLAIN, 12));
+		g.drawString("HP: " + player.getHealth() + "/" + player.getMaxHP() , x + 5, y + 40);
+	}
+	
+	public void renderDialogueWindow(Graphics g) {
+		int x = (Window.WIDTH / 2);
+		int y = (Window.HEIGHT / 2);
+		int width = Window.WIDTH - (SCALE *4);
+		int height = SCALE * 5;
+		
+		Color c = new Color(0, 0, 0);
+		g.setColor(c);
+		g.fillRoundRect(x, y, width, height, SCALE, SCALE);
 	}
 }

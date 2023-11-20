@@ -26,41 +26,45 @@ public class GameRun {
 	 *  TODO:
 	 *  1) Game Logic
 	 *  	-Enemy chasing player logic in moveEnemies()
-	 *  	-Remove enemy when killed
-	 *  	-Stop game when player dies
-	 *  	-Interactions with environment (picking up items, opening doors, opening chests, etc.)
+	 *  	-Stop game when player dies // can call worldmodel.initialize game to restart game
+	 *  	-Interactions with environment (picking up items, opening doors, opening chests, etc.) // see display
+	 *  	-Design inventory system
 	 * 
 	 * 		-newGame+
 	 * 		-Items carry over to newGame+
 	 *  	-Movement between tiles to be more fluid (no teleporting)
 	 *  
 	 *  2) Display
-	 *  	-Player HUD Display
 	 * 		-Inventory Display
 	 *  	-Start Screen Display
 	 *  	-Game Over Display
 	 *  	-Game Complete/Credits Display
 	 *  	-Dialogue Display
+	 *  	-Interaction Display // idea - if you are close to the item, render a sprite above the item 
+	 *  						//			the sprite being like a message bubble with a 'E' in it to
+	 *  						// 			inform the player to press E to interact
 	 *  
 	 *  3) Level Design
 	 *  	-Create levels
 	 *  	-Create story
 	 *  
-	 *  4) Inventory System
-	 *  	-Design Inventory System
-	 *  
+	 *  5) CISC 191
+	 *  	-Comment all code
+	 *  	-Update README documentation
+	 *  	-Remove redundant variable
+	 *  	-Ensure proper variable names
+	 *  	-Ensure proper usage of private,protected,public,static,final
 	 *  
 	 */
 	
     public static void main(String[] args) {
     	
-    	//loop begin
-    	WorldModel model = new WorldModel();
-    	WorldModel.initializeWorld();
+       	WorldModel model = new WorldModel();
+    	WorldModel.initializeImages();
+    	WorldModel.initializeGame();
     	Window view = new Window();
     	WorldController controller = new WorldController(model, view);
-    	view.setVisible(true);
-        // loop end        
+    	view.setVisible(true);    
         
     }
 }
