@@ -1,5 +1,6 @@
 package project.model;
 
+import java.awt.Graphics;
 import java.util.Random;
 
 import project.view.ImageLoader;
@@ -225,6 +226,61 @@ public class WorldModel {
 		// player not next to enemy
 		return attackingRange;
 	}
+	
+	public boolean isNPCAtPlayer()
+	{
+		for (NPC npc : currentRoom.getNPCs())
+		{
+			if (playerNextToNPC(npc))
+			{
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	public NPC getNPCAtPlayer()
+	{
+		for (NPC npc : currentRoom.getNPCs())
+		{
+			if (playerNextToNPC(npc))
+			{
+				return npc;
+			}
+		}
+		
+		return null;
+	}
+	
+	public boolean playerNextToNPC(NPC npc)
+	{
+		boolean isNear = false;
+		
+		if (npc.getPosX() + 1 == player.getPosX() && npc.getPosY() == player.getPosY())
+		{
+			isNear = true;
+			return isNear;
+		}
+		else if (npc.getPosX() - 1 == player.getPosX() && npc.getPosY() == player.getPosY()) 
+		{
+			isNear = true;
+			return isNear;
+		}
+		else if (npc.getPosX() == player.getPosX() && npc.getPosY() + 1 == player.getPosY()) 
+		{
+			isNear = true;
+			return isNear;
+		}
+		else if (npc.getPosX() == player.getPosX() && npc.getPosY() - 1 == player.getPosY())
+		{
+			isNear = true;
+			return isNear;
+		}
+		return isNear;
+	}
+	
+	
 	
 	public LevelDesign getLevel() {
 		return level;

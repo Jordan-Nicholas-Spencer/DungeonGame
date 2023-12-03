@@ -111,4 +111,6 @@ public class Player extends Organism{
 	{
 		this.levelsCompleted += 1;
 	}
+	
+	
 }

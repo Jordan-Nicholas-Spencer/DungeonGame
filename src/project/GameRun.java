@@ -2,6 +2,7 @@ package project;
 
 import project.model.WorldModel;
 import project.view.Window;
+import project.view.WorldBuilder;
 
 /**
  * Lead Author(s):
@@ -60,6 +61,7 @@ public class GameRun {
     public static void main(String[] args) {
     	
        	WorldModel model = new WorldModel();
+       	WorldBuilder builder = new WorldBuilder();
     	WorldModel.initializeImages();
     	WorldModel.initializeGame();
     	Window view = new Window();

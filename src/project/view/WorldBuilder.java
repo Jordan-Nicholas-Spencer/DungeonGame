@@ -47,6 +47,7 @@ public class WorldBuilder {
 		wall = ImageLoader.getSprite("wall");
 		ssr.setImage(wall);
 		wall = ssr.grabImage(8, 3, SIZE, SIZE);
+
 		
 		String name;
 		for(int column=0; column < room.getSizeY(); column++) {
@@ -156,7 +157,7 @@ public class WorldBuilder {
 			g.drawRoundRect(x, y, width, height, SCALE, SCALE);
 			
 			g.setFont(new Font("Dialog", Font.PLAIN, 20));
-			g.drawString("Floors cleard: " + player.getLevelsCompleted(), x + SCALE / 2, y + SCALE * 2);
+			g.drawString("Floors cleared: " + player.getLevelsCompleted(), x + SCALE / 2, y + SCALE * 2);
 			g.drawString("Press any key to restart the game.", x + SCALE / 2, y + SCALE * 2 + SCALE / 2);
 			
 			g.setColor(Color.RED);
@@ -193,5 +194,9 @@ public class WorldBuilder {
 		Color c = new Color(0, 0, 0);
 		g.setColor(c);
 		g.fillRoundRect(x, y, width, height, SCALE, SCALE);
+		g.setColor(Color.WHITE);
+		g.drawRoundRect(x, y, width, height, SCALE / 2, SCALE / 2);
+		
+		
 	}
 }

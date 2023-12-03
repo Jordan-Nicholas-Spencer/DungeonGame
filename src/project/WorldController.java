@@ -10,6 +10,7 @@ import javax.swing.Timer;
 import project.model.WorldModel;
 import project.view.Panel;
 import project.view.Window;
+import project.view.WorldBuilder;
 
 /**
  * Lead Author(s):
@@ -34,6 +35,9 @@ public class WorldController implements ActionListener{
 		private WorldModel model;
 		private Window view;
 		private Panel panel;
+		private WorldBuilder builder;
+		private static boolean isDialogueActive = false;
+		private static boolean isTalking = false;
 	
 		public WorldController(WorldModel model, Window view) {
 			this.model = model;
@@ -41,12 +45,23 @@ public class WorldController implements ActionListener{
 			this.panel = new Panel();
 			this.panel.addKeyListener(new KeyboardListener());
 			this.view.add(panel);
+			this.builder = panel.getWorldBuilder();
 			
 			// Start a game timer to handle animation and updates
 		    Timer timer = new Timer(0, this); // 100ms interval
 		    timer.start();
 		}
-
+		
+		public static void setDialogueActive(boolean active)
+		{
+			isDialogueActive = active;
+		}
+		
+		public static boolean getIsDialogueActive()
+		{
+			return isDialogueActive;
+		}
+		
 		public WorldModel getWorld() {
 			return model;			
 		}		
@@ -69,7 +84,7 @@ public class WorldController implements ActionListener{
 		        if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) {
 		        	WorldModel.getPlayer().setFacing("left");
 		        	model.movePlayer(-1, 0);
-		        } 
+		        }
 		        else if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
 		        	WorldModel.getPlayer().setFacing("right");
 		        	model.movePlayer(1, 0);
@@ -82,11 +97,24 @@ public class WorldController implements ActionListener{
 		        	WorldModel.getPlayer().setFacing("down");
 		        	model.movePlayer(0, 1);
 		        }
+		        else if (key == KeyEvent.VK_E && model.isNPCAtPlayer() && WorldController.isTalking == false)
+		        {
+		        	WorldController.isTalking = true;
+		        	String dialogue = "yo";
+		        	builder.renderDialogueWindow(panel.getGraphics());
+		        	WorldController.setDialogueActive(true);
+		        }
+		        else if (key == KeyEvent.VK_E && WorldController.getIsDialogueActive() && WorldController.isTalking)
+		        {
+		        	WorldController.setDialogueActive(false);
+		        	WorldController.isTalking = false;
+		        }
 		    }
 		}
 		
 		@Override
-		public void actionPerformed(ActionEvent e) {
-			// can we use this to slow down movement?
+		public void actionPerformed(ActionEvent e) 
+		{
+			
 		}
 }

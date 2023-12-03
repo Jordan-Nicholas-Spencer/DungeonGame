@@ -2,6 +2,7 @@ package project.view;
 
 import javax.swing.JPanel;
 
+import project.WorldController;
 import project.model.WorldModel;
 
 import java.awt.Color;
@@ -38,6 +39,11 @@ public class Panel extends JPanel {
     	this.setFocusable(true);
     }
     
+    public WorldBuilder getWorldBuilder()
+    {
+    	return worldBuilder;
+    }
+    
     // invoked by keyListener added to Panel in WorldController
     @Override
     protected void paintComponent(Graphics g) {
@@ -53,6 +59,11 @@ public class Panel extends JPanel {
         	worldBuilder.renderEnemy(WorldModel.getCurrentRoom().getEnemies(), WorldModel.getPlayer(), g);
         	worldBuilder.renderHUD(WorldModel.getPlayer(), g);
         	worldBuilder.renderGameOver(WorldModel.getPlayer(), g);
+        	
+        	if (WorldController.getIsDialogueActive())
+        	{
+        		worldBuilder.renderDialogueWindow(g);
+        	}
         	
         } catch (Exception e) {
         	System.out.print("Error rendering ");
