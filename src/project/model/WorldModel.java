@@ -99,7 +99,7 @@ public class WorldModel {
 				nextLevel();
 				break;
 			case "door":			
-				nextLevel();
+				
 				break;
 			default:
 				break;
@@ -204,6 +204,14 @@ public class WorldModel {
 		}
 	}
 	
+	
+	
+	public static void openDoor(int x, int y)
+	{
+		WorldModel.getCurrentRoom().openDoor(x, y);
+		WorldModel.getPlayer().useKey();
+	}
+	
 	public boolean playerNextToEnemy(Enemy enemy) {
 		boolean attackingRange = false;
 		// player right
@@ -260,6 +268,66 @@ public class WorldModel {
 			return isNear;
 		}
 		return isNear;		
+	}
+	
+	public static boolean playerNextToDoor()
+	{
+		boolean isNear = false;
+		
+		if(WorldModel.getCurrentRoom().getTileAt(WorldModel.getPlayer().getPosX()+1, WorldModel.getPlayer().getPosY()).getName() == "door") 
+		{
+			isNear = true;
+			if (WorldModel.getPlayer().getKeyCount() >= 1)
+			{
+				WorldModel.getCurrentRoom().openDoor(WorldModel.getPlayer().getPosX()+1, WorldModel.getPlayer().getPosY());
+				player.useKey();
+			}
+			else
+			{
+				System.out.println("Need key");
+			}
+		}
+		if(WorldModel.getCurrentRoom().getTileAt(WorldModel.getPlayer().getPosX()-1, WorldModel.getPlayer().getPosY()).getName() == "door") 
+		{
+			isNear = true;
+			if (WorldModel.getPlayer().getKeyCount() >= 1)
+			{
+				WorldModel.getCurrentRoom().openDoor(WorldModel.getPlayer().getPosX()-1, WorldModel.getPlayer().getPosY());
+				player.useKey();
+			}
+			else
+			{
+				System.out.println("Need key");
+			}
+		}
+		if(WorldModel.getCurrentRoom().getTileAt(WorldModel.getPlayer().getPosX(), WorldModel.getPlayer().getPosY() + 1).getName() == "door") 
+		{
+			isNear = true;
+			if (WorldModel.getPlayer().getKeyCount() >= 1)
+			{
+				WorldModel.getCurrentRoom().openDoor(WorldModel.getPlayer().getPosX(), WorldModel.getPlayer().getPosY() + 1);
+				player.useKey();
+			}
+			else
+			{
+				System.out.println("Need key");
+			}
+		}
+		if(WorldModel.getCurrentRoom().getTileAt(WorldModel.getPlayer().getPosX(), WorldModel.getPlayer().getPosY() - 1).getName() == "door") 
+		{
+			isNear = true;
+			if (WorldModel.getPlayer().getKeyCount() >= 1)
+			{
+				WorldModel.getCurrentRoom().openDoor(WorldModel.getPlayer().getPosX(), WorldModel.getPlayer().getPosY() - 1);
+				player.useKey();
+			}
+			else
+			{
+				System.out.println("Need key");
+			}
+		}
+		
+		return isNear;
 	}
 	
 	public static void pickUpItem(Player player, int posX, int posY)

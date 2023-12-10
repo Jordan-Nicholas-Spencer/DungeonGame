@@ -162,10 +162,12 @@ public class WorldController
 		        	WorldController.inMenu = false;
 		        	WorldController.setChestWindowActive(false);
 		        }
-//		        else if (key == KeyEvent.VK_E && WorldModel.getTileInFront(WorldModel.getPlayer(), WorldModel.getPlayer().getPosX(), WorldModel.getPlayer().getPosY()).getName() == "key")
-//		        {
-//		        	WorldModel.pickUpItem(WorldModel.getPlayer(), );
-//		        }
+		        else if ((key == KeyEvent.VK_E && WorldModel.playerNextToDoor()))
+		        {
+		        	
+		        }
+		  
+		        
 		        
 		        // inventory
 		        if (key == KeyEvent.VK_I && WorldController.inInventory == false)

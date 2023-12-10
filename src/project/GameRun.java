@@ -48,7 +48,6 @@ public class GameRun {
 	 *  4) Extras
 	 *  	-potions/healing
 	 *  	-Dialogue Display
-	 *  	-opening doors
 	 * 		-Enemy chasing player logic in moveEnemies()
 	 * 		-newGame+
 	 * 		-Items carry over to newGame+

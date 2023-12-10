@@ -122,6 +122,11 @@ public class Room {
 		return null;
 	}
 	
+	public void openDoor(int x, int y)
+	{
+		room[y][x] = new Tile("floor", x, y);
+	}
+	
 	public Enemy getEnemyAt(int x, int y)
 	{
 		for (Enemy enemy: enemies)

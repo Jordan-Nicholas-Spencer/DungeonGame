@@ -55,6 +55,16 @@ public class Player extends Organism {
 		keyCount--;
 	}
 	
+	public boolean canOpenDoor(Player player)
+	{
+		if (player.getKeyCount() >= 1)
+		{
+			return true;
+		}
+		
+		return false;
+	}
+	
 	public Consumable getInventoryItem(int index) 
 	{
 		return consumables.get(index);
