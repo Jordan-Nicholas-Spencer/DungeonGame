@@ -1,15 +1,23 @@
 package project.view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
-
+import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import project.model.Enemy;
 import project.model.Player;
 import project.model.Room;
-import project.model.WorldModel;
+import project.model.items.Chest;
+import project.model.items.Chest.Chests;
+import project.model.items.Item;
 
 /**
  * Lead Author(s):
@@ -27,7 +35,7 @@ import project.model.WorldModel;
  * 
  */
 
-public class WorldBuilder {
+public class WorldBuilder extends JPanel {
 	
 	private final int SIZE = 32; // 32 x 32 - this program's standard sprite size
 	private final int SCALE = 48; // 32 * 1.5
@@ -145,23 +153,27 @@ public class WorldBuilder {
 	}
 	
 	public void renderGameOver(Player player, Graphics g) {
-		int x = (Window.WIDTH / 2) - SCALE * 5;
-		int y = (Window.HEIGHT/ 2) - SCALE * 4;
-		int width = SCALE * 10;
-		int height = SCALE * 5;
 		
-		g.setColor(Color.BLACK);
-		g.fillRoundRect(x, y, width, height, SCALE, SCALE);
-		g.setColor(Color.WHITE);
-		g.drawRoundRect(x, y, width, height, SCALE, SCALE);
-		
-		g.setFont(new Font("Dialog", Font.PLAIN, 20));
-		g.drawString("Floors cleared: " + player.getLevelsCompleted(), x + SCALE / 2, y + SCALE * 2);
-		g.drawString("Press any key to restart the game.", x + SCALE / 2, y + SCALE * 2 + SCALE / 2);
-		
-		g.setColor(Color.RED);
-		g.setFont(new Font("Dialog", Font.PLAIN, 40));
-		g.drawString("GAME OVER", x + SCALE * 2 + SCALE / 2, y + SCALE);
+		if (player.getHealth() <= 0) {
+			int x = (Window.WIDTH / 2) - SCALE * 5;
+			int y = (Window.HEIGHT/ 2) - SCALE * 4;
+			int width = SCALE * 10;
+			int height = SCALE * 5;
+			
+			g.setColor(Color.BLACK);
+			g.fillRoundRect(x, y, width, height, SCALE, SCALE);
+			g.setColor(Color.WHITE);
+			g.drawRoundRect(x, y, width, height, SCALE, SCALE);
+			
+			g.setFont(new Font("Dialog", Font.PLAIN, 20));
+			g.drawString("Floors cleared: " + player.getLevelsCompleted(), x + SCALE / 2, y + SCALE * 2);
+			g.drawString("Press any key to restart the game.", x + SCALE / 2, y + SCALE * 2 + SCALE / 2);
+			
+			g.setColor(Color.RED);
+			g.setFont(new Font("Dialog", Font.PLAIN, 40));
+			g.drawString("GAME OVER", x + SCALE * 2 + SCALE / 2, y + SCALE);
+		}
+
 	}
 	
 	public void renderHUD(Player player, Graphics g) {
@@ -187,13 +199,106 @@ public class WorldBuilder {
 		int y = (Window.HEIGHT / 2);
 		int width = Window.WIDTH - (SCALE *4);
 		int height = SCALE * 5;
+		String str = "Want to learn more about this place? Keep fighting to find out!";
 		
 		Color c = new Color(0, 0, 0);
 		g.setColor(c);
 		g.fillRoundRect(x, y, width, height, SCALE, SCALE);
 		g.setColor(Color.WHITE);
 		g.drawRoundRect(x, y, width, height, SCALE / 2, SCALE / 2);
+		g.drawString(str, x + 30 , y  + 30);
+	}
+	
+	public void renderChestWindow(Graphics g, Chest chest)
+	{
+		int x = (Window.WIDTH / 2);
+		int y = (Window.HEIGHT / 2);
+		int width = Window.WIDTH - (SCALE *4);
+		int height = SCALE * 5;
 		
-		
+		String type = chest.getChest().getChestType();
+		String contents = "";
+		String newStr;
+		Item[] itemArray = chest.getChest().getItemArray();
+		for (int i = 0 ; i < itemArray.length ; i++)
+		{
+			newStr = itemArray[i].getName() + ": " + itemArray[i].getDescription();
+			contents+=newStr;
+		}
+		Color c = new Color(0, 0, 0);
+		g.setColor(c);
+		g.fillRoundRect(x, y, width, height, SCALE, SCALE);
+		g.setColor(Color.WHITE);
+		g.drawRoundRect(x, y, width, height, SCALE / 2, SCALE / 2);
+		g.drawString(type, x + 30 , y  + 30);
+		g.drawString(contents, x + 30, y + 50);
+	}
+	
+	
+	public void renderInventoryWindow(Graphics g, Player player)
+	{
+		int x = 0;
+	    int y = 0;
+	    int width = Window.WIDTH - 200;
+	    int height = Window.HEIGHT - 100;
+	    String str = "Inventory";
+
+	    Color c = new Color(0, 0, 0);
+	    g.setColor(c);
+	    g.fillRoundRect(x, y, width, height, SCALE, SCALE);
+	    g.setColor(Color.WHITE);
+	    g.drawRoundRect(x, y, width, height, SCALE / 2, SCALE / 2);
+
+	    
+	    int cellWidth = width / 2;
+	    int cellHeight = 100;
+	    int tableX = x + 10;
+	    int tableY = y + 60;
+
+	    g.drawLine(tableX, tableY, tableX + width - 20, tableY);
+
+	    // draw horizontal lines for each row on the right half
+	    for (int i = 0; i < 4; i++) {
+	        int rowY = tableY + i * cellHeight;
+	        g.drawLine(tableX + cellWidth, rowY, tableX + width - 20, rowY);
+	    }
+
+	    // draw vertical line separating the two halves
+	    int columnX = tableX + cellWidth;
+	    g.drawLine(columnX, tableY, columnX, tableY + height - 60);
+
+	    //display stats on the left half
+	    String weaponName;
+	    String armorName;
+	    
+	    if (player.getWeapon() != null)
+	    {
+	    	weaponName = player.getWeapon().getName();
+	    } else
+	    {
+	    	weaponName = "None equipped.";
+	    }
+	    
+	    if (player.getArmor() != null)
+	    {
+	    	armorName = player.getArmor().getName();
+	    } else
+	    {
+	    	armorName = "None equipped.";
+	    }
+	    
+	    g.drawString("Player Stats", tableX + 10, tableY + 20);
+	    g.drawString("Weapon: " + weaponName, tableX + 10, tableY + 40);
+	    g.drawString("Armor: " + armorName, tableX + 10, tableY + 60);
+	    g.drawString("Defense: " + player.getDefense(), tableX + 10, tableY + 80);
+	    g.drawString("Strength: " + player.getStrength(), tableX + 10, tableY + 100);
+
+	    // display items on the right half
+	    g.drawString("Item Inventory", tableX + cellWidth + 10, tableY + 20);
+
+	    for (int i = 0; i < 3; i++) {
+	        String itemName = player.getInventoryItem(i).getName();
+	        g.drawString(itemName, tableX + cellWidth + 10, tableY + (i + 1) * cellHeight + 20);
+	    }
 	}
 }

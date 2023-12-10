@@ -28,7 +28,7 @@ import java.awt.image.BufferedImage;
  */
 
 public class Panel extends JPanel {
-	
+	private boolean gameOverScreen = false;
 	WorldBuilder worldBuilder = new WorldBuilder();
 	
 	/**
@@ -39,9 +39,20 @@ public class Panel extends JPanel {
     	this.setFocusable(true);
     }
     
+    
     public WorldBuilder getWorldBuilder()
     {
     	return worldBuilder;
+    }
+    
+    public boolean isGameOver()
+    {
+    	return gameOverScreen;
+    }
+    
+    public void newGame()
+    {
+    	gameOverScreen = false;
     }
     
     // invoked by keyListener added to Panel in WorldController
@@ -58,16 +69,26 @@ public class Panel extends JPanel {
         	worldBuilder.renderPlayer(WorldModel.getPlayer(), g);
         	worldBuilder.renderEnemy(WorldModel.getCurrentRoom().getEnemies(), WorldModel.getPlayer(), g);
         	worldBuilder.renderHUD(WorldModel.getPlayer(), g);
-        	
-        	if (WorldModel.getPlayer().getHealth() <= 0) {
-        		worldBuilder.renderGameOver(WorldModel.getPlayer(), g);
-        	}
-        	
+        	worldBuilder.renderGameOver(WorldModel.getPlayer(), g);
         	
         	if (WorldController.getIsDialogueActive())
         	{
         		worldBuilder.renderDialogueWindow(g);
         	}
+        	else if (WorldController.getIsChestWindowActive())
+        	{
+        		worldBuilder.renderChestWindow(g, WorldModel.getChestAtPlayer());
+        	}
+        	else if (WorldController.getIsInventoryWindowActive())
+        	{
+        		worldBuilder.renderInventoryWindow(g, WorldModel.getPlayer());
+        	}
+        	if (WorldModel.getPlayer().getHealth() <= 0)
+        	{
+        		worldBuilder.renderGameOver(WorldModel.getPlayer(), g);
+        		gameOverScreen = true;
+        	}
+        	
         	
         } catch (Exception e) {
         	System.out.print("Error rendering ");
@@ -77,8 +98,3 @@ public class Panel extends JPanel {
         repaint();
     }
 }
-
-    
-
-
-

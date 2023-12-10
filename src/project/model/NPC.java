@@ -19,11 +19,15 @@ public class NPC extends Organism {
         return character;
     }
 
+    
+    
+    
+
     public enum Characters {
         PRISONER("Mysterious Prisoner", "Yo what's up loser");
         // Add more characters as needed
 
-        private BufferedImage sprite;
+        
         private String name;
         private String dialogue;
 
@@ -35,17 +39,26 @@ public class NPC extends Organism {
         public String getName() {
             return name;
         }
-
-        public void interact(Graphics g) {
-            sprite = ImageLoader.getSprite("npc");
-
-            g.setColor(Color.BLACK);
-            g.fillRoundRect(100, 100, 100, 100, 48, 48);
-            g.setColor(Color.WHITE);
-            g.drawRoundRect(100, 100, 100, 100, 48, 48);
-
-            g.setFont(new Font("Dialog", Font.PLAIN, 20));
-            g.drawString(this.dialogue, 100, 100);
+        
+        public String getDialogue()
+        {
+        	return dialogue;
         }
+        
+        
+
+        
+    }
+    
+    public void interact(Graphics g) {
+        BufferedImage sprite = ImageLoader.getSprite("npc");
+
+        g.setColor(Color.BLACK);
+        g.fillRoundRect(100, 100, 100, 100, 48, 48);
+        g.setColor(Color.WHITE);
+        g.drawRoundRect(100, 100, 100, 100, 48, 48);
+
+        g.setFont(new Font("Dialog", Font.PLAIN, 20));
+        g.drawString("yo whats up", 100, 100);
     }
 }

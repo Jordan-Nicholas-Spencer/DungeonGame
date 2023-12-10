@@ -1,15 +1,19 @@
 package project.model;
 
+import java.util.ArrayList;
+
+
 import project.model.items.Armor;
 import project.model.items.Consumable;
-import project.model.items.Shop;
+import project.model.items.Item;
+
 import project.model.items.Weapon;
 
 public class Player extends Organism{
 
-	private static final int INVENTORY_SIZE = 3;
 	private static final int startingHP = 20;
-	private Consumable[] inventory;
+	private ArrayList<Consumable> consumables;
+	
 	private boolean inventoryOpen;
 	private Weapon weaponEquipped;
 	private Armor armorEquipped;
@@ -17,7 +21,7 @@ public class Player extends Organism{
 	
 	public Player(String type, int posX, int posY) {
 		super(type, posX, posY, startingHP);
-		this.inventory = new Consumable[INVENTORY_SIZE];
+		this.consumables = new ArrayList<>(5);
 		this.inventoryOpen = false;
 		this.weaponEquipped = null;
 		this.armorEquipped = null;
@@ -27,36 +31,23 @@ public class Player extends Organism{
 	}
 	
 	/**Adds an items to the first empty slot
-	 * @param consumable - The item to add
+	 * @param consumable  The item to add
 	 * @return True if the item was added, false if inventory is full
 	 */
-	public boolean addItem(Consumable item) {
-		for(int i=0;i<INVENTORY_SIZE;i++) {
-			if(this.inventory[i] == null) {
-				this.inventory[i] = item;
-				return true;
-			}
-		}
-		return false;
+	public void addItem(Consumable consumable) 
+	{
+		
 	}
 	
-	/**Removes an item from the player's inventory
-	 * @param index - Inventory slot
-	 */
-	public void removeItem(int index) {
-		try {
-			this.inventory[index] = null;
-		} catch(ArrayIndexOutOfBoundsException e) {
-			return;
-		}
+
+	public Consumable getInventoryItem(int index) 
+	{
+		return consumables.get(index);
 	}
 	
-	public Consumable getInventoryItem(int index) {
-		try {
-			return inventory[index];
-		} catch(ArrayIndexOutOfBoundsException e) {
-			return null;
-		}
+	public ArrayList<Consumable> getInventoryConsumables()
+	{
+		return consumables;
 	}
 	
 	public void setInventoryOpen(boolean inventoryOpen) {
@@ -86,12 +77,18 @@ public class Player extends Organism{
 		return def;
 	}
 	
-	public void equipWeapon(Weapon weapon) {
-		this.weaponEquipped = new Weapon(weapon.getName(), weapon.getDescription(), weapon.getStrength());
+	public void equipWeapon(Item item) {
+		if (item.getClass() == Weapon.class)
+		{
+			this.weaponEquipped = (Weapon) item;
+		}
 	}
 	
-	public void equipArmor(Armor armor) {
-		this.armorEquipped = new Armor(armor.getName(), armor.getDescription(), armor.getDefense());
+	public void equipArmor(Item item) {
+		if (item.getClass() == Armor.class)
+		{
+			this.armorEquipped = (Armor) item;
+		}
 	}
 
 	public Weapon getWeapon() {

@@ -25,12 +25,12 @@ public class GameRun {
 	
 	/* 
 	 *  TODO:
-	 *  1) Game Logic	 *  	
+	 *  1) Game Logic
+	 *  	-Enemy chasing player logic in moveEnemies()
 	 *  	-Stop game when player dies // can call worldmodel.initialize game to restart game
 	 *  	-Interactions with environment (picking up items, opening doors, opening chests, etc.) // see display
 	 *  	-Design inventory system
 	 * 
-	 * 		-Enemy chasing player logic in moveEnemies()
 	 * 		-newGame+
 	 * 		-Items carry over to newGame+
 	 *  	-Movement between tiles to be more fluid (no teleporting)
@@ -62,15 +62,14 @@ public class GameRun {
     	
        	WorldModel model = new WorldModel();
        	WorldBuilder builder = new WorldBuilder();
-    	WorldModel.initializeImages();
-    	WorldModel.initializeGame();
+    	model.initializeImages();
     	Window view = new Window();
     	WorldController controller = new WorldController(model, view);
+    	controller.getModel().initializeGame();
     	view.setVisible(true);    
         
     }
 }
-
 
 
 

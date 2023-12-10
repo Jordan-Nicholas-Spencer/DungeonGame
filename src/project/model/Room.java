@@ -1,11 +1,13 @@
 package project.model;
 
 import java.awt.Color;
+import java.util.Random;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
 
 import project.model.NPC.Characters;
+import project.model.items.Chest;
 import project.view.Window;
 
 public class Room {
@@ -15,10 +17,13 @@ public class Room {
 	private int yStartPos;
 	private ArrayList<Enemy> enemies;
 	private ArrayList<NPC> npcs;
+	private ArrayList<Chest> chests;
 	
 	public Room(String[] levelDesign, int xStartPos, int yStartPos, Enemy... species) {
 		room = new Tile[levelDesign.length][];
 		this.npcs = new ArrayList<>();
+		this.chests = new ArrayList<>();
+		Random rand = new Random();
 		for(int column = 0; column<levelDesign.length; column++) {
 			room[column] = new Tile[levelDesign[column].length()];
 			
@@ -44,6 +49,18 @@ public class Room {
 					break;
 				case 'c':
 					room[column][row] = new Tile("chest", row, column);
+					Chest chest;
+					switch(rand.nextInt(2) + 1)
+					{
+					case 1:
+						chest = new Chest(Chest.Chests.WEAPONCHEST, row, column);
+						chests.add(chest);
+						break;
+					case 2:
+						chest = new Chest(Chest.Chests.ARMORCHEST, row, column);
+						chests.add(chest);
+						break;
+					}
 					break;
 				case 'o':
 					room[column][row] = new Tile("open", row, column);
@@ -86,6 +103,13 @@ public class Room {
 		NPC[] roomNPCs = new NPC[npcs.size()];
 		roomNPCs = npcs.toArray(roomNPCs);
 		return roomNPCs;
+	}
+	
+	public Chest[] getChests()
+	{
+		Chest[] roomChests = new Chest[chests.size()];
+		roomChests = chests.toArray(roomChests);
+		return roomChests;
 	}
 	
 	public NPC getNPCAt(int x, int y)

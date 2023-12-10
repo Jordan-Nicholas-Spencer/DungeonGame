@@ -1,7 +1,10 @@
 package project.model;
 
+import java.awt.Graphics;
 import java.util.Random;
 
+import project.model.items.Chest;
+import project.model.items.Chest.Chests;
 import project.view.ImageLoader;
 
 /**
@@ -31,14 +34,14 @@ public class WorldModel {
 		initializeGame();
 	}
 	
-	public static void initializeGame() {
+	public void initializeGame() {
 		random = new Random();
 		level = new LevelDesign();
 		currentRoom = level.LEVELARRAY[0];
 		player = new Player ("player", currentRoom.getXStartPos(), currentRoom.getYStartPos());
 	}
 	
-	public static void initializeImages() {
+	public void initializeImages() {
 		ImageLoader.initializeSprites();
 	}
 	
@@ -56,7 +59,6 @@ public class WorldModel {
 	
 	public void movePlayer(int dirX, int dirY) {
 		boolean playerMoved = false;
-		
 		if (currentRoom.enemyInRoom(getTileInFront(player, dirX, dirY).getPosX(), getTileInFront(player, dirX, dirY).getPosY())) {
 			Enemy enemy = currentRoom.getEnemyAt(getTileInFront(player, dirX, dirY).getPosX(), getTileInFront(player, dirX, dirY).getPosY());
 			enemy.damage(player.getStrength() - enemy.getDefense());
@@ -227,6 +229,46 @@ public class WorldModel {
 		return attackingRange;
 	}
 	
+	public static boolean playerNextToChest(Chest chest)
+	{
+		boolean isNear = false;
+		
+		if (chest.getPosX() + 1 == player.getPosX() && chest.getPosY() == player.getPosY())
+		{
+			isNear = true;
+			return isNear;
+		}
+		else if (chest.getPosX() - 1 == player.getPosX() && chest.getPosY() == player.getPosY()) 
+		{
+			isNear = true;
+			return isNear;
+		}
+		else if (chest.getPosX() == player.getPosX() && chest.getPosY() + 1 == player.getPosY()) 
+		{
+			isNear = true;
+			return isNear;
+		}
+		else if (chest.getPosX() == player.getPosX() && chest.getPosY() - 1 == player.getPosY())
+		{
+			isNear = true;
+			return isNear;
+		}
+		return isNear;		
+	}
+	
+	public boolean isChestAtPlayer()
+	{
+		for (Chest chest : currentRoom.getChests()) 
+		{
+			if (playerNextToChest(chest))
+			{
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
 	public boolean isNPCAtPlayer()
 	{
 		for (NPC npc : currentRoom.getNPCs())
@@ -253,6 +295,18 @@ public class WorldModel {
 		return null;
 	}
 	
+	public static Chest getChestAtPlayer()
+	{
+		for (Chest chest : currentRoom.getChests())
+		{
+			if (playerNextToChest(chest))
+			{
+				return chest;
+			}
+		}
+		
+		return null;
+	}
 	public boolean playerNextToNPC(NPC npc)
 	{
 		boolean isNear = false;
