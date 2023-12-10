@@ -151,6 +151,15 @@ public class Room {
 		}
 	}
 	
+	public void pickUpKey(int x, int y) {
+		switch(room[y][x].getName()) {
+		case "key":
+			room[y][x] = new Tile("floor", x, y);
+		case "postion":
+			room[y][x] = new Tile("floor", x, y);
+		}
+	}
+	
 	public int getXStartPos() {
 		return xStartPos;
 	}

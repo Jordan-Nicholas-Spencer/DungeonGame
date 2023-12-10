@@ -81,6 +81,12 @@ public class WorldModel {
 				player.setPosition(player.getPosX() + dirX, player.getPosY() + dirY);
 				playerMoved = true;
 				break;
+			case "key":
+				player.setPosition(player.getPosX() + dirX, player.getPosY() + dirY);
+				player.pickUpKey();
+				currentRoom.pickUpKey(player.getPosX(), player.getPosY());
+				playerMoved = true;
+				break;
 			case "skeleton":
 				break;
 			case "gate":
@@ -269,10 +275,10 @@ public class WorldModel {
 		}
 	}
 	
-	public static int getKeyPos()
-	{
-		
-	}
+//	public static int getKeyPos()
+//	{
+//		
+//	}
 	
 	public boolean isChestAtPlayer()
 	{
