@@ -292,6 +292,7 @@ public class WorldBuilder extends JPanel {
 	    g.drawString("Armor: " + armorName, tableX + 10, tableY + 60);
 	    g.drawString("Defense: " + player.getDefense(), tableX + 10, tableY + 80);
 	    g.drawString("Strength: " + player.getStrength(), tableX + 10, tableY + 100);
+	    g.drawString("Keys: " + player.getKeyCount(), tableX + 10, tableY + 120);
 
 	    // display items on the right half
 	    g.drawString("Item Inventory", tableX + cellWidth + 10, tableY + 20);

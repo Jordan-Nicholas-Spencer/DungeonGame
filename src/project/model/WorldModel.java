@@ -49,7 +49,7 @@ public class WorldModel {
 		return player;
 	}
 	
-	private static Tile getTileInFront(Organism organism, int dirX, int dirY) {
+	public static Tile getTileInFront(Organism organism, int dirX, int dirY) {
 		return currentRoom.getTileAt(organism.getPosX() + dirX, organism.getPosY() + dirY);
 	}
 	
@@ -254,6 +254,24 @@ public class WorldModel {
 			return isNear;
 		}
 		return isNear;		
+	}
+	
+	public static void pickUpItem(Player player, int posX, int posY)
+	{
+		switch(WorldModel.getTileInFront(player, posX, posY).getName())
+		{
+		case "key":
+			player.pickUpKey();
+			break;
+		case "potion":
+			
+			break;
+		}
+	}
+	
+	public static int getKeyPos()
+	{
+		
 	}
 	
 	public boolean isChestAtPlayer()

@@ -14,6 +14,7 @@ public class Player extends Organism {
 	private static final int startingHP = 20;
 	private ArrayList<Consumable> consumables;
 	
+	private int keyCount = 0;
 	private boolean inventoryOpen;
 	private Weapon weaponEquipped;
 	private Armor armorEquipped;
@@ -39,7 +40,21 @@ public class Player extends Organism {
 		
 	}
 	
-
+	public int getKeyCount()
+	{
+		return keyCount;
+	}
+	
+	public void pickUpKey()
+	{
+		keyCount++;
+	}
+	
+	public void useKey()
+	{
+		keyCount--;
+	}
+	
 	public Consumable getInventoryItem(int index) 
 	{
 		return consumables.get(index);

@@ -68,6 +68,9 @@ public class Room {
 				case 'g':
 					room[column][row] = new Tile("gate", row, column);
 					break;
+				case 'k':
+					room[column][row] = new Tile("key", row, column);
+					break;
 				}
 			}
 		}

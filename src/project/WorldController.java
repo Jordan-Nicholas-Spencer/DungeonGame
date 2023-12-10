@@ -142,7 +142,7 @@ public class WorldController
 		        }
 		        
 		        // player interaction
-		        else if (key == KeyEvent.VK_E && model.isNPCAtPlayer() && WorldController.isTalking == false)
+		        if (key == KeyEvent.VK_E && model.isNPCAtPlayer() && WorldController.isTalking == false)
 		        {
 		        	WorldController.isTalking = true;
 		        	WorldController.setDialogueActive(true);
@@ -162,9 +162,13 @@ public class WorldController
 		        	WorldController.inMenu = false;
 		        	WorldController.setChestWindowActive(false);
 		        }
+		        else if (key == KeyEvent.VK_E && WorldModel.getTileInFront(WorldModel.getPlayer(), WorldModel.getPlayer().getPosX(), WorldModel.getPlayer().getPosY()).getName() == "key")
+		        {
+		        	WorldModel.pickUpItem(WorldModel.getPlayer(), );
+		        }
 		        
 		        // inventory
-		        else if (key == KeyEvent.VK_I && WorldController.inInventory == false)
+		        if (key == KeyEvent.VK_I && WorldController.inInventory == false)
 		        {
 		        	WorldController.inInventory = true;
 		        	WorldController.setInventoryWindowActive(true);
