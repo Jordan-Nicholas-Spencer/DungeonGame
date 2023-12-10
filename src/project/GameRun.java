@@ -25,12 +25,12 @@ public class GameRun {
 	
 	/* 
 	 *  TODO:
-	 *  1) Game Logic
-	 *  	-Enemy chasing player logic in moveEnemies()
+	 *  1) Game Logic	 *  	
 	 *  	-Stop game when player dies // can call worldmodel.initialize game to restart game
 	 *  	-Interactions with environment (picking up items, opening doors, opening chests, etc.) // see display
 	 *  	-Design inventory system
 	 * 
+	 * 		-Enemy chasing player logic in moveEnemies()
 	 * 		-newGame+
 	 * 		-Items carry over to newGame+
 	 *  	-Movement between tiles to be more fluid (no teleporting)

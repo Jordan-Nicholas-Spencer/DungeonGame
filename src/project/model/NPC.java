@@ -19,10 +19,6 @@ public class NPC extends Organism {
         return character;
     }
 
-    public void interact(Graphics g) {
-        
-    }
-
     public enum Characters {
         PRISONER("Mysterious Prisoner", "Yo what's up loser");
         // Add more characters as needed

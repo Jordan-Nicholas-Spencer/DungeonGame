@@ -36,6 +36,7 @@ public class WorldController implements ActionListener{
 		private Window view;
 		private Panel panel;
 		private WorldBuilder builder;
+		private static boolean gameOver = false;
 		private static boolean isDialogueActive = false;
 		private static boolean isTalking = false;
 	

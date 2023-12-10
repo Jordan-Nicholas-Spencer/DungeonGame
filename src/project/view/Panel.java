@@ -58,7 +58,11 @@ public class Panel extends JPanel {
         	worldBuilder.renderPlayer(WorldModel.getPlayer(), g);
         	worldBuilder.renderEnemy(WorldModel.getCurrentRoom().getEnemies(), WorldModel.getPlayer(), g);
         	worldBuilder.renderHUD(WorldModel.getPlayer(), g);
-        	worldBuilder.renderGameOver(WorldModel.getPlayer(), g);
+        	
+        	if (WorldModel.getPlayer().getHealth() <= 0) {
+        		worldBuilder.renderGameOver(WorldModel.getPlayer(), g);
+        	}
+        	
         	
         	if (WorldController.getIsDialogueActive())
         	{

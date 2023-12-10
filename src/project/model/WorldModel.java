@@ -1,6 +1,5 @@
 package project.model;
 
-import java.awt.Graphics;
 import java.util.Random;
 
 import project.view.ImageLoader;
@@ -57,6 +56,7 @@ public class WorldModel {
 	
 	public void movePlayer(int dirX, int dirY) {
 		boolean playerMoved = false;
+		
 		if (currentRoom.enemyInRoom(getTileInFront(player, dirX, dirY).getPosX(), getTileInFront(player, dirX, dirY).getPosY())) {
 			Enemy enemy = currentRoom.getEnemyAt(getTileInFront(player, dirX, dirY).getPosX(), getTileInFront(player, dirX, dirY).getPosY());
 			enemy.damage(player.getStrength() - enemy.getDefense());

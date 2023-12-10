@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 import project.model.Enemy;
 import project.model.Player;
 import project.model.Room;
+import project.model.WorldModel;
 
 /**
  * Lead Author(s):
@@ -144,27 +145,23 @@ public class WorldBuilder {
 	}
 	
 	public void renderGameOver(Player player, Graphics g) {
+		int x = (Window.WIDTH / 2) - SCALE * 5;
+		int y = (Window.HEIGHT/ 2) - SCALE * 4;
+		int width = SCALE * 10;
+		int height = SCALE * 5;
 		
-		if (player.getHealth() <= 0) {
-			int x = (Window.WIDTH / 2) - SCALE * 5;
-			int y = (Window.HEIGHT/ 2) - SCALE * 4;
-			int width = SCALE * 10;
-			int height = SCALE * 5;
-			
-			g.setColor(Color.BLACK);
-			g.fillRoundRect(x, y, width, height, SCALE, SCALE);
-			g.setColor(Color.WHITE);
-			g.drawRoundRect(x, y, width, height, SCALE, SCALE);
-			
-			g.setFont(new Font("Dialog", Font.PLAIN, 20));
-			g.drawString("Floors cleared: " + player.getLevelsCompleted(), x + SCALE / 2, y + SCALE * 2);
-			g.drawString("Press any key to restart the game.", x + SCALE / 2, y + SCALE * 2 + SCALE / 2);
-			
-			g.setColor(Color.RED);
-			g.setFont(new Font("Dialog", Font.PLAIN, 40));
-			g.drawString("GAME OVER", x + SCALE * 2 + SCALE / 2, y + SCALE);
-		}
-
+		g.setColor(Color.BLACK);
+		g.fillRoundRect(x, y, width, height, SCALE, SCALE);
+		g.setColor(Color.WHITE);
+		g.drawRoundRect(x, y, width, height, SCALE, SCALE);
+		
+		g.setFont(new Font("Dialog", Font.PLAIN, 20));
+		g.drawString("Floors cleared: " + player.getLevelsCompleted(), x + SCALE / 2, y + SCALE * 2);
+		g.drawString("Press any key to restart the game.", x + SCALE / 2, y + SCALE * 2 + SCALE / 2);
+		
+		g.setColor(Color.RED);
+		g.setFont(new Font("Dialog", Font.PLAIN, 40));
+		g.drawString("GAME OVER", x + SCALE * 2 + SCALE / 2, y + SCALE);
 	}
 	
 	public void renderHUD(Player player, Graphics g) {
