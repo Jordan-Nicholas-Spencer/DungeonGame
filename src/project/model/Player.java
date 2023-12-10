@@ -9,7 +9,7 @@ import project.model.items.Item;
 
 import project.model.items.Weapon;
 
-public class Player extends Organism{
+public class Player extends Organism {
 
 	private static final int startingHP = 20;
 	private ArrayList<Consumable> consumables;

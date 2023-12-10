@@ -1,14 +1,9 @@
 package project.model;
 
-import java.awt.Color;
 import java.util.Random;
-
-import java.awt.Graphics;
 import java.util.ArrayList;
 
-import project.model.NPC.Characters;
 import project.model.items.Chest;
-import project.view.Window;
 
 public class Room {
 
@@ -19,7 +14,7 @@ public class Room {
 	private ArrayList<NPC> npcs;
 	private ArrayList<Chest> chests;
 	
-	public Room(String[] levelDesign, int xStartPos, int yStartPos, Enemy... species) {
+	public Room(String[] levelDesign, int xStartPos, int yStartPos,  Enemy... species) {
 		room = new Tile[levelDesign.length][];
 		this.npcs = new ArrayList<>();
 		this.chests = new ArrayList<>();

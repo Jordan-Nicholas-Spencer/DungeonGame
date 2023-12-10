@@ -13,6 +13,4 @@ public class Weapon extends Item {
 		return strength;
 	}
 	
-	
-	
 }

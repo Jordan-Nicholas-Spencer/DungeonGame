@@ -16,7 +16,7 @@ package project.model;
  * 
  */
 
-public class Organism extends Tile{
+public abstract class Organism extends Tile {
 
 	private String facing;
 	protected int health;

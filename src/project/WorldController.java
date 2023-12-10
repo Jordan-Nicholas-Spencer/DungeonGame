@@ -1,15 +1,8 @@
 package project;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.KeyListener;
 
-import javax.swing.Timer;
-
-import project.model.NPC;
 import project.model.WorldModel;
 import project.view.Panel;
 import project.view.Window;
@@ -109,6 +102,7 @@ public class WorldController
 		    @Override
 		    public void keyPressed(KeyEvent e) {
 		        int key = e.getKeyCode();
+		        
 		        // Implement player movement based on key presses
 		        if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) {
 		        	WorldModel.getPlayer().setFacing("left");
@@ -146,6 +140,8 @@ public class WorldController
 		        		panel.newGame();
 		        	}
 		        }
+		        
+		        // player interaction
 		        else if (key == KeyEvent.VK_E && model.isNPCAtPlayer() && WorldController.isTalking == false)
 		        {
 		        	WorldController.isTalking = true;
@@ -166,6 +162,8 @@ public class WorldController
 		        	WorldController.inMenu = false;
 		        	WorldController.setChestWindowActive(false);
 		        }
+		        
+		        // inventory
 		        else if (key == KeyEvent.VK_I && WorldController.inInventory == false)
 		        {
 		        	WorldController.inInventory = true;
