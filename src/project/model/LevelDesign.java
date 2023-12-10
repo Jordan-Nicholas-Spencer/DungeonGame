@@ -37,7 +37,6 @@ public class LevelDesign {
 		}, 4, 4, new Enemy(Enemy.Species.BAT, 5 , 10), new Enemy(Enemy.Species.GARGOYLE, 15 , 10),
 			new Enemy(Enemy.Species.RAT, 6, 11), new Enemy(Enemy.Species.SLIME, 5, 12),
 			new Enemy(Enemy.Species.SUCCUBUS, 16, 11), new Enemy(Enemy.Species.VAMPIRE, 15, 13) ),
-			new Chest(),
 			
 			new Room(new String[] {
 				"##########################",
