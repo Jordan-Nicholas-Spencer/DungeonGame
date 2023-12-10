@@ -2,12 +2,13 @@ package project.model.items;
 
 public class Chest 
 {
+	static Shop shop = new Shop();
 	
-	private static Item[] weaponArray = {new Weapon("Straight Sword", "slice through even the toughest opponents", 10)};
+	private static Item[] weaponArray = {shop.getRandWeapon()};
 	
-	private static Item[] armorArray = {new Armor("helmet", "blah", 10)};
+	private static Item[] armorArray = {shop.getRandArmor()};
 	
-	private static Item[] potionArray = {new Consumable("health", "heal up")};
+	private static Item[] potionArray = {shop.getPotion()};
 	
 	private Chests chest;
 	private int posX;

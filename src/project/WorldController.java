@@ -192,6 +192,21 @@ public class WorldController
 		        		WorldModel.getPlayer().equipArmor(WorldModel.getChestAtPlayer().getChest().getItemArray()[0]);
 		        	}
 		        }
+		        
+		        // god mode
+		        if (key == KeyEvent.VK_G)
+		        {
+		        	if (WorldModel.getPlayer().getHealth() < 1000)
+		        	{
+		        		WorldModel.getPlayer().infiniteHealth();
+		        		WorldModel.getPlayer().onePunchMan();
+		        	}
+		        	else
+		        	{
+		        		WorldModel.getPlayer().normalHealth();
+		        		WorldModel.getPlayer().normalDamage();
+		        	}
+		        }
 		    }
 		}
 		

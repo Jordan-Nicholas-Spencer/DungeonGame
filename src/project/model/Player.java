@@ -9,9 +9,11 @@ import project.model.items.Item;
 
 import project.model.items.Weapon;
 
-public class Player extends Organism {
+public class Player extends Organism implements GodMode{
 
-	private static final int startingHP = 20;
+	private static final int STARTINGHP = 20;
+	private static final int STARTINGSTRENGTH = 1;
+	private static final int STARTINGDEFENSE = 1;
 	private ArrayList<Consumable> consumables;
 	
 	private int keyCount = 0;
@@ -21,13 +23,13 @@ public class Player extends Organism {
 	private int levelsCompleted;
 	
 	public Player(String type, int posX, int posY) {
-		super(type, posX, posY, startingHP);
+		super(type, posX, posY, STARTINGHP);
 		this.consumables = new ArrayList<>(5);
 		this.inventoryOpen = false;
 		this.weaponEquipped = null;
 		this.armorEquipped = null;
-		this.strength = 1;
-		this.defense = 1;
+		this.strength = STARTINGSTRENGTH;
+		this.defense = STARTINGDEFENSE;
 		this.levelsCompleted = 0;
 	}
 	
@@ -132,6 +134,32 @@ public class Player extends Organism {
 	public void levelCompleted()
 	{
 		this.levelsCompleted += 1;
+	}
+
+	@Override
+	public void infiniteHealth() {
+		this.maxHP = 1000000000;
+		this.health = 1000000000;
+		
+	}
+
+	@Override
+	public void onePunchMan() {
+		this.strength = 9001;
+		
+	}
+
+	@Override
+	public void normalHealth() {
+		this.maxHP = STARTINGHP;
+		this.health = STARTINGHP;
+		
+	}
+
+	@Override
+	public void normalDamage() {
+		this.strength = STARTINGSTRENGTH;
+		
 	}
 	
 	
