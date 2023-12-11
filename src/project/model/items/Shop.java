@@ -1,5 +1,21 @@
 package project.model.items;
-import java.util.Random;
+
+/**
+ * Lead Author(s):
+ * @author Jordan Spencer
+ * @author Nicholas Moffat
+ * 
+ * References:
+ * Morelli, R., & Walde, R. (2016). Java, Java, Java: Object-Oriented Problem Solving.
+ * Retrieved from https://open.umn.edu/opentextbooks/textbooks/java-java-java-object-oriented-problem-solving
+ * 
+ *  
+ * Version/date: 12/10/2023
+ * 
+ * Responsibilities of class: instantiates all of the items for use within the game 
+ * 
+ */
+
 
 public class Shop {
 
@@ -15,58 +31,6 @@ public class Shop {
 
 	
 	public static final Item HP_POTION = new Item("Health Potion", "Restores 10 HP");
-	public static final Item KEY = new Item("small_key", "Can be used once to open a locked door");
-	
-	public Weapon getRandWeapon()
-	{
-		Random rand = new Random();
-		Weapon weapon;
-		switch (rand.nextInt(3) + 1)
-		{
-		case 1:
-			weapon = SWORD;
-			return weapon;
-		case 2:
-			weapon = AXE;
-			return weapon;
-		case 3:
-			weapon = WHIP;
-			return weapon;
-		}
-		
-		return null;
-	}
-	
-	public Armor getRandArmor()
-	{
-		Random rand = new Random();
-		Armor armor;
-		switch (rand.nextInt(4) + 1)
-		{
-		case 1:
-			armor = SCRAP;
-			return armor;
-		case 2:
-			armor = LEATHER;
-			return armor;
-		case 3:
-			armor = PLATE;
-			return armor;
-		case 4:
-			armor = BLESSED;
-			return armor;
-		}
-		
-		return null;
-	}
-	
-	public Item getKey()
-	{
-		return KEY;
-	}
-	
-	public Item getPotion()
-	{
-		return HP_POTION;
-	}
+	public static final Item KEY = new Item("key", "Can be used once to open a locked door");
+
 }

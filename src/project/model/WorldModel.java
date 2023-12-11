@@ -387,8 +387,14 @@ public class WorldModel {
 				playerNextToChest(true);
 			}
 			else {
-				player.addItem(item);
-				playerNextToChest(true);
+				if (item.getName() == "key") {
+					player.pickUpKey();
+					playerNextToChest(true);
+				}
+				else {
+					player.addItem(item);
+					playerNextToChest(true);
+				}
 			}
 		}
 	}
