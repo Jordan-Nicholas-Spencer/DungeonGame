@@ -194,10 +194,10 @@ public class WorldBuilder extends JPanel {
 	}
 	
 	public void renderDialogueWindow(Graphics g) {
-		int x = (Window.WIDTH / 2);
-		int y = (Window.HEIGHT / 2);
-		int width = Window.WIDTH - (SCALE *4);
-		int height = SCALE * 5;
+		int x = (Window.WIDTH / 2) - SCALE - STEP;
+		int y = (Window.HEIGHT / 2) + SCALE;
+		int width = SCALE * 10;
+		int height = SCALE * 4;
 		String str = WorldModel.dialogueText.get(0);
 		
 		drawWrappedText(str, x, y, width, height, g);
@@ -209,7 +209,7 @@ public class WorldBuilder extends JPanel {
         ta.setWrapStyleWord(true);
         ta.setBounds(0, 0, w, h);
         ta.setBackground(new Color(0,0,0));
-        ta.setForeground(Color.WHITE);
+        ta.setForeground(g.getColor());
         ta.setFont(g.getFont());
         Graphics g2 = g.create(x, y, w, h); // Use new graphics to leave original graphics state unchanged
         ta.paint(g2);
