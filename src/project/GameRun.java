@@ -2,7 +2,6 @@ package project;
 
 import project.model.WorldModel;
 import project.view.Window;
-import project.view.WorldBuilder;
 
 /**
  * Lead Author(s):
@@ -28,25 +27,12 @@ public class GameRun {
 	 *  	-Create story
 	 *  
 	 *  2) Display
-	 *  	-Game win screen //	Game Complete/Credits Display
+	 *  	-Game Complete/Credits Display
+	 *  	-Start Screen Display
 	 *  
 	 *  3) CISC 191
-	 *  	-Comment all code
+	 *  	-Comment WorldBuilder
 	 *  	-Update README documentation
-	 *  	-Remove redundant variable
-	 *  	-Ensure proper variable names
-	 *  	-Ensure proper usage of private,protected,public,static,final
-	 *  
-	 *  4) Extras
-	 *  	-Dialogue Portrait Display
-	 * 		-Enemy chasing player logic in moveEnemies()
-	 * 		-newGame+
-	 * 		-Items carry over to newGame+
-	 *  	-Movement between tiles to be more fluid (no teleporting)
-	 *  	-Start Screen Display
-	 *  	-Interaction Display 	//idea - if you are close to the item, render a sprite above the item 
-	 *  						    	   the sprite being like a message bubble with a 'E' in it to
-	 *  								   inform the player to press E to interact
 	 */
 	
     public static void main(String[] args) {
