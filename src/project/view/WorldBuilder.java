@@ -3,6 +3,7 @@ package project.view;
 
 import java.awt.Color;
 
+
 import java.awt.Font;
 import java.awt.Graphics;
 
@@ -15,7 +16,6 @@ import project.model.Enemy;
 import project.model.Player;
 import project.model.Room;
 import project.model.WorldModel;
-import project.model.items.Chest;
 import project.model.items.Item;
 
 /**

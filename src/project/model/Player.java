@@ -3,7 +3,6 @@ package project.model;
 import java.util.ArrayList;
 
 import project.model.items.Armor;
-import project.model.items.Consumable;
 import project.model.items.Item;
 import project.model.items.Weapon;
 
