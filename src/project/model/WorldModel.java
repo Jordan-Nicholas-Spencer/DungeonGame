@@ -1,6 +1,10 @@
 package project.model;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 import project.WorldController;
 import project.model.items.Armor;
@@ -30,6 +34,7 @@ public class WorldModel {
 	private static Room currentRoom;
 	private static Random random;
 	private static LevelDesign level;
+	public static ArrayList<String> dialogueText;
 	
 	public WorldModel() {
 		initializeGame();
@@ -40,7 +45,31 @@ public class WorldModel {
 		level = new LevelDesign();
 		currentRoom = level.LEVELARRAY[0];
 		player = new Player ("player", currentRoom.getXStartPos(), currentRoom.getYStartPos());
+		try {
+			read();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
+	
+	
+	public void read() throws IOException
+	{
+		dialogueText = new ArrayList<>();
+		
+		File file = new File("src/project/view/Dialogue.txt");
+		
+		Scanner scanner = new Scanner(file);
+		
+		while(scanner.hasNext())
+		{
+			String[] tokens = scanner.nextLine().split(";");
+			String last = tokens[tokens.length - 1];
+			dialogueText.add(last);
+		}
+	}
+	
 	
 	public void initializeImages() {
 		ImageLoader.initializeSprites();

@@ -9,6 +9,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 import project.model.Enemy;
 import project.model.Player;
@@ -197,15 +198,22 @@ public class WorldBuilder extends JPanel {
 		int y = (Window.HEIGHT / 2);
 		int width = Window.WIDTH - (SCALE *4);
 		int height = SCALE * 5;
-		String str = "Want to learn more about this place? Keep fighting to find out!";
+		String str = WorldModel.dialogueText.get(0);
 		
-		Color c = new Color(0, 0, 0);
-		g.setColor(c);
-		g.fillRoundRect(x, y, width, height, SCALE, SCALE);
-		g.setColor(Color.WHITE);
-		g.drawRoundRect(x, y, width, height, SCALE / 2, SCALE / 2);
-		g.drawString(str, x + 30 , y  + 30);
+		drawWrappedText(str, x, y, width, height, g);
 	}
+	
+	public void drawWrappedText(String text, int x, int y, int w, int h, Graphics g) {
+        JTextArea ta = new JTextArea(text);
+        ta.setLineWrap(true);
+        ta.setWrapStyleWord(true);
+        ta.setBounds(0, 0, w, h);
+        ta.setBackground(new Color(0,0,0));
+        ta.setForeground(Color.WHITE);
+        ta.setFont(g.getFont());
+        Graphics g2 = g.create(x, y, w, h); // Use new graphics to leave original graphics state unchanged
+        ta.paint(g2);
+    }
 	
 	public void renderChestWindow(boolean b, Graphics g)
 	{
