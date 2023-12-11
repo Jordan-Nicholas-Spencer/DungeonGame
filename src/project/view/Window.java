@@ -15,7 +15,7 @@ import javax.swing.JFrame;
  * Retrieved from https://open.umn.edu/opentextbooks/textbooks/java-java-java-object-oriented-problem-solving
  * 
  *  
- * Version/date: 11/16/2023
+ * Version/date: 12/10/2023
  * 
  * Responsibilities of class: Defines the JFrame in which the game is displayed
  * 
@@ -23,7 +23,6 @@ import javax.swing.JFrame;
 
 public class Window extends JFrame {
 	
-	// constants for window size and placement on screen
 	public static final int WIDTH = 896;  // 32 x 28
 	public static final int HEIGHT = 576; // 32 * 18
 	private static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -42,11 +41,6 @@ public class Window extends JFrame {
 	 */
 	private void initComponents() {
 		setTitle("HUNTER");
-		
-//		Panel display = new Panel();
-//        add(display);
-        
-//      pack();	// preferably we are able to use pack here
         setBounds((screenSize.width / 2) - (WIDTH / 2), (screenSize.height / 2) - (HEIGHT / 2), WIDTH, HEIGHT);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -90,7 +90,7 @@ public class Panel extends JPanel {
         	}
         	else if (WorldController.getIsChestWindowActive())
         	{
-        		worldBuilder.renderChestWindow(WorldModel.playerNextToChest(false), g);
+        		worldBuilder.renderChestWindow(g);
         	}
         	else if (WorldController.getIsInventoryWindowActive())
         	{

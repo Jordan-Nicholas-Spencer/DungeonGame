@@ -28,7 +28,7 @@ import project.model.items.Item;
  * Retrieved from https://open.umn.edu/opentextbooks/textbooks/java-java-java-object-oriented-problem-solving
  * 
  *  
- * Version/date: 11/18/2023
+ * Version/date: 12/10/2023
  * 
  * Responsibilities of class: Handles logic for drawing images using data passed from Panel
  * 
@@ -46,7 +46,14 @@ public class WorldBuilder extends JPanel {
 	private BufferedImage floor;
 	private BufferedImage wall;
 
+	/**
+	 * renders the room one sprite image at a time, but refrains from rendering the player or enemies
+	 * @param room
+	 * @param player
+	 * @param g - graphics
+	 */
 	public void renderLevel(Room room, Player player, Graphics g) {
+		// this sets the base image for floor and wall to be used throughout the room
 		// floor tiles 512 x 384 / 32 = 16 x 12
 		floor = ImageLoader.getSprite("floor");
 		ssr.setImage(floor);
@@ -87,6 +94,11 @@ public class WorldBuilder extends JPanel {
 		}
 	}
 	
+	 /**
+	  * renders the player based on the direction they are facing
+	  * @param player
+	  * @param g - graphics
+	  */
 	public void renderPlayer(Player player, Graphics g) {
 		int c, r;
 		
@@ -118,6 +130,12 @@ public class WorldBuilder extends JPanel {
 		g.drawImage(sprite, drawPosX, drawPosY, SCALE * MULT, SCALE * MULT, null);
 	}
 	
+	/**
+	 * renders the enemy based on the direction they are facing
+	 * @param enemies
+	 * @param player
+	 * @param g - graphics
+	 */
 	public void renderEnemy(Enemy[] enemies, Player player, Graphics g) {
 		int c, r;
 		
@@ -150,7 +168,11 @@ public class WorldBuilder extends JPanel {
 			g.drawImage(sprite, drawPosX, drawPosY, SCALE * MULT, SCALE * MULT, null);
 		}
 	}
-	
+	 /**
+	  * renders the gameOverScreen
+	  * @param player
+	  * @param g - graphics
+	  */
 	public void renderGameOver(Player player, Graphics g) {
 		
 		if (player.getHealth() <= 0) {
@@ -175,6 +197,11 @@ public class WorldBuilder extends JPanel {
 
 	}
 	
+	/**
+	 * renders the HUD with basic player stats
+	 * @param player
+	 * @param g - graphics
+	 */
 	public void renderHUD(Player player, Graphics g) {
 		int x = SCALE / 2;
 		int y = SCALE / 2;
@@ -193,6 +220,10 @@ public class WorldBuilder extends JPanel {
 		g.drawString("HP: " + player.getHealth() + "/" + player.getMaxHP() , x + 5, y + 40);
 	}
 	
+	/**
+	 * renders the dialogue window when talking to an NPC
+	 * @param g - graphics
+	 */
 	public void renderDialogueWindow(Graphics g) {
 		int x = (Window.WIDTH / 2) - SCALE - STEP;
 		int y = (Window.HEIGHT / 2) + SCALE;
@@ -203,6 +234,15 @@ public class WorldBuilder extends JPanel {
 		drawWrappedText(str, x, y, width, height, g);
 	}
 	
+	/**
+	 * used with renderDialogueWindow in order to wrap long winded NPCs
+	 * @param text
+	 * @param x
+	 * @param y
+	 * @param w
+	 * @param h
+	 * @param g
+	 */
 	public void drawWrappedText(String text, int x, int y, int w, int h, Graphics g) {
         JTextArea ta = new JTextArea(text);
         ta.setLineWrap(true);
@@ -215,12 +255,17 @@ public class WorldBuilder extends JPanel {
         ta.paint(g2);
     }
 	
-	public void renderChestWindow(boolean b, Graphics g)
+	/**
+	 * renders the chestWindow which shows what is inside a chest
+	 * @param b - boolean
+	 * @param g
+	 */
+	public void renderChestWindow(Graphics g)
 	{
-		int x = (Window.WIDTH / 2);
-		int y = (Window.HEIGHT / 2);
-		int width = Window.WIDTH - (SCALE *4);
-		int height = SCALE * 5;
+		int x = (Window.WIDTH / 2) - SCALE - STEP;
+		int y = (Window.HEIGHT / 2) + SCALE;
+		int width = SCALE * 6;
+		int height = SCALE * 2;
 		
 		String content = "";
 		Item[] itemArray = WorldModel.getCurrentRoom().getChestItems();
@@ -230,11 +275,14 @@ public class WorldBuilder extends JPanel {
 		g.fillRoundRect(x, y, width, height, SCALE, SCALE);
 		g.setColor(Color.WHITE);
 		g.drawRoundRect(x, y, width, height, SCALE / 2, SCALE / 2);
-		//g.drawString(type, x + 30 , y  + 30);
 		g.drawString(content, x + 30, y + 50);
 	}
 	
-	
+	/**
+	 * renders the inventoryWindow
+	 * @param player
+	 * @param g - graphics
+	 */
 	public void renderInventoryWindow(Player player, Graphics g)
 	{
 		int x = 10;
