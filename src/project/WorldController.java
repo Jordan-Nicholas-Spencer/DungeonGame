@@ -203,6 +203,8 @@ public class WorldController
 		        		WorldController.setIsChestWindowActive(true);
 		        	}
 		        }
+		        
+		        
 		        // toggle inventory
 		        else if (key == KeyEvent.VK_I)
 		        {
@@ -219,6 +221,63 @@ public class WorldController
 		        {
 		        	WorldModel.pickUpItem(WorldModel.getPlayer(), WorldModel.getPlayer().getPosX(), WorldModel.getPlayer().getPosY());
 		        	WorldController.setIsChestWindowActive(false);
+		        }
+		        
+		        // heal the player
+		        else if (key == KeyEvent.VK_1 && WorldController.getIsInventoryWindowActive())
+		        {
+		        	// check to see if the inventory size is greater than zero
+		        	// if it is, then check to see which consumable is being used
+		        	if (WorldModel.getPlayer().getInventorySize() > 0)
+		        	{
+		        		if (WorldModel.getPlayer().getInventoryItem(0).getName() == "Health Potion")
+			        	{
+			        		WorldModel.getPlayer().heal(10);
+			        		WorldModel.getPlayer().getInventoryConsumables().remove(0);
+			        	}
+		        	}
+		        }
+		        
+		        else if (key == KeyEvent.VK_2 && WorldController.getIsInventoryWindowActive())
+		        {
+		        	// check to see if the inventory size is greater than one
+		        	// if it is, then check to see which consumable is being used
+		        	if (WorldModel.getPlayer().getInventorySize() > 1)
+		        	{
+		        		if (WorldModel.getPlayer().getInventoryItem(1).getName() == "Health Potion")
+			        	{
+			        		WorldModel.getPlayer().heal(10);
+			        		WorldModel.getPlayer().getInventoryConsumables().remove(1);
+			        	}
+		        	}
+		        }
+		        
+		        else if (key == KeyEvent.VK_3 && WorldController.getIsInventoryWindowActive())
+		        {
+		        	// check to see if the inventory size is greater than two
+		        	// if it is, then check to see which consumable is being used
+		        	if (WorldModel.getPlayer().getInventorySize() > 2)
+		        	{
+		        		if (WorldModel.getPlayer().getInventoryItem(2).getName() == "Health Potion")
+			        	{
+			        		WorldModel.getPlayer().heal(10);
+			        		WorldModel.getPlayer().getInventoryConsumables().remove(2);
+			        	}
+		        	}
+		        }
+		        
+		        else if (key == KeyEvent.VK_4 && WorldController.getIsInventoryWindowActive())
+		        {
+		        	// check to see if the inventory size is greater than three
+		        	// if it is, then check to see which consumable is being used
+		        	if (WorldModel.getPlayer().getInventorySize() > 3)
+		        	{
+		        		if (WorldModel.getPlayer().getInventoryItem(3).getName() == "Health Potion")
+			        	{
+			        		WorldModel.getPlayer().heal(10);
+			        		WorldModel.getPlayer().getInventoryConsumables().remove(3);
+			        	}
+		        	}
 		        }
 		        // open door
 		        else if ((key == KeyEvent.VK_E && WorldModel.playerNextToDoor()))

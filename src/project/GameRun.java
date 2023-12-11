@@ -43,7 +43,6 @@ public class GameRun {
 	 *  	-Ensure proper usage of private,protected,public,static,final
 	 *  
 	 *  4) Extras
-	 *  	-potions/healing
 	 *  	-Dialogue Portrait Display
 	 * 		-Enemy chasing player logic in moveEnemies()
 	 * 		-newGame+

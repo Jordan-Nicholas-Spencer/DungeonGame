@@ -15,7 +15,7 @@ public class Player extends Organism implements GodMode{
 	private static final int MAXCONSUMABLES = 3;
 	private ArrayList<Item> consumables;
 	
-	private int keyCount = 0;
+	private int keyCount = 0; 
 	private Weapon weaponEquipped;
 	private Armor armorEquipped;
 	private int levelsCompleted;

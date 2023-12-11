@@ -14,7 +14,7 @@ public class Shop {
 	public static final Armor BLESSED = new Armor("blessed", "Your armor has been blessed by the gods themselves", 9);
 
 	
-	public static final Item HP_POTION = new Item("hp_potion", "Restores 10 HP");
+	public static final Item HP_POTION = new Item("Health Potion", "Restores 10 HP");
 	public static final Item KEY = new Item("small_key", "Can be used once to open a locked door");
 	
 	public Weapon getRandWeapon()
