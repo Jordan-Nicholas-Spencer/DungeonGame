@@ -58,7 +58,7 @@ public class LevelDesign {
 			"##########################",
 			"##########################", // 15
 			"##########################"  
-		}, 4, 4, new Item[] {Shop.SWORD, Shop.HP_POTION, Shop.HP_POTION}, 
+		}, 4, 4, new Item[] {Shop.SWORD, Shop.SCRAP, Shop.HP_POTION}, 
 			new Enemy(Enemy.Species.BAT, 5 , 10), new Enemy(Enemy.Species.GARGOYLE, 15 , 10),
 			new Enemy(Enemy.Species.RAT, 6, 11), new Enemy(Enemy.Species.SLIME, 5, 12),
 			new Enemy(Enemy.Species.SUCCUBUS, 16, 11), new Enemy(Enemy.Species.VAMPIRE, 15, 13) ),
@@ -79,14 +79,14 @@ public class LevelDesign {
 			"#                   ######",
 			"#                   ######",
 			"#                   ######",
-			"#                   ######",
+			"#1                  ######",
 			"#                   ######",
 			"#                   ######",
 			"#            ## ##########",
 			"#cc          #     k######",
 			"##########################",
 			"##########################"
-		}, 1, 3, new Item[] {}, 
+		}, 1, 3, new Item[] {Shop.AXE, Shop.HP_POTION, Shop.LEATHER}, 
 			new Enemy(Enemy.Species.VAMPIRE, 15, 11), new Enemy(Enemy.Species.SUCCUBUS, 17, 12), new Enemy(Enemy.Species.SLIME, 15, 18)),
 	
 			
@@ -96,7 +96,8 @@ public class LevelDesign {
 			"##### ##",
 			"##g   ##",
 			"########"
-		}, 3, 3, new Item[] {} ),
+		}, 3, 3, new Item[] {},
+				new Enemy(Enemy.Species.RAT, 5, 1)),
 	
 			
 		new Room(new String[] {
@@ -104,17 +105,21 @@ public class LevelDesign {
 			"## ##^##",
 			"## ## ##",
 			"##    ##",
+			"##    ##",
+			"##   c##",
 			"########"
-		}, 2, 1, new Item[] {} ),
+		}, 2, 1, new Item[] {Shop.HP_POTION} ),
 	
 			
 		new Room(new String[] {
-			"#########",
-			"##     ##",
-			"##  ^  ##",
-			"##     ##",
-			"#########"
-		}, 6, 1, new Item[] {}),
+				"##d#####",
+				"## ## ##",
+				"## ## ##",
+				"##    ##",
+				"##    ##",
+				"########"
+		}, 5, 1, new Item[] {},
+				new Enemy(Enemy.Species.GARGOYLE, 5, 4)),
 			
 			
 		new Room(new String[] {
