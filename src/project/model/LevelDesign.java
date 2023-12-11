@@ -1,5 +1,8 @@
 package project.model;
 
+import project.model.items.Item;
+import project.model.items.Shop;
+
 public class LevelDesign {
 	
 	/* character legend:
@@ -20,8 +23,8 @@ public class LevelDesign {
 			"##########################", // 0
 			"##########################",
 			"##########################",
-			"######ss##ccc#s#s##s######",
-			"##k     1#   #     c######",
+			"######ss##c c#s#s##s######",
+			"##k     1#   #      ######",
 			"####     #   #     #######", // 5
 			"#######d##   #d###########", 
 			"###                 ######",
@@ -34,7 +37,7 @@ public class LevelDesign {
 			"##########################",
 			"##########################", // 15
 			"##########################"  
-		}, 4, 4, new Enemy(Enemy.Species.BAT, 5 , 10), new Enemy(Enemy.Species.GARGOYLE, 15 , 10),
+		}, 4, 4, new Item[] {Shop.SWORD, Shop.SCRAP}, new Enemy(Enemy.Species.BAT, 5 , 10), new Enemy(Enemy.Species.GARGOYLE, 15 , 10),
 			new Enemy(Enemy.Species.RAT, 6, 11), new Enemy(Enemy.Species.SLIME, 5, 12),
 			new Enemy(Enemy.Species.SUCCUBUS, 16, 11), new Enemy(Enemy.Species.VAMPIRE, 15, 13) ),
 			
@@ -61,7 +64,7 @@ public class LevelDesign {
 				"##########################",
 				"##########################"
 				
-			}, 1, 3, new Enemy(Enemy.Species.VAMPIRE, 15, 11), new Enemy(Enemy.Species.SUCCUBUS, 17, 12), new Enemy(Enemy.Species.SLIME, 15, 18)),
+			}, 1, 3, new Item[] {}, new Enemy(Enemy.Species.VAMPIRE, 15, 11), new Enemy(Enemy.Species.SUCCUBUS, 17, 12), new Enemy(Enemy.Species.SLIME, 15, 18)),
 	
 			new Room(new String[] {
 					"########",
@@ -69,7 +72,7 @@ public class LevelDesign {
 					"##### ##",
 					"##g   ##",
 					"########"
-				}, 3, 3 ),
+				}, 3, 3, new Item[] {} ),
 	
 			new Room(new String[] {
 					"########",
@@ -77,7 +80,7 @@ public class LevelDesign {
 					"## ## ##",
 					"##    ##",
 					"########"
-				}, 2, 1 ),
+				}, 2, 1, new Item[] {} ),
 	
 			new Room(new String[] {
 					"#########",
@@ -85,7 +88,7 @@ public class LevelDesign {
 					"##  ^  ##",
 					"##     ##",
 					"#########"
-				}, 6, 1),
+				}, 6, 1, new Item[] {}),
 			
 			new Room(new String[] {
 					"########################",
@@ -96,6 +99,6 @@ public class LevelDesign {
 					
 					
 					
-					}, 3, 3)};
+					}, 3, 3, new Item[] {})};
 	
 }

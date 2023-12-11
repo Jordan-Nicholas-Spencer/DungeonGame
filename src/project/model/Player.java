@@ -14,7 +14,7 @@ public class Player extends Organism implements GodMode{
 	private static final int STARTINGHP = 20;
 	private static final int STARTINGSTRENGTH = 1;
 	private static final int STARTINGDEFENSE = 1;
-	private ArrayList<Consumable> consumables;
+	private ArrayList<Item> consumables;
 	
 	private int keyCount = 0;
 	private boolean inventoryOpen;
@@ -67,12 +67,16 @@ public class Player extends Organism implements GodMode{
 		return false;
 	}
 	
-	public Consumable getInventoryItem(int index) 
+	public Item getInventoryItem(int index) 
 	{
 		return consumables.get(index);
 	}
 	
-	public ArrayList<Consumable> getInventoryConsumables()
+	public int getInventorySize() {
+		return consumables.size();
+	}
+	
+	public ArrayList<Item> getInventoryConsumables()
 	{
 		return consumables;
 	}

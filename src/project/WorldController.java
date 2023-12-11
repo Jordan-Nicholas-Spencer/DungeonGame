@@ -32,7 +32,6 @@ public class WorldController
 		private WorldModel model;
 		private Window view;
 		private Panel panel;
-		private WorldBuilder builder;
 		private static boolean isDialogueActive = false;
 		private static boolean isTalking = false;
 		private static boolean isChestWindowActive = false;
@@ -46,12 +45,6 @@ public class WorldController
 			this.panel = new Panel();
 			this.panel.addKeyListener(new KeyboardListener());
 			this.view.add(panel);
-			this.builder = panel.getWorldBuilder();
-		//	this.inventory.setVisible(false);
-			
-			// Start a game timer to handle animation and updates
-		   // Timer timer = new Timer(0, this); // 100ms interval
-		   // timer.start();
 		}
 		
 		public static void setDialogueActive(boolean active)
@@ -152,7 +145,7 @@ public class WorldController
 		        	WorldController.setDialogueActive(false);
 		        	WorldController.isTalking = false;
 		        }
-		        else if (key == KeyEvent.VK_E && model.isChestAtPlayer() && WorldController.inMenu == false)
+		        else if (key == KeyEvent.VK_E && WorldModel.playerNextToChest(false) && WorldController.inMenu == false)
 		        {
 		        	WorldController.inMenu = true;
 		        	WorldController.setChestWindowActive(true);
@@ -164,9 +157,15 @@ public class WorldController
 		        }
 		        else if ((key == KeyEvent.VK_E && WorldModel.playerNextToDoor()))
 		        {
-		        	
+		        	// message
 		        }
-		  
+		        
+		        if (key == KeyEvent.VK_1 && WorldController.getIsChestWindowActive())
+		        {
+		        	WorldModel.pickUpItem(WorldModel.getPlayer(), WorldModel.getPlayer().getPosX(), WorldModel.getPlayer().getPosY());
+		        	WorldController.inMenu = false;
+		        	WorldController.setChestWindowActive(false);
+		        }
 		        
 		        
 		        // inventory
@@ -180,18 +179,7 @@ public class WorldController
 		        	WorldController.inInventory = false;
 		        	WorldController.setInventoryWindowActive(false);
 		        }
-		        else if (key == KeyEvent.VK_1 && WorldController.getIsChestWindowActive())
-		        {
-		        	if (WorldModel.getChestAtPlayer().getChest().getChestType() == "Weapon Chest")
-		        	{
-		        		WorldModel.getPlayer().equipWeapon(WorldModel.getChestAtPlayer().getChest().getItemArray()[0]);
-		        	}
-		        	
-		        	if (WorldModel.getChestAtPlayer().getChest().getChestType() == "Armor Chest")
-		        	{
-		        		WorldModel.getPlayer().equipArmor(WorldModel.getChestAtPlayer().getChest().getItemArray()[0]);
-		        	}
-		        }
+
 		        
 		        // god mode
 		        if (key == KeyEvent.VK_G)

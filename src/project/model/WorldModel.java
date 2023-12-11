@@ -1,10 +1,12 @@
 package project.model;
 
-import java.awt.Graphics;
 import java.util.Random;
 
+import project.WorldController;
+import project.model.items.Armor;
 import project.model.items.Chest;
-import project.model.items.Chest.Chests;
+import project.model.items.Item;
+import project.model.items.Weapon;
 import project.view.ImageLoader;
 
 /**
@@ -59,6 +61,15 @@ public class WorldModel {
 	
 	public void movePlayer(int dirX, int dirY) {
 		boolean playerMoved = false;
+		if (WorldController.getIsInventoryWindowActive()) {
+			return;
+		}
+		if (WorldController.getIsChestWindowActive()) {
+			return;
+		}
+		if (WorldController.getIsDialogueActive()) {
+			return;
+		}
 		if (currentRoom.enemyInRoom(getTileInFront(player, dirX, dirY).getPosX(), getTileInFront(player, dirX, dirY).getPosY())) {
 			Enemy enemy = currentRoom.getEnemyAt(getTileInFront(player, dirX, dirY).getPosX(), getTileInFront(player, dirX, dirY).getPosY());
 			enemy.damage(player.getStrength() - enemy.getDefense());
@@ -84,7 +95,7 @@ public class WorldModel {
 			case "key":
 				player.setPosition(player.getPosX() + dirX, player.getPosY() + dirY);
 				player.pickUpKey();
-				currentRoom.pickUpKey(player.getPosX(), player.getPosY());
+				currentRoom.pickUpItem(player.getPosX(), player.getPosY());
 				playerMoved = true;
 				break;
 			case "skeleton":
@@ -99,7 +110,6 @@ public class WorldModel {
 				nextLevel();
 				break;
 			case "door":			
-				
 				break;
 			default:
 				break;
@@ -243,33 +253,6 @@ public class WorldModel {
 		return attackingRange;
 	}
 	
-	public static boolean playerNextToChest(Chest chest)
-	{
-		boolean isNear = false;
-		
-		if (chest.getPosX() + 1 == player.getPosX() && chest.getPosY() == player.getPosY())
-		{
-			isNear = true;
-			return isNear;
-		}
-		else if (chest.getPosX() - 1 == player.getPosX() && chest.getPosY() == player.getPosY()) 
-		{
-			isNear = true;
-			return isNear;
-		}
-		else if (chest.getPosX() == player.getPosX() && chest.getPosY() + 1 == player.getPosY()) 
-		{
-			isNear = true;
-			return isNear;
-		}
-		else if (chest.getPosX() == player.getPosX() && chest.getPosY() - 1 == player.getPosY())
-		{
-			isNear = true;
-			return isNear;
-		}
-		return isNear;		
-	}
-	
 	public static boolean playerNextToDoor()
 	{
 		boolean isNear = false;
@@ -330,9 +313,48 @@ public class WorldModel {
 		return isNear;
 	}
 	
+	public static boolean playerNextToChest(boolean itemTaken)
+	{
+		boolean isNear = false;
+		
+		if (WorldModel.getCurrentRoom().getTileAt(WorldModel.getPlayer().getPosX()+1, WorldModel.getPlayer().getPosY()).getName() == "chest")
+		{
+			isNear = true;
+			if (itemTaken) {
+				currentRoom.pickUpItem(WorldModel.getPlayer().getPosX()+1, WorldModel.getPlayer().getPosY());
+			}
+		}
+		else if (WorldModel.getCurrentRoom().getTileAt(WorldModel.getPlayer().getPosX()-1, WorldModel.getPlayer().getPosY()).getName() == "chest") 
+		{
+			isNear = true;
+			if (itemTaken) {
+				currentRoom.pickUpItem(WorldModel.getPlayer().getPosX()-1, WorldModel.getPlayer().getPosY());
+			}
+
+		}
+		else if (WorldModel.getCurrentRoom().getTileAt(WorldModel.getPlayer().getPosX(), WorldModel.getPlayer().getPosY() + 1).getName() == "chest") 
+		{
+			isNear = true;
+			if (itemTaken) {
+				currentRoom.pickUpItem(WorldModel.getPlayer().getPosX(), WorldModel.getPlayer().getPosY()+1);
+			}
+
+		}
+		else if (WorldModel.getCurrentRoom().getTileAt(WorldModel.getPlayer().getPosX(), WorldModel.getPlayer().getPosY() - 1).getName() == "chest")
+		{
+			isNear = true;
+			if (itemTaken) {
+				currentRoom.pickUpItem(WorldModel.getPlayer().getPosX(), WorldModel.getPlayer().getPosY()-1);
+			}
+
+		}
+		
+		return isNear;		
+	}
+	
 	public static void pickUpItem(Player player, int posX, int posY)
 	{
-		switch(WorldModel.getTileInFront(player, posX, posY).getName())
+		switch(WorldModel.currentRoom.getTileAt(player.getPosX(), player.getPosY()).getName())
 		{
 		case "key":
 			player.pickUpKey();
@@ -341,24 +363,21 @@ public class WorldModel {
 			
 			break;
 		}
-	}
-	
-//	public static int getKeyPos()
-//	{
-//		
-//	}
-	
-	public boolean isChestAtPlayer()
-	{
-		for (Chest chest : currentRoom.getChests()) 
-		{
-			if (playerNextToChest(chest))
-			{
-				return true;
+		
+		if (playerNextToChest(false)) {
+			Item item = currentRoom.takeItemFromChest();
+			if (item instanceof Weapon) {
+				player.equipWeapon(item);
+				playerNextToChest(true);
+			}
+			else if (item instanceof Armor) {
+				player.equipArmor(item);
+				playerNextToChest(true);
+			}
+			else {
+				// add item to inventory
 			}
 		}
-		
-		return false;
 	}
 	
 	public boolean isNPCAtPlayer()
@@ -387,18 +406,6 @@ public class WorldModel {
 		return null;
 	}
 	
-	public static Chest getChestAtPlayer()
-	{
-		for (Chest chest : currentRoom.getChests())
-		{
-			if (playerNextToChest(chest))
-			{
-				return chest;
-			}
-		}
-		
-		return null;
-	}
 	public boolean playerNextToNPC(NPC npc)
 	{
 		boolean isNear = false;
@@ -426,7 +433,13 @@ public class WorldModel {
 		return isNear;
 	}
 	
+	public void newMethod() {
+		return;
+	}
 	
+	public void testMethod() {
+		return;
+	}
 	
 	public LevelDesign getLevel() {
 		return level;

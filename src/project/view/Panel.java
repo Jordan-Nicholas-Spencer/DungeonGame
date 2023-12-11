@@ -77,12 +77,13 @@ public class Panel extends JPanel {
         	}
         	else if (WorldController.getIsChestWindowActive())
         	{
-        		worldBuilder.renderChestWindow(g, WorldModel.getChestAtPlayer());
+        		worldBuilder.renderChestWindow(WorldModel.playerNextToChest(false), g);
         	}
         	else if (WorldController.getIsInventoryWindowActive())
         	{
-        		worldBuilder.renderInventoryWindow(g, WorldModel.getPlayer());
+        		worldBuilder.renderInventoryWindow(WorldModel.getPlayer(), g);
         	}
+        	
         	if (WorldModel.getPlayer().getHealth() <= 0)
         	{
         		worldBuilder.renderGameOver(WorldModel.getPlayer(), g);

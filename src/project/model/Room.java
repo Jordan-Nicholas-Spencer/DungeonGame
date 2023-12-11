@@ -1,24 +1,21 @@
 package project.model;
 
-import java.util.Random;
 import java.util.ArrayList;
 
-import project.model.items.Chest;
+import project.model.items.Item;
 
 public class Room {
 
 	private Tile[][] room;
 	private int xStartPos;
 	private int yStartPos;
+	private ArrayList<Item> chestItems;
 	private ArrayList<Enemy> enemies;
 	private ArrayList<NPC> npcs;
-	private ArrayList<Chest> chests;
 	
-	public Room(String[] levelDesign, int xStartPos, int yStartPos,  Enemy... species) {
+	public Room(String[] levelDesign, int xStartPos, int yStartPos, Item[] chestItems,  Enemy... species) {
 		room = new Tile[levelDesign.length][];
 		this.npcs = new ArrayList<>();
-		this.chests = new ArrayList<>();
-		Random rand = new Random();
 		for(int column = 0; column<levelDesign.length; column++) {
 			room[column] = new Tile[levelDesign[column].length()];
 			
@@ -44,18 +41,6 @@ public class Room {
 					break;
 				case 'c':
 					room[column][row] = new Tile("chest", row, column);
-					Chest chest;
-					switch(rand.nextInt(2) + 1)
-					{
-					case 1:
-						chest = new Chest(Chest.Chests.WEAPONCHEST, row, column);
-						chests.add(chest);
-						break;
-					case 2:
-						chest = new Chest(Chest.Chests.ARMORCHEST, row, column);
-						chests.add(chest);
-						break;
-					}
 					break;
 				case 'o':
 					room[column][row] = new Tile("open", row, column);
@@ -75,6 +60,11 @@ public class Room {
 			}
 		}
 		
+		this.chestItems = new ArrayList<Item>();
+		for(Item item : chestItems) {
+			this.chestItems.add(item);
+		}
+		
 		this.enemies = new ArrayList<Enemy>();
 		for (Enemy enemy : species) {
 			this.enemies.add(enemy);
@@ -91,6 +81,18 @@ public class Room {
 		return roomEnemies;
 	}
 	
+	public Item[] getChestItems() {
+		Item[] chestItems = new Item[this.chestItems.size()];
+		chestItems = this.chestItems.toArray(chestItems);
+		return chestItems;
+	}
+	
+	public Item takeItemFromChest() {
+		Item item = chestItems.get(0);
+		chestItems.remove(0);
+		return item;
+	}
+	
 	public void addNPC(NPC npc)
 	{
 		npcs.add(npc);
@@ -101,13 +103,6 @@ public class Room {
 		NPC[] roomNPCs = new NPC[npcs.size()];
 		roomNPCs = npcs.toArray(roomNPCs);
 		return roomNPCs;
-	}
-	
-	public Chest[] getChests()
-	{
-		Chest[] roomChests = new Chest[chests.size()];
-		roomChests = chests.toArray(roomChests);
-		return roomChests;
 	}
 	
 	public NPC getNPCAt(int x, int y)
@@ -156,11 +151,13 @@ public class Room {
 		}
 	}
 	
-	public void pickUpKey(int x, int y) {
+	public void pickUpItem(int x, int y) {
 		switch(room[y][x].getName()) {
 		case "key":
 			room[y][x] = new Tile("floor", x, y);
-		case "postion":
+		case "potion":
+			room[y][x] = new Tile("floor", x, y);
+		case "chest":
 			room[y][x] = new Tile("floor", x, y);
 		}
 	}
