@@ -109,9 +109,6 @@ public class WorldModel {
 		if (currentRoom.enemyInRoom(getTileInFront(player, dirX, dirY).getPosX(), getTileInFront(player, dirX, dirY).getPosY())) {
 			Enemy enemy = currentRoom.getEnemyAt(getTileInFront(player, dirX, dirY).getPosX(), getTileInFront(player, dirX, dirY).getPosY());
 			enemy.damage(player.getStrength() - enemy.getDefense());
-			System.out.println("fightEnemy");
-			System.out.println("Enemy Health: " + enemy.getHealth());
-			System.out.println("Player Health: " + player.getHealth());
 			if (enemy.getHealth() <= 0) {
 				currentRoom.killEnemy(enemy.getPosX(), enemy.getPosY());
 			}
@@ -171,8 +168,6 @@ public class WorldModel {
 				// if the player is next to the enemy, face player and fight
 				else if(playerNextToEnemy(enemy)) {
 					player.damage(enemy.getStrength() - player.getDefense());
-					System.out.println("fightPlayer");
-					System.out.println("Player Health: " + player.getHealth());
 					if (player.getHealth() <= 0) {
 						
 					}
@@ -190,8 +185,6 @@ public class WorldModel {
 				}
 				else if(playerNextToEnemy(enemy)) {
 					player.damage(enemy.getStrength() - player.getDefense());
-					System.out.println("fightPlayer");
-					System.out.println("Player Health: " + player.getHealth());
 					break;
 				}	
 				if(name == "floor" || name == "open") {
@@ -206,8 +199,6 @@ public class WorldModel {
 				}
 				else if(playerNextToEnemy(enemy)) {
 					player.damage(enemy.getStrength() - player.getDefense());
-					System.out.println("fightPlayer");
-					System.out.println("Player Health: " + player.getHealth());
 					break;
 				}	
 				if(name == "floor" || name == "open") {
@@ -222,8 +213,6 @@ public class WorldModel {
 				}
 				else if(playerNextToEnemy(enemy)) {
 					player.damage(enemy.getStrength() - player.getDefense());
-					System.out.println("fightPlayer");
-					System.out.println("Player Health: " + player.getHealth());
 					break;
 				}	
 				if(name == "floor" || name == "open") {
@@ -478,6 +467,5 @@ public class WorldModel {
 		currentRoom = level.LEVELARRAY[levelsCompleted + 1];
 		player.setPosition(currentRoom.getXStartPos(), currentRoom.getYStartPos());
 		player.levelCompleted();
-
 	}
 }
