@@ -31,7 +31,7 @@ public class Item {
 	 * gets the name of the item
 	 * @return name of the item
 	 */
-	public String getName() {
+	public String getName() { 
 		return name;
 	}
 	 /**

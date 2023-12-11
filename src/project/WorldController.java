@@ -29,6 +29,7 @@ public class WorldController
 		private WorldModel model;
 		private Window view;
 		private Panel panel;
+		private static boolean dialogueExhausted = false;
 		private static boolean isDialogueActive = false;
 		private static boolean isChestWindowActive = false;
 		private static boolean isInventoryWindowActive = false;
@@ -88,6 +89,14 @@ public class WorldController
 			isInventoryWindowActive = active;
 		}
 		
+		/**
+		 * Purpose: set the value of dialogueExhausted
+		 * @param a boolean status
+		 */
+		public static void setDialogueExhausted(boolean active)
+		{
+			dialogueExhausted = active;
+		}
 		/**
 		 * gets isInventoryWindowActive current status
 		 * @return isInventoryWindowActive status
@@ -184,14 +193,17 @@ public class WorldController
 		        	}
 		        }
 		        // toggle dialogue window
-		        else if (key == KeyEvent.VK_E && model.isNPCAtPlayer())
+		        else if (key == KeyEvent.VK_E && model.isNPCAtPlayer() && WorldController.dialogueExhausted == false)
 		        {
 		        	if (getIsDialogueActive()) {
 		        		WorldController.setIsDialogueActive(false);
+		        		WorldModel.exhaustDialogue();
+		        		WorldController.setDialogueExhausted(true);
 		        	}
 		        	else {
 		        		WorldController.setIsDialogueActive(true);
 		        	}
+		        	
 		        }
 		        // toggle chest window
 		        else if (key == KeyEvent.VK_E && WorldModel.playerNextToChest(false))

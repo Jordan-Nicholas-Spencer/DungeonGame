@@ -57,6 +57,11 @@ public class WorldModel {
 		return dialogueText.get(0);
 	}
 	
+	public static void exhaustDialogue()
+	{
+		dialogueText.remove(0);
+	}
+	
 	public void read() throws IOException
 	{
 		dialogueText = new ArrayList<>();
@@ -139,6 +144,7 @@ public class WorldModel {
 				break;
 			case "stairs":
 				nextLevel();
+				WorldController.setDialogueExhausted(false);
 				break;
 			case "door":			
 				break;
@@ -345,7 +351,7 @@ public class WorldModel {
 			if (itemTaken) {
 				currentRoom.pickUpItem(WorldModel.getPlayer().getPosX()-1, WorldModel.getPlayer().getPosY());
 			}
-
+ 
 		}
 		else if (WorldModel.getCurrentRoom().getTileAt(WorldModel.getPlayer().getPosX(), WorldModel.getPlayer().getPosY() + 1).getName() == "chest") 
 		{
