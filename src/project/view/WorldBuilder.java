@@ -224,12 +224,12 @@ public class WorldBuilder extends JPanel {
 	 * renders the dialogue window when talking to an NPC
 	 * @param g - graphics
 	 */
-	public void renderDialogueWindow(Graphics g) {
+	public void renderDialogueWindow(String dialogue, Graphics g) {
 		int x = (Window.WIDTH / 2) - SCALE - STEP;
 		int y = (Window.HEIGHT / 2) + SCALE;
 		int width = SCALE * 10;
 		int height = SCALE * 4;
-		String str = WorldModel.dialogueText.get(0);
+		String str = dialogue;
 		
 		drawWrappedText(str, x, y, width, height, g);
 	}

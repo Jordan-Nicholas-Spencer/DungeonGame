@@ -86,7 +86,7 @@ public class Panel extends JPanel {
         	// these are the toggle windows
         	if (WorldController.getIsDialogueActive())
         	{
-        		worldBuilder.renderDialogueWindow(g);
+        		worldBuilder.renderDialogueWindow(WorldModel.getDialogueText(), g);
         	}
         	else if (WorldController.getIsChestWindowActive())
         	{

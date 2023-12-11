@@ -22,7 +22,7 @@ import project.view.ImageLoader;
  * Retrieved from https://open.umn.edu/opentextbooks/textbooks/java-java-java-object-oriented-problem-solving
  * 
  *  
- * Version/date: 11/18/2023
+ * Version/date: 12/10/2023
  * 
  * Responsibilities of class: Handles the data logic of the program
  * 
@@ -34,7 +34,7 @@ public class WorldModel {
 	private static Room currentRoom;
 	private static Random random;
 	private static LevelDesign level;
-	public static ArrayList<String> dialogueText;
+	private static ArrayList<String> dialogueText;
 	
 	public WorldModel() {
 		initializeGame();
@@ -53,6 +53,9 @@ public class WorldModel {
 		
 	}
 	
+	public static String getDialogueText() {
+		return dialogueText.get(0);
+	}
 	
 	public void read() throws IOException
 	{
