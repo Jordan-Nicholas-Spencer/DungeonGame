@@ -13,8 +13,7 @@ import project.view.WorldBuilder;
  * Morelli, R., & Walde, R. (2016). Java, Java, Java: Object-Oriented Problem Solving.
  * Retrieved from https://open.umn.edu/opentextbooks/textbooks/java-java-java-object-oriented-problem-solving
  * 
- *  
- * Version/date: 11/16/2023
+ * Version/date: 12/10/2023
  * 
  * Responsibilities of class: Contains main() for running the program
  * 
@@ -32,10 +31,6 @@ public class GameRun {
 	 *  	-Game win screen //	Game Complete/Credits Display
 	 *  
 	 *  3) CISC 191
-	 *  	- Learning Objectives 
-	 *  		- I/O
-	 *  
-	 *  	// clean up code
 	 *  	-Comment all code
 	 *  	-Update README documentation
 	 *  	-Remove redundant variable
