@@ -4,7 +4,6 @@ import java.util.Random;
 
 import project.WorldController;
 import project.model.items.Armor;
-import project.model.items.Chest;
 import project.model.items.Item;
 import project.model.items.Weapon;
 import project.view.ImageLoader;

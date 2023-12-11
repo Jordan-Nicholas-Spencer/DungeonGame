@@ -33,7 +33,8 @@ public class Player extends Organism implements GodMode{
 		this.levelsCompleted = 0;
 	}
 	
-	/**Adds an items to the first empty slot
+	/**
+	 * Adds an items to the first empty slot
 	 * @param consumable  The item to add
 	 * @return True if the item was added, false if inventory is full
 	 */
@@ -165,6 +166,7 @@ public class Player extends Organism implements GodMode{
 		this.strength = STARTINGSTRENGTH;
 		
 	}
+
 	
 	
 }

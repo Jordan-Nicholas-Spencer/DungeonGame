@@ -25,18 +25,15 @@ public class GameRun {
 	/* 
 	 *  TODO:
 	 *  1) Game Logic
-	 *  	-Fix chests to use Shop class
 	 *  	-Create levels
 	 *  	-Create story
 	 *  
 	 *  2) Display
-	 * 		-Inventory Display // fix rendering error
 	 *  	-Game win screen //	Game Complete/Credits Display
 	 *  
 	 *  3) CISC 191
 	 *  	- Learning Objectives 
 	 *  		- I/O
-	 *  		- Abstract class and interface
 	 *  
 	 *  	// clean up code
 	 *  	-Comment all code
@@ -47,7 +44,7 @@ public class GameRun {
 	 *  
 	 *  4) Extras
 	 *  	-potions/healing
-	 *  	-Dialogue Display
+	 *  	-Dialogue Portrait Display
 	 * 		-Enemy chasing player logic in moveEnemies()
 	 * 		-newGame+
 	 * 		-Items carry over to newGame+
@@ -61,7 +58,6 @@ public class GameRun {
     public static void main(String[] args) {
     	
        	WorldModel model = new WorldModel();
-       	WorldBuilder builder = new WorldBuilder();
     	model.initializeImages();
     	Window view = new Window();
     	WorldController controller = new WorldController(model, view);
