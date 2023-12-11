@@ -13,9 +13,20 @@ public class Room {
 	private ArrayList<Enemy> enemies;
 	private ArrayList<NPC> npcs;
 	
+	/**
+	 * 
+	 * @param levelDesign - a string array that represents the layout of the room
+	 * @param xStartPos	- starting position of the player within the room
+	 * @param yStartPos - starting position of the player within the room
+	 * @param chestItems - an item array that represents the items available within chests in the room
+	 * @param species - an enumeration of the enemies in the current room
+	 */
 	public Room(String[] levelDesign, int xStartPos, int yStartPos, Item[] chestItems,  Enemy... species) {
+		// the double array room is instantiated
 		room = new Tile[levelDesign.length][];
+		// the ArrayList that will contain the NPCs in the room is instantiated
 		this.npcs = new ArrayList<>();
+		// here we iterate through String[] levelDesign in order to create a room of correlating tiles with x and y coordinates
 		for(int column = 0; column<levelDesign.length; column++) {
 			room[column] = new Tile[levelDesign[column].length()];
 			
@@ -60,6 +71,7 @@ public class Room {
 			}
 		}
 		
+		// the chestItems ArrayList of items is filled with all of the items within in the room's LevelDesign
 		this.chestItems = new ArrayList<Item>();
 		for(Item item : chestItems) {
 			this.chestItems.add(item);

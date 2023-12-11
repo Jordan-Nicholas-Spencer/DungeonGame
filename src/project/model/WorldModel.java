@@ -140,10 +140,6 @@ public class WorldModel {
 					}
 					break;
 				}	
-				// if the player is near the enemy, move towards the player
-//				else if() {
-//					
-//				}
 				else if(name == "floor" || name == "open") {
 					enemy.setPosition(enemy.getPosX() + 1, enemy.getPosY());
 					enemy.setFacing("right");
@@ -160,10 +156,6 @@ public class WorldModel {
 					System.out.println("Player Health: " + player.getHealth());
 					break;
 				}	
-				// if the player is near the enemy, move towards the player
-//				else if() {
-//					
-//				}
 				if(name == "floor" || name == "open") {
 					enemy.setPosition(enemy.getPosX() - 1, enemy.getPosY());
 					enemy.setFacing("left");
@@ -180,10 +172,6 @@ public class WorldModel {
 					System.out.println("Player Health: " + player.getHealth());
 					break;
 				}	
-				// if the player is near the enemy, move towards the player
-//				else if() {
-//					
-//				}
 				if(name == "floor" || name == "open") {
 					enemy.setPosition(enemy.getPosX(), enemy.getPosY() + 1);
 					enemy.setFacing("down");
@@ -200,10 +188,6 @@ public class WorldModel {
 					System.out.println("Player Health: " + player.getHealth());
 					break;
 				}	
-				// if the player is near the enemy, move towards the player
-//				else if() {
-//					
-//				}
 				if(name == "floor" || name == "open") {
 					enemy.setPosition(enemy.getPosX(), enemy.getPosY() - 1);
 					enemy.setFacing("up");
@@ -374,7 +358,8 @@ public class WorldModel {
 				playerNextToChest(true);
 			}
 			else {
-				// add item to inventory
+				player.addItem(item);
+				playerNextToChest(true);
 			}
 		}
 	}
