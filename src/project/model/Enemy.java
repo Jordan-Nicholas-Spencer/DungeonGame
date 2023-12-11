@@ -40,12 +40,12 @@ public class Enemy extends Organism {
 	 * Enumeration that contains all of the enemies to be used in the game
 	 */
 	public enum Species {
-		BAT("bat", 10, 3, 2),
+		BAT("bat", 5, 3, 2),
 		RAT("rat", 5, 1, 0),		
-		GARGOYLE("gargoyle", 15, 5, 5),
+		GARGOYLE("gargoyle", 10, 5, 5),
 		SLIME("slime", 8, 2, 5),
-		SUCCUBUS("succubus", 21, 7, 7),
-		VAMPIRE("vampire", 28, 9, 9);
+		SUCCUBUS("succubus", 15, 7, 7),
+		VAMPIRE("vampire", 30, 9, 9);
 		
 		private String name;
 		private int maxHP;

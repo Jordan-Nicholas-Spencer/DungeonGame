@@ -22,6 +22,7 @@ public class Shop {
 	public static final Weapon SWORD = new Weapon("sword", "A balanced slashing weapon", 5);
 	public static final Weapon AXE = new Weapon("axe", "Weapon good for cracking open doors", 6);
 	public static final Weapon WHIP= new Weapon("whip", "Attacks faster than the speed of sound", 7);
+	public static final Weapon STAKE = new Weapon("wooden stake", "according to legend, only a wooden stake through the heart can kill a vampire for good", 30);
 	
 	
 	public static final Armor SCRAP = new Armor("scrap", "Any extra padding is helpful, even newspaper", 3);

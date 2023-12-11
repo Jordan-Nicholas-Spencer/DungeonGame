@@ -97,6 +97,15 @@ public class WorldController
 		{
 			dialogueExhausted = active;
 		}
+		
+		/**
+		 * Purpose: set the value of dialogueExhausted
+		 * @param a boolean status
+		 */
+		public static boolean getDialogueExhausted()
+		{
+			return dialogueExhausted;
+		}
 		/**
 		 * gets isInventoryWindowActive current status
 		 * @return isInventoryWindowActive status

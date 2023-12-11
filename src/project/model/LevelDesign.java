@@ -44,7 +44,7 @@ public class LevelDesign {
 			"##########################", // 0
 			"##########################",
 			"##########################",
-			"######ss##c c#s#s##s######",
+			"###g##ss##c c#s#s##s######",
 			"##k     1#   #   c  ######",
 			"####     #   #     #######", // 5
 			"#######d##   #d###########", 
@@ -59,9 +59,9 @@ public class LevelDesign {
 			"##########################", // 15
 			"##########################"  
 		}, 4, 4, new Item[] {Shop.SWORD, Shop.SCRAP, Shop.HP_POTION}, 
-			new Enemy(Enemy.Species.BAT, 5 , 10), new Enemy(Enemy.Species.GARGOYLE, 15 , 10),
-			new Enemy(Enemy.Species.RAT, 6, 11), new Enemy(Enemy.Species.SLIME, 5, 12),
-			new Enemy(Enemy.Species.SUCCUBUS, 16, 11), new Enemy(Enemy.Species.VAMPIRE, 15, 13) ),
+			new Enemy(Enemy.Species.RAT, 5 , 10), new Enemy(Enemy.Species.GARGOYLE, 15 , 10),
+			new Enemy(Enemy.Species.RAT, 6, 11), new Enemy(Enemy.Species.RAT, 5, 12),
+			new Enemy(Enemy.Species.SUCCUBUS, 16, 11), new Enemy(Enemy.Species.SUCCUBUS, 15, 13) ),
 			
 			
 		new Room(new String[] {
@@ -76,18 +76,15 @@ public class LevelDesign {
 			"######### ################",
 			"######### ################",
 			"#                   ######",
-			"#                   ######",
-			"#                   ######",
-			"#                   ######",
-			"#1                  ######",
+			"g1                  ######",
 			"#                   ######",
 			"#                   ######",
 			"#            ## ##########",
 			"#cc          #     k######",
 			"##########################",
 			"##########################"
-		}, 1, 3, new Item[] {Shop.AXE, Shop.HP_POTION, Shop.LEATHER}, 
-			new Enemy(Enemy.Species.VAMPIRE, 15, 11), new Enemy(Enemy.Species.SUCCUBUS, 17, 12), new Enemy(Enemy.Species.SLIME, 15, 18)),
+		}, 1, 3, new Item[] {Shop.SCRAP, Shop.HP_POTION, Shop.LEATHER}, 
+			new Enemy(Enemy.Species.RAT, 15, 10), new Enemy(Enemy.Species.BAT, 17, 9), new Enemy(Enemy.Species.SLIME, 18, 15)),
 	
 			
 		new Room(new String[] {
@@ -112,22 +109,38 @@ public class LevelDesign {
 	
 			
 		new Room(new String[] {
-				"##d#####",
-				"## ## ##",
+				"##^#####",
+				"##d## ##",
 				"## ## ##",
 				"##    ##",
-				"##    ##",
+				"##k   ##",
 				"########"
 		}, 5, 1, new Item[] {},
-				new Enemy(Enemy.Species.GARGOYLE, 5, 4)),
+				new Enemy(Enemy.Species.BAT, 5, 4)),
 			
 			
 		new Room(new String[] {
 			"########################",
 			"########################",
-			"##      ##            ##",
-			"g                     ##",
+			"##c    1#            c##",
+			"##c     #            c##",
+			"##                    d^",
+			"g       #            k##",
 			"########################"
-		}, 3, 3, new Item[] {})};
+		}, 1, 5, new Item[] {Shop.PLATE, Shop.WHIP, Shop.HP_POTION, Shop.HP_POTION},
+				new Enemy(Enemy.Species.GARGOYLE, 20, 2)),
+		new Room(new String[] {
+				"########################",
+				"########################",
+				"##                   1##",
+				"##                    ##",
+				"##                    ##",
+				"##                     ^",
+				"#o                    ##",
+				"##                    ##",
+				"########################"
+			}, 2, 6, new Item[] {},
+					new Enemy(Enemy.Species.SLIME, 17, 2), new Enemy(Enemy.Species.SLIME, 14, 2),
+		new Enemy(Enemy.Species.SLIME, 17, 2), new Enemy(Enemy.Species.SLIME, 17, 2))};
 	
 }

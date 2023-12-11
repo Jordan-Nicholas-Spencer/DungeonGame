@@ -54,12 +54,19 @@ public class WorldModel {
 	}
 	
 	public static String getDialogueText() {
-		return dialogueText.get(0);
+		if (dialogueText.size() > 0)
+		{
+			return dialogueText.get(0);
+		}
+		return "";
 	}
 	
 	public static void exhaustDialogue()
 	{
-		dialogueText.remove(0);
+		if (dialogueText.size() > 0)
+		{
+			dialogueText.remove(0);
+		}
 	}
 	
 	public void read() throws IOException
@@ -141,7 +148,14 @@ public class WorldModel {
 				break;
 			case "stairs":
 				nextLevel();
-				WorldController.setDialogueExhausted(false);
+				if (WorldController.getDialogueExhausted() == false && currentRoom.getNPCs().length > 0)
+				{
+					WorldModel.exhaustDialogue();
+				}
+				else
+				{
+					WorldController.setDialogueExhausted(false);
+				}
 				break;
 			case "door":			
 				break;
