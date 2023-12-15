@@ -58,7 +58,7 @@ public class Room {
 					break;
 				case '1':
 					room[column][row] = new Tile("npc", row, column);
-					NPC npc = new NPC(NPC.Characters.PRISONER, row, column, 1000);
+					NPC npc = new NPC(NPC.Characters.PRISONER, row, column, 9999);
 					npcs.add(npc);
 					break;
 				case 'g':

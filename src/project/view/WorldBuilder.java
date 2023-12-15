@@ -62,7 +62,6 @@ public class WorldBuilder extends JPanel {
 		wall = ImageLoader.getSprite("wall");
 		ssr.setImage(wall);
 		wall = ssr.grabImage(8, 3, SIZE, SIZE);
-
 		
 		String name;
 		for(int column=0; column < room.getSizeY(); column++) {
@@ -73,7 +72,7 @@ public class WorldBuilder extends JPanel {
 				int drawPosX = room.getTileAt(row, column).getPosX() * (SCALE * MULT) + ((Window.WIDTH/2) - player.getPosX() * (SCALE * MULT) - SCALE);
 				int drawPosY = room.getTileAt(row, column).getPosY() * (SCALE * MULT) + ((Window.HEIGHT/2) - player.getPosY() * (SCALE * MULT) - SCALE);
 				
-				if (name == "stairs" || name == "chest" || name == "door" || name == "gate" || name == "open") {
+				if (name == "stairs" || name == "chest" || name == "door" || name == "gate" || name == "open" || name == "key" || name == "npc") {
 					g.drawImage(floor, drawPosX, drawPosY, SCALE * MULT, SCALE * MULT, null);
 				}
 				else if (name == "skeleton") {

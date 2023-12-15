@@ -464,14 +464,6 @@ public class WorldModel {
 		return isNear;
 	}
 	
-	public void newMethod() {
-		return;
-	}
-	
-	public void testMethod() {
-		return;
-	}
-	
 	public LevelDesign getLevel() {
 		return level;
 	}
