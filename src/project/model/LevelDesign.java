@@ -129,6 +129,7 @@ public class LevelDesign {
 			"########################"
 		}, 1, 5, new Item[] {Shop.PLATE, Shop.WHIP, Shop.HP_POTION, Shop.HP_POTION},
 				new Enemy(Enemy.Species.GARGOYLE, 20, 2)),
+		
 		new Room(new String[] {
 				"########################",
 				"########################",
@@ -141,6 +142,35 @@ public class LevelDesign {
 				"########################"
 			}, 2, 6, new Item[] {},
 					new Enemy(Enemy.Species.SLIME, 17, 2), new Enemy(Enemy.Species.SLIME, 14, 2),
-		new Enemy(Enemy.Species.SLIME, 17, 2), new Enemy(Enemy.Species.SLIME, 17, 2))};
+		new Enemy(Enemy.Species.SLIME, 17, 2), new Enemy(Enemy.Species.SLIME, 17, 2)),
+		
+		new Room(new String[] {
+//				 0    5    10   15   20   25   30   30   35   40
+//				 |    |    |    |    |    |    |    |    |    |  
+				"#################################################", // 0
+				"#########################o#######################",
+				"##      #                               #     c##",
+				"##                                             ##",
+				"##      #                               #      ##",
+				"##c     #                               #      ##", // 5
+				"#########                               #########",
+				"##c     #                               #      ##",
+				"##      #                               #      ##",
+				"##                                             ##",
+				"##      #                               #      ##", // 10
+				"##      #                               #     c##",
+				"#########                               #########",
+				"##c     #                               #     c##",
+				"##      #                               #      ##",
+				"##                                             ##", // 15
+				"##      #                               #      ##",
+				"##c     #                               #     c##",
+				"#########                               #########",
+				"##                                             ##",
+				"##cc    #                               #    cc##", // 20
+				"#################################################"
+			}, 25, 1, new Item[] {Shop.HP_POTION, Shop.HP_POTION, Shop.HP_POTION,Shop.HP_POTION, Shop.HP_POTION, Shop.HP_POTION,
+					Shop.HP_POTION, Shop.HP_POTION, Shop.HP_POTION, Shop.HP_POTION,Shop.HP_POTION, Shop.HP_POTION}
+					)};
 	
 }
