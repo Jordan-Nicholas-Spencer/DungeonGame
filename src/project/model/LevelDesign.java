@@ -58,7 +58,7 @@ public class LevelDesign {
 			"##########################",
 			"##########################", // 15
 			"##########################"  
-		}, 4, 4, new Item[] {Shop.SWORD, Shop.SCRAP, Shop.HP_POTION}, 
+		}, 4, 4, new Item[] {Shop.HP_POTION, Shop.HP_POTION, Shop.HP_POTION}, 
 			new Enemy(Enemy.Species.RAT, 5 , 10), new Enemy(Enemy.Species.GARGOYLE, 15 , 10),
 			new Enemy(Enemy.Species.RAT, 6, 11), new Enemy(Enemy.Species.RAT, 5, 12),
 			new Enemy(Enemy.Species.SUCCUBUS, 16, 11), new Enemy(Enemy.Species.SUCCUBUS, 15, 13) ),
@@ -83,7 +83,7 @@ public class LevelDesign {
 			"#cc          #     k######",
 			"##########################",
 			"##########################"
-		}, 1, 3, new Item[] {Shop.SCRAP, Shop.HP_POTION, Shop.LEATHER}, 
+		}, 1, 3, new Item[] {Shop.HP_POTION, Shop.HP_POTION, Shop.HP_POTION}, 
 			new Enemy(Enemy.Species.RAT, 15, 10), new Enemy(Enemy.Species.BAT, 17, 9), new Enemy(Enemy.Species.SLIME, 18, 15)),
 	
 			

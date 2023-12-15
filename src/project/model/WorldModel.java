@@ -147,7 +147,6 @@ public class WorldModel {
 			case "wall":
 				break;
 			case "stairs":
-				nextLevel();
 				if (WorldController.getDialogueExhausted() == false && currentRoom.getNPCs().length > 0)
 				{
 					WorldModel.exhaustDialogue();
@@ -156,6 +155,7 @@ public class WorldModel {
 				{
 					WorldController.setDialogueExhausted(false);
 				}
+				nextLevel();
 				break;
 			case "door":			
 				break;

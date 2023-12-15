@@ -238,7 +238,7 @@ public class WorldController
 		        }		    
 		        
 		        // take item from chest
-		        else if (key == KeyEvent.VK_1 && WorldController.getIsChestWindowActive())
+		        else if (key == KeyEvent.VK_1 && WorldController.getIsChestWindowActive() && WorldModel.getPlayer().getInventorySize() < 4)
 		        {
 		        	WorldModel.pickUpItem(WorldModel.getPlayer(), WorldModel.getPlayer().getPosX(), WorldModel.getPlayer().getPosY());
 		        	WorldController.setIsChestWindowActive(false);

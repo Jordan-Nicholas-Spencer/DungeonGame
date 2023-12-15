@@ -269,12 +269,7 @@ public class WorldBuilder extends JPanel {
 		String content = "";
 		Item[] itemArray = WorldModel.getCurrentRoom().getChestItems();
 		content = itemArray[0].getName() + ": " + itemArray[0].getDescription();
-		Color c = new Color(0, 0, 0);
-		g.setColor(c);
-		g.fillRoundRect(x, y, width, height, SCALE, SCALE);
-		g.setColor(Color.WHITE);
-		g.drawRoundRect(x, y, width, height, SCALE / 2, SCALE / 2);
-		g.drawString(content, x + 30, y + 50);
+		drawWrappedText(content, x, y, width, height, g);
 	}
 	
 	/**
@@ -341,11 +336,12 @@ public class WorldBuilder extends JPanel {
 	    g.drawString("Keys: " + player.getKeyCount(), tableX + 10, tableY + 120);
 
 	    // display items on the right half
-	    g.drawString("Item Inventory", tableX + cellWidth + 10, tableY + 20);
-
+	    g.drawString("Item Inventory", tableX + cellWidth - 35 , tableY - 20);
+	    
 	    for (int i = 0; i < player.getInventorySize(); i++) {
-	        String itemName = player.getInventoryItem(i).getName();
-	        g.drawString(itemName, tableX + cellWidth + 10, tableY + (i + 1) * cellHeight + 20);
-	    }
+	    	String itemName = player.getInventoryItem(i).getName();
+			g.drawString(itemName, tableX + cellWidth + 10, tableY + (i) * cellHeight + 20);
+	  }
+	    
 	}
 }
