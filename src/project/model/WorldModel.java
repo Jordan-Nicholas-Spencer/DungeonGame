@@ -1,10 +1,14 @@
 package project.model;
 
 import java.io.File;
+
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 
 import project.WorldController;
 import project.model.items.Armor;
@@ -35,12 +39,14 @@ public class WorldModel {
 	private static Random random;
 	private static LevelDesign level;
 	private static ArrayList<String> dialogueText;
-	private static int roomCounter = 0;
 	
 	public WorldModel() {
 		initializeGame();
 	}
 	
+	/**
+	 * Purpose: initialize the game
+	 */
 	public void initializeGame() {
 		random = new Random();
 		level = new LevelDesign();
@@ -54,6 +60,10 @@ public class WorldModel {
 		
 	}
 	
+	/**
+	 * Purpose: get the first element of the dialogue array
+	 * @return
+	 */
 	public static String getDialogueText() {
 		if (dialogueText.size() > 0)
 		{
@@ -62,6 +72,9 @@ public class WorldModel {
 		return "";
 	}
 	
+	/**
+	 * Purpose: remove the first element of the dialogue array
+	 */
 	public static void exhaustDialogue()
 	{
 		if (dialogueText.size() > 0)
@@ -70,6 +83,10 @@ public class WorldModel {
 		}
 	}
 	
+	/**
+	 * Purpose: read the dialogue file
+	 * @throws IOException
+	 */
 	public void read() throws IOException
 	{
 		dialogueText = new ArrayList<>();
@@ -86,25 +103,84 @@ public class WorldModel {
 		}
 	}
 	
+	/**
+	 * Purpose: write the player stats to a file
+	 * @param stats
+	 */
+	public static void writeStats(int stats)
+	{
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/project/view/stats.txt")))
+		{
+			writer.write(String.valueOf(stats));
+			writer.newLine();
+			
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
 	
+	/**
+	 * Purpose: read the player stats from the file
+	 * @return
+	 * @throws IOException
+	 */
+	public static String readStats() throws IOException
+	{
+		String stats = "";
+		File file = new File("src/project/view/stats.txt");
+		Scanner scanner = new Scanner(file);
+		while(scanner.hasNext())
+		{
+			stats = scanner.nextLine();
+		}
+		
+		return stats;
+	}
+	
+	
+	/**
+	 * Purpose: initialize the images
+	 */
 	public void initializeImages() {
 		ImageLoader.initializeSprites();
 	}
 	
+	/**
+	 * Purpose: get the player
+	 * @return
+	 */
 	public static Player getPlayer() {
 		return player;
 	}
 	
+	/**
+	 * Purpose: get the tile in front of the player
+	 * @param organism
+	 * @param dirX
+	 * @param dirY
+	 * @return
+	 */
 	public static Tile getTileInFront(Organism organism, int dirX, int dirY) {
 		return currentRoom.getTileAt(organism.getPosX() + dirX, organism.getPosY() + dirY);
 	}
 	
+	/**
+	 * Purpose: get the current room
+	 * @return
+	 */
 	public static Room getCurrentRoom() {
 		return currentRoom;
 	}
 	
+	/**
+	 * Purpose: move the player in the desired direction
+	 * @param dirX
+	 * @param dirY
+	 */
 	public void movePlayer(int dirX, int dirY) {
 		boolean playerMoved = false;
+		// cant move if the inventory, chest or dialogue window is open
 		if (WorldController.getIsInventoryWindowActive()) {
 			return;
 		}
@@ -114,6 +190,7 @@ public class WorldModel {
 		if (WorldController.getIsDialogueActive()) {
 			return;
 		}
+		// this is how we damage enemies. if they are in front of the player, then we have them fight
 		if (currentRoom.enemyInRoom(getTileInFront(player, dirX, dirY).getPosX(), getTileInFront(player, dirX, dirY).getPosY())) {
 			Enemy enemy = currentRoom.getEnemyAt(getTileInFront(player, dirX, dirY).getPosX(), getTileInFront(player, dirX, dirY).getPosY());
 			enemy.damage(player.getStrength() - enemy.getDefense());
@@ -148,6 +225,8 @@ public class WorldModel {
 			case "wall":
 				break;
 			case "stairs":
+				// exhaust the dialogue of the npc even if you didnt talk to them
+				// assuming they are in the room
 				if (WorldController.getDialogueExhausted() == false && currentRoom.getNPCs().length > 0)
 				{
 					WorldModel.exhaustDialogue();
@@ -163,12 +242,16 @@ public class WorldModel {
 			default:
 				break;
 			}
+			// move the enemies if the player moved
 			if (playerMoved == true) {
 				moveEnemies();
 			}
 		}
 	}
 	
+	/**
+	 * Purpose: move the enemies randomly about the room
+	 */
 	public void moveEnemies() {
 		for (Enemy enemy : currentRoom.getEnemies()) {
 			String name;
@@ -240,13 +323,22 @@ public class WorldModel {
 	}
 	
 	
-	
+	/**
+	 * Purpose: unlock a door
+	 * @param x
+	 * @param y
+	 */
 	public static void openDoor(int x, int y)
 	{
 		WorldModel.getCurrentRoom().openDoor(x, y);
 		WorldModel.getPlayer().useKey();
 	}
 	
+	/**
+	 * Purpose: check if a player is next to an enemy
+	 * @param enemy
+	 * @return
+	 */
 	public boolean playerNextToEnemy(Enemy enemy) {
 		boolean attackingRange = false;
 		// player right
@@ -278,10 +370,15 @@ public class WorldModel {
 		return attackingRange;
 	}
 	
+	/**
+	 * Purpose: check if a player is next to a door
+	 * @return
+	 */
 	public static boolean playerNextToDoor()
 	{
 		boolean isNear = false;
 		
+		// uses a similar format as the playerNextToEnemy method
 		if(WorldModel.getCurrentRoom().getTileAt(WorldModel.getPlayer().getPosX()+1, WorldModel.getPlayer().getPosY()).getName() == "door") 
 		{
 			isNear = true;
@@ -338,13 +435,20 @@ public class WorldModel {
 		return isNear;
 	}
 	
+	/**
+	 * Purpose: check if a player is next to a chest
+	 * @param itemTaken
+	 * @return
+	 */
 	public static boolean playerNextToChest(boolean itemTaken)
 	{
 		boolean isNear = false;
 		
+		// uses a similar format to playerNextToEnemy method
 		if (WorldModel.getCurrentRoom().getTileAt(WorldModel.getPlayer().getPosX()+1, WorldModel.getPlayer().getPosY()).getName() == "chest")
 		{
 			isNear = true;
+			// only pick up the item if you pass true as the argument
 			if (itemTaken) {
 				currentRoom.pickUpItem(WorldModel.getPlayer().getPosX()+1, WorldModel.getPlayer().getPosY());
 			}
@@ -352,6 +456,7 @@ public class WorldModel {
 		else if (WorldModel.getCurrentRoom().getTileAt(WorldModel.getPlayer().getPosX()-1, WorldModel.getPlayer().getPosY()).getName() == "chest") 
 		{
 			isNear = true;
+			// only pick up the item if you pass true as the argument
 			if (itemTaken) {
 				currentRoom.pickUpItem(WorldModel.getPlayer().getPosX()-1, WorldModel.getPlayer().getPosY());
 			}
@@ -360,6 +465,7 @@ public class WorldModel {
 		else if (WorldModel.getCurrentRoom().getTileAt(WorldModel.getPlayer().getPosX(), WorldModel.getPlayer().getPosY() + 1).getName() == "chest") 
 		{
 			isNear = true;
+			// only pick up the item if you pass true as the argument
 			if (itemTaken) {
 				currentRoom.pickUpItem(WorldModel.getPlayer().getPosX(), WorldModel.getPlayer().getPosY()+1);
 			}
@@ -368,6 +474,7 @@ public class WorldModel {
 		else if (WorldModel.getCurrentRoom().getTileAt(WorldModel.getPlayer().getPosX(), WorldModel.getPlayer().getPosY() - 1).getName() == "chest")
 		{
 			isNear = true;
+			// only pick up the item if you pass true as the argument
 			if (itemTaken) {
 				currentRoom.pickUpItem(WorldModel.getPlayer().getPosX(), WorldModel.getPlayer().getPosY()-1);
 			}
@@ -377,6 +484,12 @@ public class WorldModel {
 		return isNear;		
 	}
 	
+	/**
+	 * Purpose: pick up an item
+	 * @param player
+	 * @param posX
+	 * @param posY
+	 */
 	public static void pickUpItem(Player player, int posX, int posY)
 	{
 		switch(WorldModel.currentRoom.getTileAt(player.getPosX(), player.getPosY()).getName())
@@ -384,11 +497,7 @@ public class WorldModel {
 		case "key":
 			player.pickUpKey();
 			break;
-		case "potion":
-			
-			break;
 		}
-		
 		if (playerNextToChest(false)) {
 			Item item = currentRoom.takeItemFromChest();
 			if (item instanceof Weapon) {
@@ -412,6 +521,10 @@ public class WorldModel {
 		}
 	}
 	
+	/**
+	 * Purpose: check if an npc is near the player
+	 * @return boolean
+	 */
 	public boolean isNPCAtPlayer()
 	{
 		for (NPC npc : currentRoom.getNPCs())
@@ -425,6 +538,10 @@ public class WorldModel {
 		return false;
 	}
 	
+	/**
+	 * Purpose: get the npc at the player
+	 * @return
+	 */
 	public NPC getNPCAtPlayer()
 	{
 		for (NPC npc : currentRoom.getNPCs())
@@ -438,6 +555,11 @@ public class WorldModel {
 		return null;
 	}
 	
+	/**
+	 * Purpose: check if a player is near npc
+	 * @param npc
+	 * @return
+	 */
 	public boolean playerNextToNPC(NPC npc)
 	{
 		boolean isNear = false;
@@ -465,10 +587,17 @@ public class WorldModel {
 		return isNear;
 	}
 	
+	/**
+	 * Purpose: get the current level
+	 * @return
+	 */
 	public LevelDesign getLevel() {
 		return level;
 	}
 	
+	/**
+	 * Purpose: move to the next room
+	 */
 	public void nextLevel() {
 		int levelsCompleted = player.getLevelsCompleted();
 		currentRoom = level.LEVELARRAY[levelsCompleted + 1];

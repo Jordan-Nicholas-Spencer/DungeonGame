@@ -8,6 +8,8 @@ import java.awt.Font;
 import java.awt.Graphics;
 
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.Map;
 
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -172,8 +174,12 @@ public class WorldBuilder extends JPanel {
 	  * renders the gameOverScreen
 	  * @param player
 	  * @param g - graphics
+	 * @throws IOException 
 	  */
-	public void renderGameOver(Player player, Graphics g) {
+	public void renderGameOver(Player player, Graphics g) throws IOException {
+		
+		int gameStats = player.getLevelsCompleted();
+		WorldModel.writeStats(gameStats);
 		
 		if (player.getHealth() <= 0) {
 			int x = (Window.WIDTH / 2) - SCALE * 5;
@@ -187,12 +193,15 @@ public class WorldBuilder extends JPanel {
 			g.drawRoundRect(x, y, width, height, SCALE, SCALE);
 			
 			g.setFont(new Font("Dialog", Font.PLAIN, 20));
-			g.drawString("Floors cleared: " + player.getLevelsCompleted(), x + SCALE / 2, y + SCALE * 2);
+			g.drawString("Floors cleared: " + WorldModel.readStats(), x + SCALE / 2, y + SCALE * 2);
 			g.drawString("Press any key to restart the game.", x + SCALE / 2, y + SCALE * 2 + SCALE / 2);
 			
 			g.setColor(Color.RED);
 			g.setFont(new Font("Dialog", Font.PLAIN, 40));
 			g.drawString("GAME OVER", x + SCALE * 2 + SCALE / 2, y + SCALE);
+			
+			g.setColor(Color.WHITE);
+			
 		}
 
 	}

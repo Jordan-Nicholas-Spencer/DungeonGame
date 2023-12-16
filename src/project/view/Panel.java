@@ -29,7 +29,6 @@ import java.awt.image.BufferedImage;
 
 public class Panel extends JPanel {
 	private boolean gameOverScreen = false;
-	private boolean gameWinScreen = false;
 	WorldBuilder worldBuilder = new WorldBuilder();
 	
 	/**
@@ -103,6 +102,7 @@ public class Panel extends JPanel {
         		worldBuilder.renderGameOver(WorldModel.getPlayer(), g);
         		gameOverScreen = true;
         	}
+        	// when the player encounters the npc for the final time and talks to them, they win
         	if (WorldModel.getPlayer().getLevelsCompleted() == 9 && WorldController.getDialogueExhausted())
         	{
         		worldBuilder.renderGameWin(WorldModel.getPlayer(), g);
