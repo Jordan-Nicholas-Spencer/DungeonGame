@@ -12,6 +12,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import project.WorldController;
 import project.model.Enemy;
 import project.model.Player;
 import project.model.Room;
@@ -343,5 +344,34 @@ public class WorldBuilder extends JPanel {
 			g.drawString(itemName, tableX + cellWidth + 10, tableY + (i) * cellHeight + 20);
 	  }
 	    
+	}
+	 /**
+	  * renders the gameWinScreen
+	  * @param player
+	  * @param g - graphics
+	  */
+	public void renderGameWin(Player player, Graphics g) {
+		
+		if (WorldController.getDialogueExhausted())
+		{
+			int x = (Window.WIDTH / 2) - SCALE * 5;
+			int y = (Window.HEIGHT/ 2) - SCALE * 4;
+			int width = SCALE * 10;
+			int height = SCALE * 5;
+			
+			g.setColor(Color.BLACK);
+			g.fillRoundRect(x, y, width, height, SCALE, SCALE);
+			g.setColor(Color.WHITE);
+			g.drawRoundRect(x, y, width, height, SCALE, SCALE);
+			
+			g.setFont(new Font("Dialog", Font.PLAIN, 20));
+			g.drawString("Floors cleared: " + player.getLevelsCompleted(), x + SCALE / 2, y + SCALE * 2);
+			g.drawString("Please close the game using the x.", x + SCALE / 2, y + SCALE * 2 + SCALE / 2);
+			
+			g.setColor(Color.RED);
+			g.setFont(new Font("Dialog", Font.PLAIN, 40));
+			g.drawString("YOU WIN?", x + SCALE * 2 + SCALE / 2, y + SCALE);
+		}
+
 	}
 }

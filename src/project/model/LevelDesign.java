@@ -58,7 +58,7 @@ public class LevelDesign {
 			"##########################",
 			"##########################", // 15
 			"##########################"  
-		}, 4, 4, new Item[] {Shop.HP_POTION, Shop.HP_POTION, Shop.HP_POTION}, 
+		}, 4, 4, new Item[] {Shop.SWORD, Shop.SCRAP, Shop.HP_POTION}, 
 			new Enemy(Enemy.Species.RAT, 5 , 10), new Enemy(Enemy.Species.GARGOYLE, 15 , 10),
 			new Enemy(Enemy.Species.RAT, 6, 11), new Enemy(Enemy.Species.RAT, 5, 12),
 			new Enemy(Enemy.Species.SUCCUBUS, 16, 11), new Enemy(Enemy.Species.SUCCUBUS, 15, 13) ),
@@ -83,7 +83,7 @@ public class LevelDesign {
 			"#cc          #     k######",
 			"##########################",
 			"##########################"
-		}, 1, 3, new Item[] {Shop.HP_POTION, Shop.HP_POTION, Shop.HP_POTION}, 
+		}, 1, 3, new Item[] {Shop.SWORD, Shop.SCRAP, Shop.HP_POTION}, 
 			new Enemy(Enemy.Species.RAT, 15, 10), new Enemy(Enemy.Species.BAT, 17, 9), new Enemy(Enemy.Species.SLIME, 18, 15)),
 	
 			
@@ -131,46 +131,81 @@ public class LevelDesign {
 				new Enemy(Enemy.Species.GARGOYLE, 20, 2)),
 		
 		new Room(new String[] {
-				"########################",
+//				 0    5    10   15   20 23
+		//		 |    |    |    |    |  |
+				"########################", // 0
 				"########################",
 				"##                   1##",
 				"##                    ##",
-				"##                    ##",
-				"##                     ^",
+				"##                    ##", 
+				"##                     ^",	// 5
 				"#o                    ##",
-				"##                    ##",
-				"########################"
-			}, 2, 6, new Item[] {},
-					new Enemy(Enemy.Species.SLIME, 17, 2), new Enemy(Enemy.Species.SLIME, 14, 2),
-		new Enemy(Enemy.Species.SLIME, 17, 2), new Enemy(Enemy.Species.SLIME, 17, 2)),
+				"##                  cc##",
+				"########################" // 8
+			}, 2, 6, new Item[] {Shop.HP_POTION, Shop.HP_POTION},
+					new Enemy(Enemy.Species.SLIME, 3, 2), new Enemy(Enemy.Species.SLIME, 6, 2),
+					new Enemy(Enemy.Species.SLIME, 9, 2), new Enemy(Enemy.Species.SLIME, 12, 2),
+					new Enemy(Enemy.Species.SLIME, 15, 2), new Enemy(Enemy.Species.SLIME, 18, 2),
+					new Enemy(Enemy.Species.SLIME, 3, 4), new Enemy(Enemy.Species.SLIME, 6, 4),
+					new Enemy(Enemy.Species.SLIME, 9, 4), new Enemy(Enemy.Species.SLIME, 12, 4),
+					new Enemy(Enemy.Species.SLIME, 15, 4), new Enemy(Enemy.Species.SLIME, 18, 4),
+					new Enemy(Enemy.Species.SLIME, 3, 7), new Enemy(Enemy.Species.SLIME, 6, 7),
+					new Enemy(Enemy.Species.SLIME, 9, 7), new Enemy(Enemy.Species.SLIME, 12, 7),
+					new Enemy(Enemy.Species.SLIME, 15, 7), new Enemy(Enemy.Species.SLIME, 18, 7)),
 		
 		new Room(new String[] {
 //				 0    5    10   15   20   25   30   30   35   40
 //				 |    |    |    |    |    |    |    |    |    |  
 				"#################################################", // 0
-				"#########################o#######################",
+				"#########################o#######s###############",
 				"##      #                               #     c##",
-				"##                                             ##",
+				"#s                                             s#",
 				"##      #                               #      ##",
 				"##c     #                               #      ##", // 5
-				"#########                               #########",
+				"#########                               ####s####",
 				"##c     #                               #      ##",
 				"##      #                               #      ##",
-				"##                                             ##",
+				"#s                                             ##",
 				"##      #                               #      ##", // 10
 				"##      #                               #     c##",
 				"#########                               #########",
 				"##c     #                               #     c##",
-				"##      #                               #      ##",
-				"##                                             ##", // 15
-				"##      #                               #      ##",
-				"##c     #                               #     c##",
-				"#########                               #########",
-				"##                                             ##",
-				"##cc    #                               #    cc##", // 20
-				"#################################################"
+				"##      #                               #      s#",
+				"#s                                             ##", // 15
+				"##      #                 1             #      ##",
+				"##c     #               #d#             #     c##",
+				"######s##               # #             #########",
+				"##                    ##  #                    ##",
+				"##cc    #             #c  #             #    cc##", // 20
+				"#########################^#######################"
 			}, 25, 1, new Item[] {Shop.HP_POTION, Shop.HP_POTION, Shop.HP_POTION,Shop.HP_POTION, Shop.HP_POTION, Shop.HP_POTION,
-					Shop.HP_POTION, Shop.HP_POTION, Shop.HP_POTION, Shop.HP_POTION,Shop.HP_POTION, Shop.HP_POTION}
-					)};
+					Shop.HP_POTION, Shop.HP_POTION, Shop.HP_POTION, Shop.HP_POTION,Shop.HP_POTION, Shop.KEY, Shop.BLESSED},
+				new Enemy(Enemy.Species.GARGOYLE, 5, 3), new Enemy(Enemy.Species.GARGOYLE, 6, 3), new Enemy(Enemy.Species.GARGOYLE, 37, 3),
+				new Enemy(Enemy.Species.GARGOYLE, 39, 3), new Enemy(Enemy.Species.GARGOYLE, 22, 5), new Enemy(Enemy.Species.GARGOYLE, 28, 5),
+				new Enemy(Enemy.Species.GARGOYLE, 22, 10), new Enemy(Enemy.Species.GARGOYLE, 28, 10), new Enemy(Enemy.Species.GARGOYLE, 22, 15),
+				new Enemy(Enemy.Species.GARGOYLE, 27, 15), new Enemy(Enemy.Species.GARGOYLE, 22, 20), new Enemy(Enemy.Species.GARGOYLE, 27, 20),
+				new Enemy(Enemy.Species.GARGOYLE, 5, 8), new Enemy(Enemy.Species.GARGOYLE, 6, 8), new Enemy(Enemy.Species.GARGOYLE, 37, 8),
+				 new Enemy(Enemy.Species.GARGOYLE, 39, 8), new Enemy(Enemy.Species.GARGOYLE, 5, 13), new Enemy(Enemy.Species.GARGOYLE, 6, 13),
+				 new Enemy(Enemy.Species.GARGOYLE, 37, 13), new Enemy(Enemy.Species.GARGOYLE, 39, 13), new Enemy(Enemy.Species.GARGOYLE, 5, 18),
+				 new Enemy(Enemy.Species.GARGOYLE, 6, 18), new Enemy(Enemy.Species.GARGOYLE, 37, 18), new Enemy(Enemy.Species.GARGOYLE, 39, 18)
+					),
+		new Room(new String[] {
+				"#######g#######",
+				"#            1#",
+				"#             #",
+				"#             #",
+				"#c            #",
+				"#######^#######"
+			}, 7, 1, new Item[] {Shop.STAKE}, new Enemy(Enemy.Species.VAMPIRE, 7, 3)),
+		new Room(new String[] {
+				"####g####",
+				"#       #",
+				"#       #",
+				"#   1   #",
+				"#       #",
+				"#########"
+			}, 4, 1, new Item[] {})
+		};
+	
 	
 }

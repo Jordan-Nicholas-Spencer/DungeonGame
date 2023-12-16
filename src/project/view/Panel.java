@@ -29,6 +29,7 @@ import java.awt.image.BufferedImage;
 
 public class Panel extends JPanel {
 	private boolean gameOverScreen = false;
+	private boolean gameWinScreen = false;
 	WorldBuilder worldBuilder = new WorldBuilder();
 	
 	/**
@@ -100,6 +101,11 @@ public class Panel extends JPanel {
         	if (WorldModel.getPlayer().getHealth() <= 0)
         	{
         		worldBuilder.renderGameOver(WorldModel.getPlayer(), g);
+        		gameOverScreen = true;
+        	}
+        	if (WorldModel.getPlayer().getLevelsCompleted() == 9 && WorldController.getDialogueExhausted())
+        	{
+        		worldBuilder.renderGameWin(WorldModel.getPlayer(), g);
         		gameOverScreen = true;
         	}
         // catch any exception during render

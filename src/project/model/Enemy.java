@@ -45,7 +45,7 @@ public class Enemy extends Organism {
 		GARGOYLE("gargoyle", 10, 5, 5),
 		SLIME("slime", 8, 2, 5),
 		SUCCUBUS("succubus", 15, 7, 7),
-		VAMPIRE("vampire", 30, 9, 9);
+		VAMPIRE("vampire", 50, 50, 0);
 		
 		private String name;
 		private int maxHP;

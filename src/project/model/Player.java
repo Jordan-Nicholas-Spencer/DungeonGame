@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import project.model.items.Armor;
 import project.model.items.Item;
+import project.model.items.Shop;
 import project.model.items.Weapon;
 
 public class Player extends Organism implements GodMode{
@@ -142,7 +143,15 @@ public class Player extends Organism implements GodMode{
 	public void equipWeapon(Item item) {
 		if (item.getClass() == Weapon.class)
 		{
-			this.weaponEquipped = (Weapon) item;
+			if (item == Shop.STAKE)
+			{
+				this.defense = 1000;
+				this.weaponEquipped = (Weapon) item;
+			}
+			else
+			{
+				this.weaponEquipped = (Weapon) item;
+			}
 		}
 	}
 	

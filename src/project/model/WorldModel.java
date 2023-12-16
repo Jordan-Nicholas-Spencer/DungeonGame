@@ -35,6 +35,7 @@ public class WorldModel {
 	private static Random random;
 	private static LevelDesign level;
 	private static ArrayList<String> dialogueText;
+	private static int roomCounter = 0;
 	
 	public WorldModel() {
 		initializeGame();
